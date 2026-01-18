@@ -1,11 +1,11 @@
 export const config = {
   site: {
-    title: "Nextjs Blog Template",
-    name: "Nextjs Blog Template",
-    description: "Nextjs Blog Template",
-    keywords: ["Nextjs Blog Template", "AI", "Full Stack Developer"],
-    url: "https://xxx.com",
-    baseUrl: "https://xxx.com",
+    title: "vw2x",
+    name: "vw2x",
+    description: "vw2x",
+    keywords: ["vw2x", "AI", "Full Stack Developer"],
+    url: "https://vw2x.vercel.app",
+    baseUrl: "https://vw2x.vercel.app",
     image: "https://xxx.com/og-image.png",
     favicon: {
       ico: "/favicon.ico",
@@ -15,7 +15,7 @@ export const config = {
     },
     manifest: "/site.webmanifest",
     rss: {
-      title: "Nextjs Blog Template",
+      title: "vw2x",
       description: "Thoughts on Full-stack development, AI",
       feedLinks: {
         rss2: "/rss.xml",
@@ -25,16 +25,12 @@ export const config = {
     },
   },
   author: {
-    name: "Your Name",
-    email: "your.email@example.com",
-    bio: "这是一个 Nextjs 博客模板",
+    name: "vw2x",
+    email: "vwvw2025@outlook.com",
+    bio: "welcome!",
   },
   social: {
-    github: "https://github.com/xxx",
-    x: "https://x.com/xxx",
-    xiaohongshu: "https://www.xiaohongshu.com/user/profile/xxx",
-    wechat: "https://storage.xxx.com/images/wechat-official-account.png",
-    buyMeACoffee: "https://www.buymeacoffee.com/xxx",
+    github: "https://github.com/vwww-droid",
   },
   giscus: {
     repo: "guangzhengli/hugo-ladder-exampleSite",
