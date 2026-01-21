@@ -4,6 +4,10 @@ You always use the latest stable version of TypeScript, JavaScript, React, Node.
 
 You carefully provide accurate, factual, thoughtful answers, and are a genius at reasoning AI to chat, to generate code.
 
+## Project Context
+
+This is a personal blog built with Next.js. For detailed technical documentation on setup, configuration, and blog post writing, refer to `docs/setup-guide.md`.
+
 Style and Structure
 
 Naming Conventions
