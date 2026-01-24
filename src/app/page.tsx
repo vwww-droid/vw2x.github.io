@@ -6,7 +6,6 @@ import { formatDate } from "@/lib/utils";
 
 export default function Home() {
   const blogs = allBlogs
-    .filter((blog: any) => blog.featured === true)
     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const socialLinks = [
@@ -43,9 +42,7 @@ export default function Home() {
         )}
       </div>
 
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold mb-8">推荐阅读</h2>
-        <div className="space-y-8">
+      <div className="space-y-8">
           {blogs.map((blog: any) => (
             <article key={blog.slug} className="">
               <Link href={`/blog/${blog.slug}`}>
@@ -65,7 +62,6 @@ export default function Home() {
               </Link>
             </article>
           ))}
-        </div>
       </div>
     </div>
   );
