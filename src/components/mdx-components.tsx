@@ -71,7 +71,7 @@ const components = {
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
       className={cn(
-        "my-4 text-[1.1rem] leading-[2rem]",
+        "my-4 text-[1rem] leading-[1.8rem]",
         className
       )}
       {...props}
@@ -87,7 +87,7 @@ const components = {
     <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <li className={cn("mt-2 ml-4 text-[1.1rem] leading-[1.6em]", className)} {...props} />
+    <li className={cn("mt-2 ml-4 text-[1rem] leading-[1.6em]", className)} {...props} />
   ),
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <blockquote
@@ -114,7 +114,7 @@ const components = {
       <table
         className={cn(
           "mx-auto mb-12 w-full border-collapse border-spacing-0 text-left",
-          "text-[1.1rem]",
+          "text-[1rem]",
           className
         )}
         {...props}
@@ -148,9 +148,10 @@ const components = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "text-[0.8rem] mt-4",
+        "text-[0.75rem] mt-4",
         className
       )}
+      style={{ fontFamily: 'Monaco, "Courier New", monospace' }}
       {...props}
     />
   ),
@@ -158,9 +159,10 @@ const components = {
     <code
       className={cn(
         "w-max-2xl rounded-[0.6rem] bg-[#ededeb] px-[0.3rem] py-[0.2rem]",
-        "font-mono text-[1.0rem] font-normal text-[#ed4759]",
+        "text-[0.8rem] font-normal text-[#ed4759]",
         className
       )}
+      style={{ fontFamily: 'Monaco, "Courier New", monospace' }}
       {...props}
     />
   ),
