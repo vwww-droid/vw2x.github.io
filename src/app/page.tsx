@@ -1,12 +1,12 @@
 import { allBlogs } from "content-collections";
 import Link from "next/link";
-import count from 'word-count'
 import { config } from "@/lib/config";
-import { formatDate } from "@/lib/utils";
+import { BlogList } from "@/components/blog/blog-list";
 
 export default function Home() {
-  const blogs = allBlogs
-    .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const blogs = [...allBlogs].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   const socialLinks = [
     { name: "赞赏", key: "buyMeACoffee" },
@@ -40,27 +40,7 @@ export default function Home() {
         )}
       </div>
 
-      <div className="space-y-6 md:space-y-8">
-          {blogs.map((blog: any) => (
-            <article key={blog.slug}>
-              <Link href={`/blog/${blog.slug}`}>
-                <div className="flex flex-col space-y-1 md:space-y-1.5">
-                  <div className="flex flex-col gap-0.5 md:flex-row md:items-center md:justify-between">
-                    <h2 className="text-base md:text-xl font-semibold underline underline-offset-4">
-                      {blog.title}
-                    </h2>
-                    <span className="text-xs md:text-sm text-gray-500 shrink-0">
-                      {formatDate(blog.date)} · {count(blog.content)} 字
-                    </span>
-                  </div>
-                  <p className="text-sm md:text-base text-gray-600 line-clamp-2">
-                    {blog.summary}
-                  </p>
-                </div>
-              </Link>
-            </article>
-          ))}
-      </div>
+      <BlogList blogs={blogs} />
     </div>
   );
 }
