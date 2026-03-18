@@ -21,15 +21,13 @@ export default function Home() {
     .filter(link => !!link.href);
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      {/* 个人介绍部分 */}
-      <div className="mb-16 space-y-4">
-        <h1 className="text-4xl font-bold">{config.site.title}</h1>
-        <p className="text-md text-gray-600">{config.author.bio}</p>
+    <div className="max-w-3xl mx-auto px-4 py-4 md:py-8">
+      <div className="mb-10 md:mb-16 space-y-3 md:space-y-4">
+        <h1 className="text-2xl md:text-4xl font-bold">{config.site.title}</h1>
+        <p className="text-sm md:text-base text-gray-600">{config.author.bio}</p>
         
-        {/* 社交链接 - 仅当有链接时才显示 */}
         {socialLinks.length > 0 && (
-          <div className="flex space-x-2 text-gray-600">
+          <div className="flex space-x-2 text-sm md:text-base text-gray-600">
             {socialLinks.map((link, index) => (
               <div key={link.name} className="flex items-center">
                 {index > 0 && <span className="mx-1">·</span>}
@@ -42,20 +40,20 @@ export default function Home() {
         )}
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-6 md:space-y-8">
           {blogs.map((blog: any) => (
-            <article key={blog.slug} className="">
+            <article key={blog.slug}>
               <Link href={`/blog/${blog.slug}`}>
-                <div className="flex flex-col space-y-2">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold underline underline-offset-4">
+                <div className="flex flex-col space-y-1 md:space-y-1.5">
+                  <div className="flex flex-col gap-0.5 md:flex-row md:items-center md:justify-between">
+                    <h2 className="text-base md:text-xl font-semibold underline underline-offset-4">
                       {blog.title}
                     </h2>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-xs md:text-sm text-gray-500 shrink-0">
                       {formatDate(blog.date)} · {count(blog.content)} 字
                     </span>
                   </div>
-                  <p className="text-gray-600 line-clamp-2">
+                  <p className="text-sm md:text-base text-gray-600 line-clamp-2">
                     {blog.summary}
                   </p>
                 </div>
