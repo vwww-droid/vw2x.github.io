@@ -8,7 +8,6 @@ import XIcon from "@/components/icons/x";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { SquareTerminal } from "lucide-react";
 import { config } from "@/lib/config";
 
 export function Header() {
@@ -28,25 +27,20 @@ export function Header() {
     .filter(link => !!link.href);
 
   return (
-    <header className="pt-4">
+    <header className="hidden pt-4 md:block">
       <motion.div
         initial={{ maxWidth: "48rem" }}
         animate={{ maxWidth: isBlogPage ? "72rem" : "48rem" }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className={cn("container mx-auto flex h-16 items-center justify-center md:justify-between md:px-4", isBlogPage ? "max-w-4xl xl:max-w-6xl" : "max-w-3xl")}
+        className={cn("container mx-auto flex h-16 items-center justify-between px-4", isBlogPage ? "max-w-4xl xl:max-w-6xl" : "max-w-3xl")}
       >
-        {/* Logo */}
-        <Link href="/" title="Home" className="flex items-center gap-4 md:order-first">
-          <SquareTerminal className="w-10 h-10" />
-        </Link>
-
         {/* Desktop navigation */}
-        <div className="hidden md:block">
+        <div>
           <NavDesktopMenu />
         </div>
 
         {/* Right side buttons */}
-        <div className="hidden md:flex items-center space-x-2 md:space-x-8 mr-4">
+        <div className="flex items-center space-x-8 mr-4">
           {socialLinks.map((link) => (
             <Link key={link.title} href={link.href} title={link.title}>
               {link.icon}

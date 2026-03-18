@@ -23,8 +23,8 @@ export default function Home() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-4 md:py-8">
       <div className="mb-10 md:mb-16 space-y-3 md:space-y-4">
-        <h1 className="text-2xl md:text-4xl font-bold">{config.site.title}</h1>
-        <p className="text-sm md:text-base text-gray-600">{config.author.bio}</p>
+        <h1 className="text-2xl md:text-4xl font-bold text-center">{config.site.title}</h1>
+        <p className="text-sm md:text-base text-gray-600 text-center">As tiny as it is, there is a difference.</p>
         
         {socialLinks.length > 0 && (
           <div className="flex space-x-2 text-sm md:text-base text-gray-600">
