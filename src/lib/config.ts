@@ -16,6 +16,8 @@ export const config = {
   site: {
     title: "vw2x",
     name: "vw2x",
+    /** Short line under the site title on the home page */
+    tagline: "As tiny as it is, there is a difference.",
     description: "vw2x",
     keywords: ["vw2x", "AI", "Full Stack Developer"],
     url: siteOrigin,
