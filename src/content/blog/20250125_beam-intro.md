@@ -2,7 +2,7 @@
 title: "Beam - 优雅的跨设备复制命令行方案"
 date: "2026-01-25"
 featured: true
-summary: "两个命令搞定跨设备复制粘贴, 而且可选加密传输. 让跨设备复制粘贴和本地复制粘贴一样简单."
+summary: "两个命令搞定跨设备复制粘贴, 而且可选加密传输."
 keywords: ["Beam", "clipboard", "cross-device", "encryption", "CLI", "Python"]
 ---
 

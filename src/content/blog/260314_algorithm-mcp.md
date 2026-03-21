@@ -2,7 +2,7 @@
 title: "AI 时代逆向工程基建: 从 GUI 到 API 的思考(算法助手 MCP)"
 date: "2026-03-14"
 featured: false
-summary: "以算法助手 Pro 为例, 探索如何将面向人的逆向 GUI 工具逐步剥离成 agent 向的 API 与 CLI."
+summary: "探索如何将面向人的逆向 GUI 工具逐步剥离成 agent 向的 API 与 CLI."
 keywords: ["Reverse Engineering", "MCP", "Frida", "CLI", "Android", "Agent"]
 ---
 
