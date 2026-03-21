@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <div className="mx-auto w-full max-w-4xl px-[clamp(0.75rem,3.5vw,1.25rem)] py-[clamp(1rem,5vw,2.75rem)]">
-      <div className="mb-[clamp(2.5rem,7vw,5rem)] space-y-[clamp(0.75rem,2vw,1.25rem)]">
+      <div className="mb-[clamp(1rem,3vw,2rem)] space-y-[clamp(0.75rem,2vw,1.25rem)]">
         <h1 className="text-2xl md:text-4xl font-bold text-center [text-shadow:0_1px_2px_rgb(0_0_0/0.08)] dark:[text-shadow:0.055em_0.078em_0_var(--muted),0.075em_0.105em_0.16em_color-mix(in_oklch,var(--muted)_68%,transparent)]">
           {config.site.title}
         </h1>

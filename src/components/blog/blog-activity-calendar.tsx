@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   type BlogActivityCell,
+  BLOG_ACTIVITY_WEEKS,
   buildActivityGrid,
   buildPostDateSet,
   formatPostDateLabelZh,
@@ -53,16 +54,16 @@ export function BlogActivityCalendar({ entries }: BlogActivityCalendarProps) {
   return (
     <TooltipProvider>
       <div
-        className="flex justify-center overflow-x-auto py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        aria-label="Blog posts by day, last 53 weeks"
+        className="w-full min-w-0 pt-2 pb-0"
+        aria-label={`Blog posts by day, last ${BLOG_ACTIVITY_WEEKS} weeks`}
       >
         <div
-          className="inline-flex gap-[3px]"
+          className="flex w-full min-w-0 gap-[3px]"
           role="img"
           aria-label="Daily blog activity heatmap"
         >
           {weeks.map((column, wi) => (
-            <div key={wi} className="flex flex-col gap-[3px]">
+            <div key={wi} className="flex min-w-0 flex-1 flex-col gap-[3px]">
               {column.map((cell) => (
                 <ActivityCell
                   key={cell.dateKey}
@@ -89,7 +90,7 @@ function ActivityCell({
   reduceMotion: boolean;
 }) {
   const base =
-    "size-[10px] shrink-0 rounded-[2px] block origin-center will-change-transform";
+    "aspect-square w-full min-h-0 rounded-[2px] block origin-center will-change-transform";
   const palette = cell.isFuture
     ? "bg-gray-100 dark:bg-gray-800/80"
     : cell.hasPost
@@ -138,7 +139,7 @@ function ActivityCell({
     <TooltipTrigger asChild>
       <Link
         href={`/blog?date=${cell.dateKey}`}
-        className="inline-flex rounded-[3px] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="block w-full min-w-0 rounded-[3px] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         scroll
       >
         {dot}
@@ -146,7 +147,7 @@ function ActivityCell({
     </TooltipTrigger>
   ) : (
     <TooltipTrigger asChild>
-      <span className="inline-flex">{dot}</span>
+      <span className="block w-full min-w-0">{dot}</span>
     </TooltipTrigger>
   );
 

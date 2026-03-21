@@ -40,6 +40,10 @@ function sundayOnOrBefore(d: Date): Date {
 
 export const BLOG_ACTIVITY_WEEKS = 53;
 
+export type BuildActivityGridOptions = {
+  weeks?: number;
+};
+
 export function buildPostDateSet(dates: string[]): Set<string> {
   const set = new Set<string>();
   for (const raw of dates) {
@@ -55,15 +59,21 @@ export type BlogActivityCell = {
   isFuture: boolean;
 };
 
-export function buildActivityGrid(postDates: Set<string>): BlogActivityCell[][] {
+export function buildActivityGrid(
+  postDates: Set<string>,
+  options?: BuildActivityGridOptions,
+): BlogActivityCell[][] {
+  const requested = options?.weeks ?? BLOG_ACTIVITY_WEEKS;
+  const weekCount = Math.min(BLOG_ACTIVITY_WEEKS, Math.max(1, requested));
+
   const today = startOfLocalDay(new Date());
   const endSunday = sundayOnOrBefore(today);
   const gridStart = new Date(endSunday);
-  gridStart.setDate(gridStart.getDate() - (BLOG_ACTIVITY_WEEKS - 1) * 7);
+  gridStart.setDate(gridStart.getDate() - (weekCount - 1) * 7);
 
   const weeks: BlogActivityCell[][] = [];
 
-  for (let w = 0; w < BLOG_ACTIVITY_WEEKS; w++) {
+  for (let w = 0; w < weekCount; w++) {
     const column: BlogActivityCell[] = [];
     for (let dow = 0; dow < 7; dow++) {
       const cell = new Date(gridStart);
