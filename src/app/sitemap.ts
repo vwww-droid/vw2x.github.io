@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "priority": 0.9
   },
   {
+    url: "/about",
+    lastModified: new Date("2025-04-05T13:14:53.942Z"),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  },
+  {
     "url": "blog/hello-world",
     lastModified: new Date("2025-04-05T12:10:00.000Z"),
     "changeFrequency": "weekly",

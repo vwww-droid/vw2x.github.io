@@ -1,12 +1,26 @@
+export type WeChatPublicConfig = {
+  label?: string;
+  accountName?: string;
+  qrSrc?: string;
+  url?: string;
+};
+
+const wechatPublic: WeChatPublicConfig = {
+  label: "WeChat",
+  accountName: "vw2x",
+};
+
+const siteOrigin = "https://vw2x.vercel.app";
+
 export const config = {
   site: {
     title: "vw2x",
     name: "vw2x",
     description: "vw2x",
     keywords: ["vw2x", "AI", "Full Stack Developer"],
-    url: "https://vw2x.vercel.app",
-    baseUrl: "https://vw2x.vercel.app",
-    image: "https://xxx.com/og-image.png",
+    url: siteOrigin,
+    baseUrl: siteOrigin,
+    image: `${siteOrigin}/og-image.png`,
     favicon: {
       ico: "/favicon.ico",
       png: "/favicon.png",
@@ -31,17 +45,20 @@ export const config = {
   },
   social: {
     github: "https://github.com/vwww-droid",
-  },
+    wechatPublic,
+  } satisfies { github: string; wechatPublic?: WeChatPublicConfig },
   giscus: {
-    repo: "guangzhengli/hugo-ladder-exampleSite",
-    repoId: "R_kgDOHyVOjg",
-    categoryId: "DIC_kwDOHyVOjs4CQsH7",
+    repo: "vwww-droid/vw2x.github.io" as `${string}/${string}`,
+    repoId: "R_kgDOPVXI-A",
+    category: "Announcements",
+    categoryId:
+      process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID ?? "DIC_kwDOPVXI-M4C45-J",
   },
   navigation: {
     main: [],
   },
   seo: {
-    metadataBase: new URL("https://xxx.com"),
+    metadataBase: new URL(siteOrigin),
     alternates: {
       canonical: './',
     },

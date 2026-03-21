@@ -20,6 +20,15 @@ const blogs = defineCollection({
   },
 });
 
+const aboutPages = defineCollection({
+  name: "aboutPages",
+  directory: "src/content/about",
+  include: "**/*.md",
+  schema: (z) => ({
+    description: z.string().optional(),
+  }),
+});
+
 export default defineConfig({
-  collections: [blogs],
+  collections: [blogs, aboutPages],
 });

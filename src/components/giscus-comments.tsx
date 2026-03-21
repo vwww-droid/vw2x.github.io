@@ -1,23 +1,31 @@
-"use client"
+"use client";
 
-import Giscus from '@giscus/react';
-import { config } from '@/lib/config';
+import Giscus from "@giscus/react";
+import { config } from "@/lib/config";
 
 export default function GiscusComments() {
+  const { repo, repoId, category, categoryId } = config.giscus;
+  if (!categoryId) {
+    return null;
+  }
+
   return (
-    <Giscus
-      id="comments"
-      repo={config.giscus.repo as `${string}/${string}`}
-      repoId={config.giscus.repoId}
-      category="Announcements"
-      categoryId={config.giscus.categoryId}
-      mapping="pathname"
-      reactionsEnabled="1"
-      emitMetadata="0"
-      inputPosition="top"
-      theme="light"
-      lang="en"
-      loading="lazy"
-    />
+    <div className="mt-16 border-t border-border pt-10">
+      <Giscus
+        id="comments"
+        repo={repo}
+        repoId={repoId}
+        category={category}
+        categoryId={categoryId}
+        mapping="pathname"
+        strict="0"
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="top"
+        theme="preferred_color_scheme"
+        lang="zh-CN"
+        loading="lazy"
+      />
+    </div>
   );
 }

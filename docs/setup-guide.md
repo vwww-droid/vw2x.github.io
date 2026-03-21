@@ -90,20 +90,17 @@ Links displayed in:
 - Homepage social media section
 - Navigation bar social icons
 
-### Comments System Configuration
+### Comments (Giscus)
 
-```typescript
-giscus: {
-  repo: "your-repo",
-  repoId: "repo-id",
-  categoryId: "category-id",
-}
-```
+Blog posts embed [Giscus](https://giscus.app/) (GitHub Discussions).
 
-Using Giscus as comment system requires:
-1. Install Giscus app on GitHub
-2. Enable Discussions in your repo
-3. Get configuration info and fill here
+1. In the repo **Settings → General → Features**, turn on **Discussions**.
+2. Install the [giscus GitHub App](https://github.com/apps/giscus) for that repo.
+3. Open [giscus.app](https://giscus.app), select repo `vwww-droid/vw2x.github.io`, pick a discussion category (e.g. **Announcements**). The generated **category id** is stored in `config.giscus.categoryId` in `src/lib/config.ts` (override with `NEXT_PUBLIC_GISCUS_CATEGORY_ID` if needed).
+
+### Open Graph image
+
+Default share image URL is `config.site.image` (e.g. `https://your-domain/og-image.png`). Replace `public/og-image.png` with your own 1200×630 (or similar) asset.
 
 ### Navigation Menu Configuration
 
