@@ -38,12 +38,7 @@ export const config = {
     categoryId: "DIC_kwDOHyVOjs4CQsH7",
   },
   navigation: {
-    main: [
-      { 
-        title: "文章", 
-        href: "/blog",
-      },
-    ],
+    main: [],
   },
   seo: {
     metadataBase: new URL("https://xxx.com"),

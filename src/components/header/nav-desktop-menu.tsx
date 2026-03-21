@@ -68,7 +68,7 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-2xg font-bold leading-none">{title}</div>
+          <div className="text-sm font-medium leading-none">{title}</div>
         </a>
       </NavigationMenuLink>
     </li>
