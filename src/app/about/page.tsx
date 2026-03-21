@@ -11,6 +11,7 @@ import rehypeSlug from "rehype-slug";
 import "highlight.js/styles/github-dark.min.css";
 import "katex/dist/katex.min.css";
 import { components } from "@/components/mdx-components";
+import { expandMultiBlankLines } from "@/lib/mdx-expand-blank-lines";
 import { SketchArrowLeft } from "@/components/icons/sketch-arrow-left";
 import { config } from "@/lib/config";
 
@@ -44,7 +45,7 @@ export default function AboutPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-4 md:py-8">
+    <div className="mx-auto w-full max-w-3xl px-[clamp(0.75rem,3.5vw,1.25rem)] py-[clamp(1rem,5vw,2.75rem)]">
       <nav className="mb-6 md:mb-8" aria-label="Back to posts">
         <Link
           href="/"
@@ -54,11 +55,13 @@ export default function AboutPage() {
           文章列表
         </Link>
       </nav>
-      <MDXRemote
-        source={doc.content}
-        components={components}
-        options={mdxOptions}
-      />
+      <div className="mdx-content [&>h2:first-child]:mt-3 [&>h3:first-child]:mt-2">
+        <MDXRemote
+          source={expandMultiBlankLines(doc.content)}
+          components={components}
+          options={mdxOptions}
+        />
+      </div>
     </div>
   );
 }

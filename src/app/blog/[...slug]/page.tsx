@@ -17,6 +17,7 @@ import GiscusComments from "@/components/giscus-comments";
 import { GoToTop } from "@/components/go-to-top"
 import 'katex/dist/katex.min.css';
 import { config } from "@/lib/config";
+import { expandMultiBlankLines } from "@/lib/mdx-expand-blank-lines";
 
 type BlogsPageProps = {
   params: Promise<{slug: string[]}>
@@ -100,20 +101,24 @@ export default async function BlogPage(props: BlogsPageProps) {
   const toc = await getTableOfContents(blog.content)
 
   return (
-    <main className="relative py-6 max-w-full md:max-w-6xl mx-auto lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
-      <div className="max-w-4xl mx-auto w-full px-6">
-        <div className="my-8">
-          <h1 className="text-[32px] font-bold">{blog.title}</h1>
+    <main className="relative max-w-full py-[clamp(1.25rem,4vw,2rem)] md:max-w-6xl mx-auto lg:gap-10 lg:py-[clamp(1.5rem,4.5vw,2.25rem)] xl:grid xl:grid-cols-[1fr_300px]">
+      <div className="max-w-4xl mx-auto w-full px-[clamp(1.25rem,4vw,2rem)]">
+        <div className="my-6">
+          <h1 className="text-[32px] font-bold text-foreground">{blog.title}</h1>
         </div>
 
-        <div className="my-4">
-          <p className="text-sm">
+        <div className="my-3">
+          <p className="text-sm text-muted-foreground">
             {formatDate(blog.date)} · {count(blog.content)} 字
           </p>
         </div>
 
-        <div className="">
-          <MDXRemote source={blog.content} components={components} options={options} />
+        <div className="mdx-content [&>h2:first-child]:mt-3 [&>h3:first-child]:mt-2">
+          <MDXRemote
+            source={expandMultiBlankLines(blog.content)}
+            components={components}
+            options={options}
+          />
         </div>
 
         <GiscusComments />

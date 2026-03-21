@@ -4,11 +4,21 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 
+const mono =
+  'ui-monospace, Monaco, "Cascadia Code", "Courier New", Courier, monospace'
+
+function isHighlightedCode(className?: string) {
+  return (
+    !!className &&
+    (className.includes("hljs") || /\blanguage-[\w-]+\b/.test(className))
+  )
+}
+
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
-        "font-heading mt-8 mb-8 scroll-m-20 text-[3.2rem] leading-[3.6rem] font-semibold tracking-tight",
+        "font-heading mt-6 mb-4 scroll-m-20 text-[3.2rem] leading-[3.6rem] font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}
@@ -17,7 +27,7 @@ const components = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "font-heading mt-8 mb-8 scroll-m-20 text-[1.6rem] leading-[2.4rem] font-semibold tracking-tight",
+        "font-heading mt-7 mb-3 scroll-m-20 text-[1.6rem] leading-snug font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}
@@ -26,7 +36,7 @@ const components = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "font-heading mt-8 mb-8 scroll-m-20 text-[1.4rem] leading-[2.2rem] font-semibold tracking-tight",
+        "font-heading mt-6 mb-2 scroll-m-20 text-[1.4rem] leading-snug font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}
@@ -35,7 +45,7 @@ const components = {
   h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
       className={cn(
-        "font-heading mt-8 mb-8 scroll-m-20 text-[1.2rem] leading-[2rem] font-semibold tracking-tight",
+        "font-heading mt-5 mb-2 scroll-m-20 text-[1.2rem] leading-snug font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}
@@ -44,7 +54,7 @@ const components = {
   h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h5
       className={cn(
-        "font-heading mt-8 mb-8 scroll-m-20 text-[1rem] leading-[1.8rem] font-semibold tracking-tight",
+        "font-heading mt-5 mb-2 scroll-m-20 text-[1rem] leading-snug font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}
@@ -53,7 +63,7 @@ const components = {
   h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h6
       className={cn(
-        "font-heading mt-8 mb-8 scroll-m-20 text-[0.8rem] leading-[1.6rem] font-semibold tracking-tight",
+        "font-heading mt-4 mb-2 scroll-m-20 text-[0.8rem] leading-snug font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}
@@ -62,7 +72,7 @@ const components = {
   a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
     <a
       className={cn(
-        "font-medium text-black transition-all duration-300 ease-in-out underline underline-offset-3",
+        "font-medium text-blue-600 underline decoration-blue-600/50 underline-offset-[0.2em] transition-colors hover:text-blue-500 hover:decoration-blue-500 dark:text-blue-400 dark:decoration-blue-400/40 dark:hover:text-blue-300 dark:hover:decoration-blue-300/50",
         className
       )}
       {...props}
@@ -71,7 +81,7 @@ const components = {
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
       className={cn(
-        "my-4 text-[1rem] leading-[1.8rem]",
+        "my-3 text-[1rem] leading-[1.7] text-foreground/95",
         className
       )}
       {...props}
@@ -81,18 +91,30 @@ const components = {
     <strong className={cn("font-bold", className)} {...props} />
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
+    <ul
+      className={cn(
+        "my-4 ml-6 list-disc space-y-1.5 text-[1rem] leading-[1.7] text-foreground/95",
+        className
+      )}
+      {...props}
+    />
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
-    <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
+    <ol
+      className={cn(
+        "my-4 ml-6 list-decimal space-y-1.5 text-[1rem] leading-[1.7] text-foreground/95",
+        className
+      )}
+      {...props}
+    />
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <li className={cn("mt-2 ml-4 text-[1rem] leading-[1.6em]", className)} {...props} />
+    <li className={cn("pl-1 marker:text-muted-foreground", className)} {...props} />
   ),
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <blockquote
       className={cn(
-        "my-6 border-l-[3px] border-[#343a40] pl-4",
+        "my-4 border-l-[3px] border-border pl-4 text-muted-foreground",
         className
       )}
       {...props}
@@ -130,7 +152,7 @@ const components = {
   th: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <th
       className={cn(
-        "border-b border-solid border-[#ced4da] p-4 text-left font-semibold",
+        "border-b border-solid border-border p-4 text-left font-semibold text-foreground",
         className
       )}
       {...props}
@@ -139,7 +161,7 @@ const components = {
   td: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <td
       className={cn(
-        "border-b border-dashed border-[#ced4da] p-4 text-left leading-[1.5]",
+        "border-b border-dashed border-border p-4 text-left leading-[1.65] text-foreground/95",
         className
       )}
       {...props}
@@ -148,24 +170,34 @@ const components = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "text-[0.75rem] mt-4",
+        "my-4 overflow-x-auto rounded-lg border border-border bg-muted/40 p-4 text-[0.8125rem] leading-relaxed",
         className
       )}
-      style={{ fontFamily: 'Monaco, "Courier New", monospace' }}
+      style={{ fontFamily: mono }}
       {...props}
     />
   ),
-  code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <code
-      className={cn(
-        "w-max-2xl rounded-[0.6rem] bg-[#ededeb] px-[0.3rem] py-[0.2rem]",
-        "text-[0.8rem] font-normal text-[#ed4759]",
-        className
-      )}
-      style={{ fontFamily: 'Monaco, "Courier New", monospace' }}
-      {...props}
-    />
-  ),
+  code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
+    if (isHighlightedCode(className)) {
+      return (
+        <code
+          className={cn(className)}
+          style={{ fontFamily: mono }}
+          {...props}
+        />
+      )
+    }
+    return (
+      <code
+        className={cn(
+          "rounded border border-border/70 bg-muted/90 px-1.5 py-0.5 text-[0.875em] font-normal text-foreground",
+          className
+        )}
+        style={{ fontFamily: mono }}
+        {...props}
+      />
+    )
+  },
   small: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <small
       className={cn("text-[70%]", className)}
@@ -176,7 +208,7 @@ const components = {
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn(
-        "font-medium text-blue-600 no-underline transition-all duration-300 ease-in-out hover:underline",
+        "font-medium text-blue-600 no-underline decoration-blue-600/50 transition-colors hover:text-blue-500 hover:underline dark:text-blue-400 dark:decoration-blue-400/40 dark:hover:text-blue-300",
         className
       )}
       {...props}
@@ -190,6 +222,9 @@ const components = {
       )}
       {...props}
     />
+  ),
+  MdxBlank: () => (
+    <div className="h-[1.25em] min-h-[1.25em] shrink-0" aria-hidden />
   ),
 }
 

@@ -15,7 +15,7 @@ export default function BlogPage() {
   );
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-4 md:py-8">
+    <div className="mx-auto w-full max-w-4xl px-[clamp(0.75rem,3.5vw,1.25rem)] py-[clamp(1rem,5vw,2.75rem)]">
       <BlogList blogs={blogs} />
     </div>
   );
