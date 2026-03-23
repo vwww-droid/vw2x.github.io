@@ -2,7 +2,7 @@
 title: "MobileAgent-v3 测试"
 date: "2026-03-23"
 featured: false
-summary: "黑灰产 App 自动化测试想稳定, 先放弃全自动幻觉"
+summary: "黑灰产 App 自动化测试想稳定, 先放弃全自动幻觉."
 keywords: ["自动化", "AI"]
 ---
 

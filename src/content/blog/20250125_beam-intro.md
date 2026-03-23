@@ -1,5 +1,5 @@
 ---
-title: "Beam - 优雅的跨设备复制命令行方案"
+title: "Beam: 优雅的跨设备复制命令行方案"
 date: "2026-01-25"
 featured: true
 summary: "两个命令搞定跨设备复制粘贴, 而且可选加密传输."
