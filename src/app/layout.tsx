@@ -43,6 +43,10 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
+        />
         <style>
           {`
             body {

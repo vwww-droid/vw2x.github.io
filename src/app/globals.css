@@ -120,3 +120,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .font-reading-zh {
+    font-family:
+      "Source Sans Pro",
+      "Microsoft YaHei",
+      "PingFang SC",
+      "Hiragino Sans GB",
+      system-ui,
+      sans-serif;
+  }
+}

@@ -1,5 +1,4 @@
 import { allBlogs } from "content-collections";
-import { BlogActivityCalendar } from "@/components/blog/blog-activity-calendar";
 import { config } from "@/lib/config";
 import { BlogList } from "@/components/blog/blog-list";
 
@@ -17,9 +16,6 @@ export default function Home() {
         <p className="text-sm md:text-base text-gray-600 text-center [text-wrap:pretty]">
           {config.site.tagline}
         </p>
-        <BlogActivityCalendar
-          entries={blogs.map((b) => ({ date: b.date, slug: b.slug, title: b.title }))}
-        />
       </div>
 
       <BlogList blogs={blogs} />
