@@ -2,7 +2,7 @@
 title: "在 Codex 里重新理解 zsh"
 date: "2026-03-27"
 featured: false
-summary: "同一条命令在 Codex 里跑出两种结果后, 我开始认真区分 zsh 的交互、login 和子进程环境. "
+summary: "同一软件, 一条命令, 两种结果. 让我开始区分 zsh 的不同启动方式. "
 keywords: ["Codex", "zsh", "Shell", "Debugging", "Android", "Build"]
 ---
 
