@@ -1,3 +1,5 @@
+import { config } from "@/lib/config";
+
 export type NavItem = {
   label: string;
   href: string;
@@ -7,12 +9,12 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   {
     label: "Weekly",
-    href: "https://weekly.vw2x.com",
+    href: config.social.weekly,
     external: true,
   },
   {
     label: "GitHub",
-    href: "https://github.com/vwww-droid",
+    href: config.social.github,
     external: true,
   },
   {
