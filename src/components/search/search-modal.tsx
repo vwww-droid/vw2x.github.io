@@ -4,16 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SearchIcon, XIcon } from "lucide-react";
-
-type SearchDocument = {
-  title: string;
-  url: string;
-  date: string;
-  summary: string;
-  content: string;
-  lang: "zh-CN" | "en-US";
-  translationKey: string;
-};
+import type { SearchDocument } from "@/lib/content";
 
 type SearchModalProps = {
   open: boolean;
