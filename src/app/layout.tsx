@@ -40,27 +40,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
-        />
-        <style>
-          {`
-            body {
-              font-family: "LXGW WenKai Lite", sans-serif;
-            }
-          `}
-        </style>
+        <link rel="stylesheet" href="https://tw93.fun/css/jinkai.css?v=20260403152924" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
         <link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
         <link rel="alternate" type="application/json" title="JSON" href="/feed.json" />
       </head>
-      <body className="flex min-h-dvh flex-col overflow-x-hidden">
+      <body className="min-h-dvh overflow-x-hidden bg-background text-foreground antialiased">
         <Header />
-        <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+        <div className="pt-[60px] md:pt-[84px]">{children}</div>
         <SiteFooter />
       </body>
     </html>

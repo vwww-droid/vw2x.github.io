@@ -47,8 +47,13 @@ export const config = {
   },
   social: {
     github: "https://github.com/vwww-droid",
+    weekly: "https://weekly.vw2x.com",
     wechatPublic,
-  } satisfies { github: string; wechatPublic?: WeChatPublicConfig },
+  } satisfies {
+    github: string;
+    weekly: string;
+    wechatPublic?: WeChatPublicConfig;
+  },
   giscus: {
     repo: "vwww-droid/vw2x.github.io" as `${string}/${string}`,
     repoId: "R_kgDOPVXI-A",
@@ -57,7 +62,11 @@ export const config = {
       process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID ?? "DIC_kwDOPVXI-M4C45-J",
   },
   navigation: {
-    main: [],
+    main: [
+      { title: "Weekly", href: "https://weekly.vw2x.com" },
+      { title: "GitHub", href: "https://github.com/vwww-droid" },
+      { title: "About", href: "/about" },
+    ],
   },
   seo: {
     metadataBase: new URL(siteOrigin),
