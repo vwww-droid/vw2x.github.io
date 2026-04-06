@@ -47,9 +47,9 @@ export default function RootLayout({
         <link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />
         <link rel="alternate" type="application/json" title="JSON" href="/feed.json" />
       </head>
-      <body className="min-h-dvh overflow-x-hidden bg-background text-foreground antialiased">
+      <body className="flex min-h-dvh flex-col overflow-x-hidden bg-background text-foreground antialiased">
         <Header />
-        <div className="md:pt-[84px]">{children}</div>
+        <div className="flex-1 md:pt-[84px]">{children}</div>
         <SiteFooter />
       </body>
     </html>

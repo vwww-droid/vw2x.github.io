@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { navItems } from "./nav-data";
 
 export function NavMobileMenu() {
@@ -30,6 +30,7 @@ export function NavMobileMenu() {
           </button>
         </SheetTrigger>
         <SheetContent side="left" className="w-[min(18rem,85vw)]">
+          <SheetTitle className="sr-only">Primary navigation</SheetTitle>
           <div className="flex h-full flex-col justify-between px-6 py-8">
             <div className="space-y-8">
               <div className="text-base font-medium tracking-[-0.03em]">vw2x</div>

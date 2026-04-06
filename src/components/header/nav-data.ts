@@ -6,19 +6,8 @@ export type NavItem = {
   external?: boolean;
 };
 
-export const navItems: NavItem[] = [
-  {
-    label: "Weekly",
-    href: config.social.weekly,
-    external: true,
-  },
-  {
-    label: "GitHub",
-    href: config.social.github,
-    external: true,
-  },
-  {
-    label: "About",
-    href: "/about",
-  },
-];
+export const navItems: NavItem[] = config.navigation.main.map(({ title, href }) => ({
+  label: title,
+  href,
+  external: /^https?:\/\//.test(href),
+}));
