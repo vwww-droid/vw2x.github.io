@@ -4,7 +4,9 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SearchIcon, XIcon } from "lucide-react";
+import { BlogCoverImage } from "@/components/blog/blog-cover-image";
 import type { SearchDocument } from "@/lib/content";
+import { formatDateCompact } from "@/lib/utils";
 
 type SearchModalProps = {
   open: boolean;
@@ -189,29 +191,39 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
                 <Link
                   key={`${result.lang}-${result.translationKey}`}
                   href={result.url}
-                  className={`block rounded-[8px] px-4 py-3 transition-colors ${
-                    selectedIndex === index ? "bg-[#f4f4f1]" : "hover:bg-[#f7f7f4]"
+                  role="option"
+                  aria-selected={selectedIndex === index}
+                  className={`block rounded-[18px] p-2.5 transition-colors ${
+                    selectedIndex === index
+                      ? "bg-[rgba(244,241,234,0.96)]"
+                      : "hover:bg-[rgba(247,245,239,0.9)]"
                   }`}
                   onClick={() => onOpenChange(false)}
                 >
-                  <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
-                    <div className="min-w-0 flex-1">
+                  <div className="flex items-start gap-3 rounded-[16px] bg-[rgba(255,255,255,0.88)] p-2.5">
+                    <BlogCoverImage
+                      cover={result.cover}
+                      sizes="112px"
+                      className="h-[88px] w-[88px] shrink-0 rounded-[14px] bg-[rgba(246,241,232,0.9)] sm:h-[96px] sm:w-[112px]"
+                      imageClassName="transition-none"
+                    />
+                    <div className="min-w-0 flex-1 px-0.5 py-0.5">
+                      <p className="text-[11px] uppercase tracking-[0.12em] text-[rgba(85,85,85,0.72)]">
+                        {formatDateCompact(result.date, result.lang)}
+                      </p>
                       <p
-                        className="text-[17px] font-semibold leading-[1.45] text-[#24292f]"
+                        className="mt-2 text-[18px] font-semibold leading-[1.3] tracking-[-0.02em] text-[rgba(36,41,47,0.94)]"
                         dangerouslySetInnerHTML={{
                           __html: highlightText(result.title, query),
                         }}
                       />
                       <p
-                        className="mt-1 text-[15px] leading-[1.7] text-[rgba(85,85,85,0.82)]"
+                        className="mt-2 text-[14px] leading-[1.65] text-[rgba(85,85,85,0.82)]"
                         dangerouslySetInnerHTML={{
-                          __html: highlightText(result.summary || result.content, query),
+                          __html: highlightText(getPreviewText(result), query),
                         }}
                       />
                     </div>
-                    <p className="shrink-0 pt-0.5 text-[14px] leading-[1.4] text-[rgba(85,85,85,0.7)]">
-                      {result.date}
-                    </p>
                   </div>
                 </Link>
               ))}
@@ -233,6 +245,16 @@ function SearchState({ children }: { children: React.ReactNode }) {
       {children}
     </div>
   );
+}
+
+function getPreviewText(document: SearchDocument) {
+  const preview = document.summary || document.content;
+
+  if (preview.length <= 120) {
+    return preview;
+  }
+
+  return `${preview.slice(0, 117).trimEnd()}...`;
 }
 
 function highlightText(text: string, query: string) {
