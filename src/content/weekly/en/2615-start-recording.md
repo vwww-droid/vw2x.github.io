@@ -6,6 +6,8 @@ keywords: ["Weekly", "Journal", "Notes"]
 lang: "en-US"
 translationKey: "2615-start-recording"
 issue: 2615
+cover: "/og-image.png"
+coverAlt: "Opening cover image for vw2x Weekly"
 ---
 
 This is the first issue of `vw2x Weekly`.

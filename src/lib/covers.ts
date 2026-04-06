@@ -1,4 +1,7 @@
-import generatedCovers from "@/content/covers/generated-covers.json";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+const generatedCovers = require("../content/covers/generated-covers.json");
 
 export type BlogCover =
   | {

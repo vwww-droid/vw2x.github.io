@@ -6,6 +6,8 @@ keywords: ["Weekly", "周记", "记录"]
 lang: "zh-CN"
 translationKey: "2615-start-recording"
 issue: 2615
+cover: "/og-image.png"
+coverAlt: "vw2x 周记开篇封面图"
 ---
 
 这是第一期 `vw2x 周记`。

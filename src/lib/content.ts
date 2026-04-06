@@ -1,6 +1,11 @@
-import { allAboutPages, allBlogs, allNotes, allWeeklies } from "content-collections";
-import type { Locale } from "@/lib/i18n";
-import { resolveBlogCover, type BlogCover } from "@/lib/covers";
+import {
+  allAboutPages,
+  allBlogs,
+  allNotes,
+  allWeeklies,
+} from "../../.content-collections/generated/index.js";
+import type { Locale } from "./i18n.ts";
+import { resolveBlogCover, type BlogCover } from "./covers.ts";
 import {
   DEFAULT_LOCALE,
   EN_LOCALE,
@@ -8,10 +13,10 @@ import {
   getLocaleLabel,
   getOppositeLocale,
   stripLocalePrefix,
-} from "@/lib/i18n";
+} from "./i18n.ts";
 import {
   getCollectionIndexHref,
-} from "@/lib/publication-routes";
+} from "./publication-routes.ts";
 
 type BlogRecord = (typeof allBlogs)[number];
 type WeeklyRecord = (typeof allWeeklies)[number];
