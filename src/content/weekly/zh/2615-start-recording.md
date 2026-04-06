@@ -1,29 +1,29 @@
 ---
-title: "2615 - 开始记录"
+title: "2615 奶而啤之"
 date: "2026-04-06"
-summary: "先把周记入口搭起来，也把这一年的记录方式定下来。"
+summary: "最近爱喝奶啤, 每晚 18r 的餐补全用来进奶啤了, 西域春的白桃味奶啤不如原啤"
 keywords: ["Weekly", "周记", "记录"]
 lang: "zh-CN"
 translationKey: "2615-start-recording"
 issue: 2615
-cover: "/og-image.png"
-coverAlt: "vw2x 周记开篇封面图"
+cover: "/weekly/2615/奶啤.png"
+coverAlt: "奶啤"
 ---
 
-这是第一期 `vw2x 周记`。
+这是第一期周记, 希望可以在自己博客里记录当周见过的好文章好想法好解决方案, 切实解决一些问题, 带来一些价值.
 
-这里先把结构搭起来：以后每周看到的人、地方、工具和想法，都可以慢慢沉淀到这里。
+照着 tw93 大佬的 [潮流周刊](https://weekly.tw93.fun) 搭建了一波, 这位博主很厉害, 特别是审美, 感觉好有沉淀, 用他开源的产品有种能静下心的感觉.
 
-## 为什么先写这一期
+不过这主要记录对我自己工作和生活有切实帮助的东西, 没那么通用, 噪音也会多些.
 
-我想先把周记和普通随手记录分开。
+## 效率工具
 
-`Weekly` 更像一周结束后的整理，而 `Notes` 更像平时想到什么就先记下来。
+最大的变化就是将 Cursor Ultra Plan 切换到了 [Codex Pro Plan](https://chatgpt.com/zh-Hans-CN/pricing/). 200 刀每月, 苹果美区 ID 礼品卡付款.
 
-## 这一期先放什么
+我有同时抽打多个 AI 的习惯, 而 Cursor 不能单窗口跑多个项目, 切换上下文会让我精力更快的消耗, 所以就立刻降级转向 Codex.
 
-第一期先不追求完整，只完成三件事：
+Cursor 自己又自动兼容其他所有 AI 的 skills 和 rules, 所以只管理 Codex 的 rules 和 skills 也能继续在 Cursor 用自己配置好的环境.
 
-1. 把站内的 `/weekly` 路由搭起来
-2. 确认中英文成对内容的基本流程
-3. 给后续每一期留下可复用的结构模板
+推荐一个月一次的付费, 贪年费省下的 10% 无法快速尝试最新的功能, 比如 Cursor 中可以使用 Claude Opus 4.6 模型, 逆向什么的限制会少很多, 而且在我写这些字的时候发现, Cursor 也出 agent 模式, 等我这次 Codex 过期可能又要转向 Cursor 了 (Claude Code 还在养号, 每天跟他聊两句, 给它提供情绪价值(因为负面词汇会被过滤上报), 周围好多人的 cc 都被封了好几个了, 而且现在 cc 美区要交税, 250$ 一个月🥶)
+
+![Cursor Agent Window](/weekly/2615/CursorAgentWindow.png)

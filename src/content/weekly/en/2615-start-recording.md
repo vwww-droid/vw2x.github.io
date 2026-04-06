@@ -1,29 +1,29 @@
 ---
-title: "2615 - Start Recording"
+title: "2615 Milk Beer"
 date: "2026-04-06"
-summary: "This opens the weekly journal and sets the baseline for how the year will be recorded."
-keywords: ["Weekly", "Journal", "Notes"]
+summary: "Lately I've been hooked on milk beer. My nightly RMB 18 dinner stipend basically all goes into it now, and Xiyuchun's white peach flavor is not as good as the original."
+keywords: ["Weekly", "Journal", "Recording"]
 lang: "en-US"
 translationKey: "2615-start-recording"
 issue: 2615
-cover: "/og-image.png"
-coverAlt: "Opening cover image for vw2x Weekly"
+cover: "/weekly/2615/奶啤.png"
+coverAlt: "Milk beer"
 ---
 
-This is the first issue of `vw2x Weekly`.
+This is the first issue of the weekly journal. I hope to use my blog to record the good articles, good ideas, and good solutions I came across each week, actually solve some problems, and leave behind something useful.
 
-The goal is to establish the structure first, so future weekly observations about people, places, tools, and thoughts can accumulate here over time.
+I set this up by borrowing from tw93's [潮流周刊](https://weekly.tw93.fun). He is an impressive blogger, especially in terms of taste. There is a real sense of accumulation in his work, and using his open-source products has a calming effect on me.
 
-## Why start with this issue
+That said, this weekly journal is mainly for things that genuinely help my own work and life. It will be less universal, and probably noisier too.
 
-I want to separate a weekly journal from lightweight everyday notes.
+## Productivity Tools
 
-`Weekly` is for end-of-week reflection, while `Notes` is for quick capture during the week.
+The biggest change recently was switching from the Cursor Ultra Plan to the [Codex Pro Plan](https://chatgpt.com/zh-Hans-CN/pricing/). It costs 200 USD per month, paid with Apple gift cards from the US App Store region.
 
-## What this first issue needs to do
+I have a habit of whipping several AI tools at the same time, and Cursor cannot run multiple projects in a single window. Context switching drains my attention faster, so I downgraded right away and moved over to Codex.
 
-The first issue does not need to be complete. It only needs to do three things:
+Cursor also stays compatible with the skills and rules from all those other AI tools, so as long as I manage the rules and skills for Codex, I can keep using the environment I already configured inside Cursor.
 
-1. Establish the `/weekly` route inside the site
-2. Confirm the bilingual content-pair workflow
-3. Leave behind a reusable structure for future issues
+I recommend paying month by month. The 10% you save on an annual plan is not worth losing the flexibility to try the newest features quickly. For example, Cursor can now use Claude Opus 4.6, which comes with fewer restrictions for reverse engineering. And while I was writing this, I noticed Cursor also shipped an agent mode, so by the time this Codex subscription expires I might switch back to Cursor again. (I am still warming up a Claude Code account by chatting with it every day and feeding it some emotional value, since negative wording gets filtered and reported. Several people around me have already had multiple Claude Code accounts banned, and the US version now also charges tax, which pushes it to 250 USD per month.)
+
+![Cursor Agent Window](/weekly/2615/CursorAgentWindow.png)
