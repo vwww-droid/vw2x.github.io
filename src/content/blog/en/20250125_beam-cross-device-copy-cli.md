@@ -4,6 +4,7 @@ date: "2026-01-25"
 featured: true
 summary: "Two commands for cross-device copy and paste, with optional encrypted transfer."
 keywords: ["Beam", "clipboard", "cross-device", "encryption", "CLI", "Python"]
+coverAlt: "Laptop workspace for a cross-device command-line workflow"
 lang: "en-US"
 translationKey: "beam-cross-device-copy-cli"
 ---

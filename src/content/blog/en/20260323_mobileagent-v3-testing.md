@@ -4,6 +4,8 @@ date: "2026-03-23"
 featured: false
 summary: "If you want stable automation for gray-market app testing, abandon the fantasy of full automation first."
 keywords: ["Automation", "AI"]
+cover: "/blog/260323_MobileAgentv3/image-2.png"
+coverAlt: "Workflow screenshot from the MobileAgent-v3 testing setup"
 lang: "en-US"
 translationKey: "mobileagent-v3-testing"
 ---
