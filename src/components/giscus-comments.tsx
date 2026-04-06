@@ -68,7 +68,7 @@ export default function GiscusComments({
   }
 
   return (
-    <div className="weekly-giscus-shell mt-0">
+    <div className="weekly-giscus-shell mt-0 min-w-0 max-w-full overflow-hidden">
       <Giscus
         id="comments"
         repo={repo}

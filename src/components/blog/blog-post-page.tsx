@@ -35,7 +35,7 @@ const pageShellClassName = "mx-auto w-full max-w-[900px] px-4 md:px-5";
 const articleSurfaceClassName =
   "bg-[rgba(255,255,255,0.9)] px-5 py-5 md:px-[30px] md:py-[24px] lg:px-[80px] lg:py-[36px]";
 const commentsSurfaceClassName =
-  "bg-white px-[15px] py-5 md:rounded-[8px] md:px-[36px] md:py-5 lg:px-[88px] lg:py-5";
+  "min-w-0 overflow-hidden bg-white px-[15px] py-5 md:rounded-[8px] md:px-[36px] md:py-5 lg:px-[88px] lg:py-5";
 const sectionStackClassName = "space-y-[15px] md:space-y-[30px]";
 const postFlowClassName = "space-y-3 md:space-y-[30px]";
 

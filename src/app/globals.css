@@ -122,4 +122,13 @@
       linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0)),
       linear-gradient(145deg, rgba(199, 186, 164, 0.1), rgba(199, 186, 164, 0.025));
   }
+
+  .weekly-giscus-shell,
+  .weekly-giscus-shell iframe.giscus-frame {
+    max-width: 100%;
+  }
+
+  .weekly-giscus-shell iframe.giscus-frame {
+    display: block;
+  }
 }

@@ -161,3 +161,37 @@ input:focus {
   text-decoration-line: none;
   word-spacing: -2px;
 }
+
+main .markdown-body,
+main .gsc-comment-content,
+main .gsc-reply-content {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+main .markdown-body pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 640px) {
+  .gsc-reactions-count:after {
+    margin-left: 0;
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+
+  .gsc-comment {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .gsc-comment-content {
+    font-size: 15px;
+  }
+
+  .gsc-social-reaction-summary-item {
+    font-size: 13px;
+    line-height: 24px;
+  }
+}
