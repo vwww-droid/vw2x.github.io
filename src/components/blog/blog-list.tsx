@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { formatDate } from "@/lib/utils";
+import { formatDateCompact } from "@/lib/utils";
 
 export type BlogListItemData = {
   slug: string;
@@ -15,7 +15,7 @@ type BlogListProps = {
 
 export function BlogList({ blogs }: BlogListProps) {
   return (
-    <div className="space-y-[clamp(1rem,2.75vw,1.75rem)]">
+    <div className="space-y-[15px] md:space-y-[30px]">
       {blogs.map(blog => (
         <BlogListItem key={blog.slug} blog={blog} />
       ))}
@@ -29,22 +29,24 @@ type BlogListItemProps = {
 
 function BlogListItem({ blog }: BlogListItemProps) {
   return (
-    <article className="group">
+    <article className="rounded-[8px] bg-white px-5 py-5 md:px-[36px] md:py-[26px] lg:px-[50px] lg:py-[30px]">
       <Link
         href={`/blog/${blog.slug}`}
-        className="block rounded-none py-[clamp(0.25rem,0.8vw,0.5rem)] transition-colors hover:text-foreground/80"
+        className="block"
       >
-        <div className="max-w-3xl space-y-2">
-          <h2 className="text-lg font-medium leading-snug tracking-tight text-foreground md:text-2xl md:leading-tight">
-            {blog.title}
-          </h2>
-          <p className="text-xs leading-5 text-muted-foreground/70 md:text-sm md:leading-6">
-            {formatDate(blog.date)}
-          </p>
-          <p className="text-sm leading-6 text-muted-foreground md:text-[1.05rem] md:leading-7">
-            {blog.summary ?? ""}
+        <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-8">
+          <div className="min-w-0 flex-1">
+            <h2 className="text-[22px] font-semibold leading-[1.35] tracking-[-0.02em] text-[rgba(36,41,47,0.9)] md:text-[30px]">
+              {blog.title}
+            </h2>
+          </div>
+          <p className="shrink-0 text-[15px] leading-[1.3] text-[rgba(85,85,85,0.8)] md:pt-1 md:text-[17px]">
+            {formatDateCompact(blog.date)}
           </p>
         </div>
+        <p className="mt-3 text-[17px] leading-[1.72] text-[rgba(36,41,47,0.82)]">
+            {blog.summary ?? ""}
+        </p>
       </Link>
     </article>
   );

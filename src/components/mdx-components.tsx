@@ -18,7 +18,7 @@ const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
-        "mt-6 mb-4 scroll-m-20 text-[1.6rem] leading-[1.35] font-semibold tracking-[-0.01em] text-foreground/96 md:text-[1.8rem]",
+        "mt-6 mb-4 scroll-m-20 text-[22px] leading-[1.35] font-semibold tracking-[-0.01em] text-[rgba(36,41,47,0.9)] md:text-[30px]",
         className
       )}
       {...props}
@@ -27,7 +27,7 @@ const components = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "mt-9 mb-3 scroll-m-20 text-[1.16rem] leading-[1.55] font-semibold tracking-[-0.005em] text-foreground/94",
+        "mt-9 mb-3 scroll-m-20 text-[22px] leading-[1.45] font-semibold tracking-[-0.01em] text-[rgba(36,41,47,0.9)]",
         className
       )}
       {...props}
@@ -36,7 +36,7 @@ const components = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "mt-7 mb-2 scroll-m-20 text-[1.03rem] leading-[1.6] font-medium text-foreground/92",
+        "mt-7 mb-2 scroll-m-20 text-[19px] leading-[1.55] font-semibold text-[rgba(36,41,47,0.88)]",
         className
       )}
       {...props}
@@ -72,7 +72,7 @@ const components = {
   a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
     <a
       className={cn(
-        "font-medium text-blue-600 underline decoration-blue-600/50 underline-offset-[0.2em] transition-colors hover:text-blue-500 hover:decoration-blue-500 dark:text-blue-400 dark:decoration-blue-400/40 dark:hover:text-blue-300 dark:hover:decoration-blue-300/50",
+        "rounded-[2px] border-b border-dotted border-[silver] font-normal text-[rgba(36,41,47,0.82)] no-underline transition-colors hover:text-[#404040] hover:border-solid",
         className
       )}
       {...props}
@@ -81,7 +81,7 @@ const components = {
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
       className={cn(
-        "my-3.5 text-[0.9rem] leading-[1.82] font-normal text-foreground/88",
+        "my-[0.8em] text-[17px] leading-[1.7] font-normal text-[rgba(36,41,47,0.9)]",
         className
       )}
       {...props}
@@ -93,7 +93,7 @@ const components = {
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
       className={cn(
-        "my-4 ml-5 list-disc space-y-1.5 text-[0.9rem] leading-[1.78] text-foreground/88",
+        "my-4 ml-5 list-disc space-y-1.5 text-[17px] leading-[1.72] text-[rgba(36,41,47,0.9)]",
         className
       )}
       {...props}
@@ -102,7 +102,7 @@ const components = {
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
       className={cn(
-        "my-4 ml-5 list-decimal space-y-1.5 text-[0.9rem] leading-[1.78] text-foreground/88",
+        "my-4 ml-5 list-decimal space-y-1.5 text-[17px] leading-[1.72] text-[rgba(36,41,47,0.9)]",
         className
       )}
       {...props}
@@ -114,7 +114,7 @@ const components = {
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <blockquote
       className={cn(
-        "my-4 border-l-[2px] border-border/70 pl-4 text-[0.9rem] leading-[1.8] text-muted-foreground/90",
+        "my-4 border-l-[4px] border-[#c9ced4] pl-3 text-[17px] leading-[1.72] text-[rgba(36,41,47,0.82)]",
         className
       )}
       {...props}
@@ -208,7 +208,7 @@ const components = {
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn(
-        "font-medium text-blue-600 no-underline decoration-blue-600/50 transition-colors hover:text-blue-500 hover:underline dark:text-blue-400 dark:decoration-blue-400/40 dark:hover:text-blue-300",
+        "rounded-[2px] border-b border-dotted border-[silver] font-normal text-[rgba(36,41,47,0.82)] no-underline transition-colors hover:text-[#404040] hover:border-solid",
         className
       )}
       {...props}

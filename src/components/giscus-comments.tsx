@@ -10,7 +10,7 @@ export default function GiscusComments() {
   }
 
   return (
-    <div className="mt-16 border-t border-border pt-10">
+    <div className="mt-0">
       <Giscus
         id="comments"
         repo={repo}
@@ -22,7 +22,7 @@ export default function GiscusComments() {
         reactionsEnabled="1"
         emitMetadata="0"
         inputPosition="top"
-        theme="dark"
+        theme="light"
         lang="zh-CN"
         loading="lazy"
       />

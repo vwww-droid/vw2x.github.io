@@ -10,11 +10,11 @@ export function NavDesktopMenu() {
     >
       <Link
         href="/"
-        className="text-base font-medium tracking-[-0.03em] transition-colors hover:opacity-70"
+        className="text-[24px] font-extrabold tracking-[-0.03em] text-[#24292f] transition-colors hover:opacity-80 md:text-[30px]"
       >
         vw2x
       </Link>
-      <div className="flex items-center gap-6 text-sm text-muted-foreground">
+      <div className="flex items-center gap-8 text-[16px] font-bold text-[rgba(36,41,47,0.82)]">
         {navItems.map((item) =>
           item.external ? (
             <a
@@ -22,7 +22,7 @@ export function NavDesktopMenu() {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-foreground"
+              className="transition-colors hover:text-[#24292f]"
             >
               {item.label}
             </a>
@@ -30,7 +30,7 @@ export function NavDesktopMenu() {
             <Link
               key={item.label}
               href={item.href}
-              className="transition-colors hover:text-foreground"
+              className="transition-colors hover:text-[#24292f]"
             >
               {item.label}
             </Link>

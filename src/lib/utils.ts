@@ -17,3 +17,11 @@ export function formatDate(date: string) {
   }).split('/');
   return `${year}年${month}月${day}日`;
 }
+
+export function formatDateCompact(date: string) {
+  const parsed = new Date(date);
+  const year = parsed.getFullYear();
+  const month = `${parsed.getMonth() + 1}`.padStart(2, "0");
+  const day = `${parsed.getDate()}`.padStart(2, "0");
+  return `${year}${month}${day}`;
+}

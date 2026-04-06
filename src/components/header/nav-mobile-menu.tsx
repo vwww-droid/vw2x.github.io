@@ -15,7 +15,7 @@ export function NavMobileMenu() {
     >
       <Link
         href="/"
-        className="text-base font-medium tracking-[-0.03em] transition-colors hover:opacity-70"
+        className="text-[24px] font-extrabold tracking-[-0.03em] text-[#24292f] transition-colors hover:opacity-80"
       >
         vw2x
       </Link>
@@ -24,7 +24,7 @@ export function NavMobileMenu() {
           <button
             type="button"
             aria-label="Open menu"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="text-[15px] font-bold text-[rgba(36,41,47,0.82)] transition-colors hover:text-[#24292f]"
           >
             Menu
           </button>
@@ -33,8 +33,8 @@ export function NavMobileMenu() {
           <SheetTitle className="sr-only">Primary navigation</SheetTitle>
           <div className="flex h-full flex-col justify-between px-6 py-8">
             <div className="space-y-8">
-              <div className="text-base font-medium tracking-[-0.03em]">vw2x</div>
-              <div className="flex flex-col gap-4 text-lg">
+              <div className="text-[24px] font-extrabold tracking-[-0.03em] text-[#24292f]">vw2x</div>
+              <div className="flex flex-col gap-5 text-[18px] font-bold text-[rgba(36,41,47,0.82)]">
                 {navItems.map((item) =>
                   item.external ? (
                     <SheetClose asChild key={item.label}>
@@ -42,7 +42,7 @@ export function NavMobileMenu() {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="transition-colors hover:opacity-70"
+                        className="transition-colors hover:text-[#24292f]"
                       >
                         {item.label}
                       </a>
@@ -51,7 +51,7 @@ export function NavMobileMenu() {
                     <SheetClose asChild key={item.label}>
                       <Link
                         href={item.href}
-                        className="transition-colors hover:opacity-70"
+                        className="transition-colors hover:text-[#24292f]"
                       >
                         {item.label}
                       </Link>
