@@ -1,4 +1,4 @@
-import { allAboutPages, allBlogs } from "content-collections";
+import { allAboutPages, allBlogs, allNotes, allWeeklies } from "content-collections";
 import type { Locale } from "@/lib/i18n";
 import { resolveBlogCover, type BlogCover } from "@/lib/covers";
 import {
@@ -9,8 +9,11 @@ import {
   getOppositeLocale,
   stripLocalePrefix,
 } from "@/lib/i18n";
+import { getCollectionIndexHref } from "@/lib/publication-routes";
 
 type BlogRecord = (typeof allBlogs)[number];
+type WeeklyRecord = (typeof allWeeklies)[number];
+type NoteRecord = (typeof allNotes)[number];
 
 export type SearchDocument = {
   title: string;
@@ -24,6 +27,12 @@ export type SearchDocument = {
 };
 
 type BlogWithCover = Omit<BlogRecord, "cover" | "coverAlt"> & {
+  cover: BlogCover;
+};
+type WeeklyWithCover = Omit<WeeklyRecord, "cover" | "coverAlt"> & {
+  cover: BlogCover;
+};
+type NoteWithCover = Omit<NoteRecord, "cover" | "coverAlt"> & {
   cover: BlogCover;
 };
 
@@ -74,6 +83,28 @@ function normalizeBlog(blog: BlogRecord): BlogWithCover {
   return normalizedBlog as BlogWithCover;
 }
 
+function normalizeWeekly(issue: WeeklyRecord): WeeklyWithCover {
+  const normalizedIssue = {
+    ...issue,
+    cover: getResolvedBlogCover(issue),
+  };
+
+  delete normalizedIssue.coverAlt;
+
+  return normalizedIssue as WeeklyWithCover;
+}
+
+function normalizeNote(note: NoteRecord): NoteWithCover {
+  const normalizedNote = {
+    ...note,
+    cover: getResolvedBlogCover(note),
+  };
+
+  delete normalizedNote.coverAlt;
+
+  return normalizedNote as NoteWithCover;
+}
+
 function toSearchableContent(content: string) {
   return content
     .replace(/```[\s\S]*?```/g, " ")
@@ -89,7 +120,15 @@ function getHomeHref(locale: Locale) {
 }
 
 function getBlogIndexHref(locale: Locale) {
-  return locale === EN_LOCALE ? "/en/blog" : "/blog";
+  return getCollectionIndexHref("blog", locale);
+}
+
+function getWeeklyIndexHref(locale: Locale) {
+  return getCollectionIndexHref("weekly", locale);
+}
+
+function getNotesIndexHref(locale: Locale) {
+  return getCollectionIndexHref("notes", locale);
 }
 
 export function getBlogsByLocale(locale: Locale) {
@@ -107,6 +146,44 @@ export function getTranslatedBlog(locale: Locale, translationKey: string) {
   return (
     getBlogsByLocale(oppositeLocale).find(
       (blog) => getDocumentTranslationKey(blog) === translationKey
+    ) ?? null
+  );
+}
+
+export function getWeeklyIssuesByLocale(locale: Locale) {
+  return sortByDateDesc(
+    allWeeklies.filter((issue) => getDocumentLocale(issue) === locale).map(normalizeWeekly)
+  );
+}
+
+export function getWeeklyIssueBySlug(locale: Locale, slug: string) {
+  return getWeeklyIssuesByLocale(locale).find((issue) => issue.slug === slug) ?? null;
+}
+
+export function getTranslatedWeeklyIssue(locale: Locale, translationKey: string) {
+  const oppositeLocale = getOppositeLocale(locale);
+  return (
+    getWeeklyIssuesByLocale(oppositeLocale).find(
+      (issue) => getDocumentTranslationKey(issue) === translationKey
+    ) ?? null
+  );
+}
+
+export function getNotesByLocale(locale: Locale) {
+  return sortByDateDesc(
+    allNotes.filter((note) => getDocumentLocale(note) === locale).map(normalizeNote)
+  );
+}
+
+export function getNoteBySlug(locale: Locale, slug: string) {
+  return getNotesByLocale(locale).find((note) => note.slug === slug) ?? null;
+}
+
+export function getTranslatedNote(locale: Locale, translationKey: string) {
+  const oppositeLocale = getOppositeLocale(locale);
+  return (
+    getNotesByLocale(oppositeLocale).find(
+      (note) => getDocumentTranslationKey(note) === translationKey
     ) ?? null
   );
 }
@@ -131,9 +208,13 @@ export function getTranslatedAboutPage(locale: Locale, translationKey: string) {
 }
 
 export function getSearchDocuments(locale?: Locale): SearchDocument[] {
-  const source = locale
-    ? getBlogsByLocale(locale)
-    : sortByDateDesc(allBlogs).map(normalizeBlog);
+  const source = sortByDateDesc([
+    ...(locale ? getBlogsByLocale(locale) : sortByDateDesc(allBlogs).map(normalizeBlog)),
+    ...(locale
+      ? getWeeklyIssuesByLocale(locale)
+      : sortByDateDesc(allWeeklies).map(normalizeWeekly)),
+    ...(locale ? getNotesByLocale(locale) : sortByDateDesc(allNotes).map(normalizeNote)),
+  ]);
 
   return source.map((blog) => {
     const blogLocale = getDocumentLocale(blog);
@@ -191,6 +272,22 @@ export function getLanguageSwitchTarget(pathname: string): LanguageSwitchTarget 
     };
   }
 
+  if (relativePathname === "/weekly") {
+    return {
+      href: getWeeklyIndexHref(nextLocale),
+      label: getLocaleLabel(nextLocale),
+      locale: nextLocale,
+    };
+  }
+
+  if (relativePathname === "/notes") {
+    return {
+      href: getNotesIndexHref(nextLocale),
+      label: getLocaleLabel(nextLocale),
+      locale: nextLocale,
+    };
+  }
+
   const blogSlug = relativePathname.match(/^\/blog\/(.+)$/)?.[1];
   if (blogSlug) {
     const current = getBlogBySlug(locale, blogSlug);
@@ -200,6 +297,34 @@ export function getLanguageSwitchTarget(pathname: string): LanguageSwitchTarget 
 
     return {
       href: translated?.href ?? getHomeHref(nextLocale),
+      label: getLocaleLabel(nextLocale),
+      locale: nextLocale,
+    };
+  }
+
+  const weeklySlug = relativePathname.match(/^\/weekly\/(.+)$/)?.[1];
+  if (weeklySlug) {
+    const current = getWeeklyIssueBySlug(locale, weeklySlug);
+    const translated = current
+      ? getTranslatedWeeklyIssue(locale, getDocumentTranslationKey(current))
+      : null;
+
+    return {
+      href: translated?.href ?? getWeeklyIndexHref(nextLocale),
+      label: getLocaleLabel(nextLocale),
+      locale: nextLocale,
+    };
+  }
+
+  const noteSlug = relativePathname.match(/^\/notes\/(.+)$/)?.[1];
+  if (noteSlug) {
+    const current = getNoteBySlug(locale, noteSlug);
+    const translated = current
+      ? getTranslatedNote(locale, getDocumentTranslationKey(current))
+      : null;
+
+    return {
+      href: translated?.href ?? getNotesIndexHref(nextLocale),
       label: getLocaleLabel(nextLocale),
       locale: nextLocale,
     };

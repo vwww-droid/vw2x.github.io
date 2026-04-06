@@ -15,16 +15,16 @@ type SearchModalProps = {
 
 const EMPTY_LABELS = {
   "zh-CN": {
-    placeholder: "搜索文章...",
+    placeholder: "搜索内容...",
     empty: "输入关键词开始搜索",
     loading: "正在加载搜索索引...",
-    noResults: "没有找到相关文章",
+    noResults: "没有找到相关内容",
     error: "搜索索引加载失败",
     tips: "/ 搜索  ESC 关闭  ↑↓ 选择  Enter 打开",
   },
   "en-US": {
-    placeholder: "Search articles...",
-    empty: "Type to search articles",
+    placeholder: "Search content...",
+    empty: "Type to search content",
     loading: "Loading search index...",
     noResults: "No results found",
     error: "Failed to load search index",
