@@ -14,7 +14,7 @@ export default function EnglishBlogIndexPage() {
   const blogs = getBlogsByLocale("en-US");
 
   return (
-    <div className="mx-auto w-full max-w-[1180px] px-4 py-[15px] md:px-5 md:py-[34px]">
+    <div className="mx-auto w-full max-w-[1040px] px-4 py-[15px] md:px-5 md:py-[34px]">
       <BlogList blogs={blogs} />
     </div>
   );

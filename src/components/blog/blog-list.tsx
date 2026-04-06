@@ -1,41 +1,31 @@
-import { BlogWeeklyCard, type BlogWeeklyCardData } from "@/components/blog/blog-weekly-card";
-import type { BlogCover } from "@/lib/covers";
-import type { Locale } from "@/lib/i18n";
-
-export type BlogListItemData = {
-  slug: string;
-  href: string;
-  title: string;
-  date: string;
-  content: string;
-  summary?: string;
-  lang?: Locale;
-  cover: BlogCover;
-};
+import { BlogWeeklyCard, type BlogTeaser } from "@/components/blog/blog-weekly-card";
 
 type BlogListProps = {
-  blogs: BlogListItemData[];
+  blogs: BlogTeaser[];
 };
 
 export function BlogList({ blogs }: BlogListProps) {
+  const [featuredBlog, ...restBlogs] = blogs;
+
   return (
-    <div className="grid gap-x-7 gap-y-10 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
-      {blogs.map((blog, index) => (
-        <BlogListItem
-          key={blog.slug}
-          blog={blog}
-          priority={index < 3}
+    <div className="space-y-10 md:space-y-12">
+      {featuredBlog ? (
+        <BlogWeeklyCard
+          blog={featuredBlog}
+          featured
+          priority
         />
-      ))}
+      ) : null}
+      {restBlogs.length > 0 ? (
+        <div className="grid gap-x-8 gap-y-10 md:grid-cols-2 md:gap-y-12">
+          {restBlogs.map((blog) => (
+            <BlogWeeklyCard
+              key={blog.href}
+              blog={blog}
+            />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
-}
-
-type BlogListItemProps = {
-  blog: BlogWeeklyCardData;
-  priority?: boolean;
-};
-
-function BlogListItem({ blog, priority = false }: BlogListItemProps) {
-  return <BlogWeeklyCard blog={blog} priority={priority} />;
 }
