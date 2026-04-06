@@ -1,11 +1,6 @@
-import {
-  allAboutPages,
-  allBlogs,
-  allNotes,
-  allWeeklies,
-} from "../../.content-collections/generated/index.js";
-import type { Locale } from "./i18n.ts";
-import { resolveBlogCover, type BlogCover } from "./covers.ts";
+import { allAboutPages, allBlogs, allNotes, allWeeklies } from "content-collections";
+import type { Locale } from "@/lib/i18n";
+import { resolveBlogCover, type BlogCover } from "@/lib/covers";
 import {
   DEFAULT_LOCALE,
   EN_LOCALE,
@@ -13,10 +8,8 @@ import {
   getLocaleLabel,
   getOppositeLocale,
   stripLocalePrefix,
-} from "./i18n.ts";
-import {
-  getCollectionIndexHref,
-} from "./publication-routes.ts";
+} from "@/lib/i18n";
+import { getCollectionIndexHref } from "@/lib/publication-routes";
 
 type BlogRecord = (typeof allBlogs)[number];
 type WeeklyRecord = (typeof allWeeklies)[number];
@@ -215,23 +208,13 @@ export function getTranslatedAboutPage(locale: Locale, translationKey: string) {
 }
 
 export function getSearchDocuments(locale?: Locale): SearchDocument[] {
-  const source = locale
-    ? [
-        ...getBlogsByLocale(locale),
-        ...getWeeklyIssuesByLocale(locale),
-        ...getNotesByLocale(locale),
-      ]
-    : sortByDateDesc([...allBlogs, ...allWeeklies, ...allNotes]).map((document) => {
-        if ("issue" in document) {
-          return normalizeWeekly(document as WeeklyRecord);
-        }
-
-        if (document.href.includes("/notes/")) {
-          return normalizeNote(document as NoteRecord);
-        }
-
-        return normalizeBlog(document as BlogRecord);
-      });
+  const source = sortByDateDesc([
+    ...(locale ? getBlogsByLocale(locale) : sortByDateDesc(allBlogs).map(normalizeBlog)),
+    ...(locale
+      ? getWeeklyIssuesByLocale(locale)
+      : sortByDateDesc(allWeeklies).map(normalizeWeekly)),
+    ...(locale ? getNotesByLocale(locale) : sortByDateDesc(allNotes).map(normalizeNote)),
+  ]);
 
   return source.map((blog) => {
     const blogLocale = getDocumentLocale(blog);
