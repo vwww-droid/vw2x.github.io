@@ -4,6 +4,8 @@ date: "2026-03-14"
 featured: false
 summary: "探索如何将面向人的逆向 GUI 工具逐步剥离成 agent 向的 API 与 CLI."
 keywords: ["Reverse Engineering", "MCP", "Frida", "CLI", "Android", "Agent"]
+lang: "zh-CN"
+translationKey: "algorithm-assistant-mcp-from-gui-to-api"
 ---
 
 ## 一、引言: AI 时代我们需要什么样的逆向基建

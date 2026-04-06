@@ -3,7 +3,11 @@
 import Giscus from "@giscus/react";
 import { config } from "@/lib/config";
 
-export default function GiscusComments() {
+export default function GiscusComments({
+  lang = "zh-CN",
+}: {
+  lang?: "zh-CN" | "en-US";
+}) {
   const { repo, repoId, category, categoryId } = config.giscus;
   if (!categoryId) {
     return null;
@@ -23,7 +27,7 @@ export default function GiscusComments() {
         emitMetadata="0"
         inputPosition="top"
         theme="light"
-        lang="zh-CN"
+        lang={lang === "en-US" ? "en" : "zh-CN"}
         loading="lazy"
       />
     </div>

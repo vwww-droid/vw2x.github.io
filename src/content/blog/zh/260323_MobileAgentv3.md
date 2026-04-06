@@ -4,6 +4,8 @@ date: "2026-03-23"
 featured: false
 summary: "黑灰产 App 自动化测试想稳定, 先放弃全自动幻觉."
 keywords: ["自动化", "AI"]
+lang: "zh-CN"
+translationKey: "mobileagent-v3-testing"
 ---
 
 今天把同个问题在两个项目里做了对照实验, 花了 3h 时间, 得到一个结论: 

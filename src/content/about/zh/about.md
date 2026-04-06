@@ -1,5 +1,7 @@
 ---
 description: 关于 vw2x
+lang: "zh-CN"
+translationKey: "about"
 ---
 
 欢迎你来! 

@@ -4,6 +4,8 @@ date: "2026-03-27"
 featured: false
 summary: "同一软件, 一条命令, 两种结果. 让我开始区分 zsh 的不同启动方式. "
 keywords: ["Codex", "zsh", "Shell", "Debugging", "Android", "Build"]
+lang: "zh-CN"
+translationKey: "rethinking-zsh-in-codex"
 ---
 
 ## 为什么我会重新理解 zsh
