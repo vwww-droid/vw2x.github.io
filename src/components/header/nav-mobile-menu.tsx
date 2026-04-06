@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { SearchTrigger } from "@/components/search/search-trigger";
+import { config } from "@/lib/config";
 import { getLocaleFromPathname } from "@/lib/i18n";
 import { LanguageSwitch } from "./language-switch";
 import { getNavItems } from "./nav-data";
@@ -20,14 +21,19 @@ export function NavMobileMenu() {
   return (
     <nav
       aria-label="Primary"
-      className="flex h-14 items-center justify-between md:hidden md:h-[84px]"
+      className="flex items-start justify-between gap-3 py-3 md:hidden"
     >
-      <Link
-        href={homeHref}
-        className="text-[24px] font-extrabold tracking-[-0.03em] text-[#24292f] transition-colors hover:opacity-80"
-      >
-        vw2x
-      </Link>
+      <div className="min-w-0 flex-1 pr-2">
+        <Link
+          href={homeHref}
+          className="block text-[24px] font-extrabold tracking-[-0.03em] text-[#24292f] transition-colors hover:opacity-80"
+        >
+          vw2x
+        </Link>
+        <p className="mt-0.5 text-[12px] leading-[1.25] text-[rgba(85,85,85,0.78)]">
+          {config.site.tagline}
+        </p>
+      </div>
       <div className="flex items-center gap-1.5">
         <SearchTrigger />
         <LanguageSwitch />

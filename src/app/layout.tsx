@@ -52,7 +52,7 @@ export default function RootLayout({
       <body className="flex min-h-dvh flex-col overflow-x-hidden bg-background text-foreground antialiased">
         <LocaleDocumentSync />
         <Header />
-        <div className="flex-1 md:pt-[84px]">{children}</div>
+        <div className="flex-1">{children}</div>
         <SiteFooter />
       </body>
     </html>
