@@ -150,6 +150,20 @@
     box-shadow: 0 18px 38px rgba(36, 41, 47, 0.08);
   }
 
+  .weekly-comments-panel {
+    border: 1px solid rgba(36, 41, 47, 0.08);
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 18px 38px rgba(36, 41, 47, 0.06);
+  }
+
+  .weekly-comments-body {
+    min-width: 0;
+  }
+
+  .weekly-comments-panel .weekly-giscus-shell {
+    min-height: 220px;
+  }
+
   .weekly-scrollbar {
     scrollbar-color: rgba(36, 41, 47, 0.24) transparent;
     scrollbar-width: thin;
@@ -265,5 +279,11 @@
 
   .card-content:active {
     transform: translateY(-2px);
+  }
+
+  @media (max-width: 640px) {
+    .weekly-comments-panel {
+      border-radius: 16px;
+    }
   }
 }
