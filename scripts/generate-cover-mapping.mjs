@@ -4,6 +4,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+import matter from "gray-matter";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,43 +16,6 @@ function parseArgs(argv) {
   return {
     dryRun: argv.includes("--dry-run"),
   };
-}
-
-function stripWrappingQuotes(value) {
-  const trimmed = value.trim();
-  if (
-    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
-    (trimmed.startsWith("'") && trimmed.endsWith("'"))
-  ) {
-    return trimmed.slice(1, -1);
-  }
-  return trimmed;
-}
-
-function parseFrontmatter(source) {
-  const match = source.match(/^---\n([\s\S]*?)\n---\n?/);
-  if (!match) {
-    return {};
-  }
-
-  const frontmatter = {};
-  for (const rawLine of match[1].split("\n")) {
-    const line = rawLine.trim();
-    if (!line || line.startsWith("#")) {
-      continue;
-    }
-
-    const separatorIndex = line.indexOf(":");
-    if (separatorIndex === -1) {
-      continue;
-    }
-
-    const key = line.slice(0, separatorIndex).trim();
-    const value = line.slice(separatorIndex + 1).trim();
-    frontmatter[key] = stripWrappingQuotes(value);
-  }
-
-  return frontmatter;
 }
 
 function hasNonEmptyValue(value) {
@@ -99,29 +63,30 @@ async function scanArticles() {
 
   for (const filePath of files) {
     const source = await readFile(filePath, "utf8");
-    const frontmatter = parseFrontmatter(source);
-    const translationKey =
-      (frontmatter.translationKey && frontmatter.translationKey.trim()) ||
-      path.basename(filePath, path.extname(filePath));
-    const title = frontmatter.title || translationKey;
-    const lang = frontmatter.lang || "";
-    const cover = frontmatter.cover;
-    const coverAlt = frontmatter.coverAlt;
+    const { data } = matter(source);
+    const translationKey = hasNonEmptyValue(data.translationKey)
+      ? data.translationKey.trim()
+      : path.basename(filePath, path.extname(filePath));
+    const title = hasNonEmptyValue(data.title) ? data.title.trim() : translationKey;
+    const lang = hasNonEmptyValue(data.lang) ? data.lang.trim() : "";
+    const cover = hasNonEmptyValue(data.cover) ? data.cover.trim() : "";
+    const coverAlt = hasNonEmptyValue(data.coverAlt) ? data.coverAlt.trim() : "";
 
     articles.push({
       filePath,
       title,
       translationKey,
       lang,
+      cover,
+      coverAlt,
       hasExplicitCover: hasNonEmptyValue(cover),
-      coverAlt: hasNonEmptyValue(coverAlt) ? coverAlt.trim() : undefined,
     });
   }
 
   return articles;
 }
 
-function buildQuery(article) {
+function buildQueryFromArticle(article) {
   return article.title.replace(/\s+/g, " ").trim();
 }
 
@@ -150,17 +115,16 @@ function selectQueryArticle(articles) {
   return [...articles].sort(compareQueryPriority)[0] ?? null;
 }
 
-function groupCandidates(articles, generatedCoverMap) {
+function groupArticlesByTranslationKey(articles, generatedCoverMap) {
   const groups = new Map();
 
   for (const article of articles) {
     const existing = groups.get(article.translationKey) ?? {
       translationKey: article.translationKey,
-      queryArticle: null,
+      articles: [],
       files: [],
       missingExplicitCoverFiles: [],
       hasCachedMapping: Boolean(generatedCoverMap[article.translationKey]?.src),
-      articles: [],
     };
 
     existing.files.push(article.filePath);
@@ -172,13 +136,43 @@ function groupCandidates(articles, generatedCoverMap) {
     groups.set(article.translationKey, existing);
   }
 
-  return [...groups.values()]
+  return [...groups.values()].sort((left, right) =>
+    left.translationKey.localeCompare(right.translationKey)
+  );
+}
+
+function buildQuerySelection(group) {
+  const article = selectQueryArticle(group.articles);
+  if (!article) {
+    return null;
+  }
+
+  return {
+    translationKey: group.translationKey,
+    article,
+    query: buildQueryFromArticle(article),
+  };
+}
+
+function buildPendingMappings(groups) {
+  const pendingMappings = groups
     .filter((group) => !group.hasCachedMapping && group.missingExplicitCoverFiles.length > 0)
-    .map((group) => ({
-      ...group,
-      queryArticle: selectQueryArticle(group.articles),
-    }))
-    .sort((a, b) => a.translationKey.localeCompare(b.translationKey));
+    .map((group) => {
+      const querySelection = buildQuerySelection(group);
+      if (!querySelection) {
+        return null;
+      }
+
+      return {
+        translationKey: group.translationKey,
+        querySelection,
+        sourceFiles: [...group.files],
+        missingExplicitCoverFiles: [...group.missingExplicitCoverFiles],
+      };
+    })
+    .filter((mapping) => mapping !== null);
+
+  return pendingMappings;
 }
 
 async function fetchUnsplashCover(query, apiKey) {
@@ -222,21 +216,23 @@ async function main() {
   const { dryRun } = parseArgs(process.argv.slice(2));
   const generatedCoverMap = await readGeneratedCoverMap();
   const articles = await scanArticles();
-  const candidates = groupCandidates(articles, generatedCoverMap);
+  const groupedArticles = groupArticlesByTranslationKey(articles, generatedCoverMap);
+  const pendingMappings = buildPendingMappings(groupedArticles);
   const apiKey = process.env.UNSPLASH_ACCESS_KEY || process.env.UNSPLASH_API_KEY;
 
   console.log(`[generate-cover-mapping] scanned ${articles.length} articles`);
   console.log(
-    `[generate-cover-mapping] ${candidates.length} translation keys need coverage updates`
+    `[generate-cover-mapping] ${pendingMappings.length} translation keys need coverage updates`
   );
 
-  for (const candidate of candidates) {
-    console.log(`- ${candidate.translationKey}`);
-    console.log(`  title: ${candidate.queryArticle?.title ?? candidate.translationKey}`);
-    console.log(`  locale: ${candidate.queryArticle?.lang ?? "unknown"}`);
-    console.log(`  files: ${candidate.missingExplicitCoverFiles.length}`);
-    console.log(`  query: ${buildQuery(candidate.queryArticle ?? candidate)}`);
-    if (generatedCoverMap[candidate.translationKey]?.src) {
+  for (const pendingMapping of pendingMappings) {
+    const { querySelection } = pendingMapping;
+    console.log(`- ${pendingMapping.translationKey}`);
+    console.log(`  title: ${querySelection.article.title}`);
+    console.log(`  locale: ${querySelection.article.lang || "unknown"}`);
+    console.log(`  files: ${pendingMapping.missingExplicitCoverFiles.length}`);
+    console.log(`  query: ${querySelection.query}`);
+    if (generatedCoverMap[pendingMapping.translationKey]?.src) {
       console.log(`  cache: hit`);
     } else {
       console.log(`  cache: miss`);
@@ -244,7 +240,7 @@ async function main() {
   }
 
   if (dryRun || !apiKey) {
-    if (!apiKey && candidates.length > 0 && !dryRun) {
+    if (!apiKey && pendingMappings.length > 0 && !dryRun) {
       console.log(
         "[generate-cover-mapping] no Unsplash API key detected, skipped remote fetch"
       );
@@ -256,20 +252,20 @@ async function main() {
   const nextMap = { ...generatedCoverMap };
   let updatedCount = 0;
 
-  for (const candidate of candidates) {
-    const queryArticle = candidate.queryArticle ?? candidate.articles[0];
-    const generated = await fetchUnsplashCover(buildQuery(queryArticle), apiKey);
+  for (const pendingMapping of pendingMappings) {
+    const { querySelection } = pendingMapping;
+    const generated = await fetchUnsplashCover(querySelection.query, apiKey);
     if (!generated?.src) {
-      console.log(`- skipped ${candidate.translationKey}: no Unsplash result`);
+      console.log(`- skipped ${pendingMapping.translationKey}: no Unsplash result`);
       continue;
     }
 
-    nextMap[candidate.translationKey] = {
+    nextMap[pendingMapping.translationKey] = {
       src: generated.src,
-      alt: generated.alt || queryArticle.title,
+      alt: generated.alt || querySelection.article.title,
     };
     updatedCount += 1;
-    console.log(`- updated ${candidate.translationKey}`);
+    console.log(`- updated ${pendingMapping.translationKey}`);
   }
 
   if (updatedCount > 0) {
