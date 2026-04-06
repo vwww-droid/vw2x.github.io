@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { config } from "@/lib/config";
 
 function Separator() {
@@ -6,7 +9,14 @@ function Separator() {
 }
 
 export function SiteFooter() {
+  const pathname = usePathname();
   const github = config.social.github;
+  const isWeeklyDetail =
+    pathname.startsWith("/weekly/") || pathname.startsWith("/en/weekly/");
+
+  if (isWeeklyDetail) {
+    return null;
+  }
 
   return (
     <footer className="shrink-0 border-t border-black/5">

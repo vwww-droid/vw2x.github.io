@@ -154,4 +154,116 @@
     scrollbar-color: rgba(36, 41, 47, 0.24) transparent;
     scrollbar-width: thin;
   }
+
+  .weekly-article {
+    font-weight: 400;
+    line-height: 1.75;
+    letter-spacing: 0.5px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .weekly-article > *:first-child {
+    margin-block-start: 0 !important;
+  }
+
+  .weekly-article > *:last-child {
+    margin-block-end: 0 !important;
+  }
+
+  .weekly-article p {
+    margin: 0.8em 0;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .weekly-article h1,
+  .weekly-article h2,
+  .weekly-article h3,
+  .weekly-article h4,
+  .weekly-article h5,
+  .weekly-article h6 {
+    margin: 0;
+    margin-block-start: 28px;
+    margin-block-end: 13px;
+    line-height: 1.7;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: rgba(36, 41, 47, 0.96);
+  }
+
+  .weekly-article h1 {
+    font-size: 32px;
+  }
+
+  .weekly-article h2 {
+    font-size: 24px;
+  }
+
+  .weekly-article h3 {
+    margin-block-start: 10px;
+    font-size: 20px;
+  }
+
+  .weekly-article h4,
+  .weekly-article h5,
+  .weekly-article h6 {
+    margin-block-start: 10px;
+    font-size: 17px;
+  }
+
+  .weekly-article h1 + h2,
+  .weekly-article h2 + h3,
+  .weekly-article h3 + h4,
+  .weekly-article h4 + h5,
+  .weekly-article h5 + h6 {
+    margin-block-start: 13px;
+  }
+
+  .weekly-article ul,
+  .weekly-article ol {
+    margin: 1rem 0;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .weekly-article ul {
+    padding-inline-start: 20px;
+  }
+
+  .weekly-article ol {
+    padding-inline-start: 28px;
+  }
+
+  .weekly-article li + li {
+    margin-top: 0.25rem;
+  }
+
+  .weekly-article blockquote {
+    margin: 1rem 0;
+    border-left: 4px solid #c9ced4;
+    padding-left: 12px;
+    font-size: 17px;
+    line-height: 1.75;
+    color: rgba(36, 41, 47, 0.82);
+  }
+
+  .card-content {
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
+    will-change: transform;
+  }
+
+  .card-content:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 8px 16px -2px rgb(0 0 0 / 0.12),
+      0 4px 8px -2px rgb(0 0 0 / 0.08);
+  }
+
+  .card-content:active {
+    transform: translateY(-2px);
+  }
 }

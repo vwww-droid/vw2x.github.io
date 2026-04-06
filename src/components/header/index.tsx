@@ -1,17 +1,25 @@
 "use client";
 
 import * as React from "react";
+import { usePathname } from "next/navigation";
 
 import { SearchProvider } from "@/components/search/search-provider";
 import { NavDesktopMenu } from "./nav-desktop-menu";
 import { NavMobileMenu } from "./nav-mobile-menu";
 
 export function Header() {
+  const pathname = usePathname();
   const [isHidden, setIsHidden] = React.useState(false);
   const [headerHeight, setHeaderHeight] = React.useState(96);
   const headerRef = React.useRef<HTMLElement | null>(null);
+  const isWeeklyDetail =
+    pathname.startsWith("/weekly/") || pathname.startsWith("/en/weekly/");
 
   React.useEffect(() => {
+    if (isWeeklyDetail) {
+      return;
+    }
+
     let previousScrollY = window.scrollY;
     let frameId = 0;
 
@@ -47,9 +55,13 @@ export function Header() {
       }
       window.removeEventListener("scroll", onScroll);
     };
-  }, []);
+  }, [isWeeklyDetail]);
 
   React.useEffect(() => {
+    if (isWeeklyDetail) {
+      return;
+    }
+
     const headerElement = headerRef.current;
     if (!headerElement) {
       return;
@@ -69,7 +81,11 @@ export function Header() {
       observer.disconnect();
       window.removeEventListener("resize", syncHeight);
     };
-  }, []);
+  }, [isWeeklyDetail]);
+
+  if (isWeeklyDetail) {
+    return null;
+  }
 
   return (
     <>

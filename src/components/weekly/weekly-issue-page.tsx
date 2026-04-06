@@ -1,6 +1,6 @@
+import * as React from "react";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
-import count from "word-count";
 import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
@@ -9,11 +9,12 @@ import remarkMath from "remark-math";
 
 import { BlogCoverImage } from "@/components/blog/blog-cover-image";
 import { components } from "@/components/mdx-components";
+import { SearchTrigger } from "@/components/search/search-trigger";
 import type { BlogCover } from "@/lib/covers";
 import type { Locale } from "@/lib/i18n";
-import { cn, formatDateCompact } from "@/lib/utils";
 import { expandMultiBlankLines } from "@/lib/mdx-expand-blank-lines";
 import { WeeklyShell } from "@/components/weekly/weekly-shell";
+import { cn } from "@/lib/utils";
 import type { WeeklyTeaser } from "@/components/weekly/weekly-card";
 
 type WeeklyIssuePageProps = {
@@ -33,16 +34,105 @@ const options = {
   },
 };
 
-function getIssueLabel(issue: WeeklyTeaser, locale: Locale) {
-  return issue.issueLabel ?? (locale === "en-US" ? `Issue ${issue.issue}` : `第 ${issue.issue} 期`);
-}
+const weeklyComponents = {
+  ...components,
+  h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h1
+      className={cn(
+        "!mb-[13px] !mt-[28px] !text-[32px] !leading-[1.7] font-bold tracking-[0.8px] text-[rgba(36,41,47,0.96)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+  h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h2
+      className={cn(
+        "!mb-[13px] !mt-[28px] !text-[24px] !leading-[1.7] font-bold tracking-[0.8px] text-[rgba(36,41,47,0.96)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+  h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h3
+      className={cn(
+        "!mb-[13px] !mt-[10px] !text-[20px] !leading-[1.7] font-bold tracking-[0.8px] text-[rgba(36,41,47,0.96)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+  h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h4
+      className={cn(
+        "!mb-[13px] !mt-[10px] !text-[16px] !leading-[1.7] font-bold tracking-[0.5px] text-[rgba(36,41,47,0.96)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+  h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h5
+      className={cn(
+        "!mb-[13px] !mt-[10px] !text-[16px] !leading-[1.7] font-bold tracking-[0.5px] text-[rgba(36,41,47,0.96)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+  h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h6
+      className={cn(
+        "!mb-[13px] !mt-[10px] !text-[16px] !leading-[1.7] font-bold tracking-[0.5px] text-[rgba(36,41,47,0.96)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+  p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
+    <p
+      className={cn(
+        "!my-[28px] !text-[16px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+  ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
+    <ul
+      className={cn(
+        "!my-[28px] list-disc pl-5 !text-[16px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)] [&>li+li]:mt-3",
+        className
+      )}
+      {...props}
+    />
+  ),
+  ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
+    <ol
+      className={cn(
+        "!my-[28px] list-decimal pl-7 !text-[16px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)] [&>li+li]:mt-3",
+        className
+      )}
+      {...props}
+    />
+  ),
+  li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
+    <li className={cn("pl-1", className)} {...props} />
+  ),
+  blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <blockquote
+      className={cn(
+        "!my-[28px] border-l-4 border-[#c9ced4] pl-3 !text-[16px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.82)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+};
 
-function getCountLabel(content: string, locale: Locale) {
-  if (locale === "en-US") {
-    return `${count(content)} words`;
-  }
-
-  return `${content.replace(/\s+/g, "").length} 字`;
+function getSidebarTitle(title: string) {
+  return title.replace(/^(\d+)\s*-\s*/, "$1 ");
 }
 
 function WeeklyIssueList({
@@ -55,7 +145,7 @@ function WeeklyIssueList({
   locale: Locale;
 }) {
   return (
-    <nav className="space-y-2">
+    <nav className="space-y-1.5 text-[17px] leading-[1.5] text-[rgba(36,41,47,0.92)]">
       {issues.map((issue) => {
         const active = issue.href === activeHref;
 
@@ -65,20 +155,12 @@ function WeeklyIssueList({
             href={issue.href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "block rounded-[18px] border px-3 py-3 transition-colors",
-              active
-                ? "border-[rgba(36,41,47,0.18)] bg-[rgba(36,41,47,0.94)] text-white shadow-[0_14px_28px_rgba(36,41,47,0.14)]"
-                : "border-[rgba(36,41,47,0.08)] bg-[rgba(255,255,255,0.66)] text-[rgba(36,41,47,0.9)] hover:bg-[rgba(255,255,255,0.9)]",
+              "block truncate px-[11px] py-[5px] transition-colors hover:text-[#a67c52]",
+              active && "font-semibold text-[#a67c52]",
               locale === "zh-CN" && "font-reading-zh"
             )}
           >
-            <div className="flex items-center justify-between gap-3 text-[12px] uppercase tracking-[0.14em] opacity-80">
-              <span>{getIssueLabel(issue, locale)}</span>
-              <span>{formatDateCompact(issue.date, locale)}</span>
-            </div>
-            <div className="mt-2 line-clamp-2 text-[15px] leading-[1.55] font-semibold tracking-[-0.02em]">
-              {issue.title}
-            </div>
+            {getSidebarTitle(issue.title)}
           </Link>
         );
       })}
@@ -93,85 +175,71 @@ export function WeeklyIssuePage({
   issues,
 }: WeeklyIssuePageProps) {
   return (
-    <WeeklyShell locale={locale} languageSwitchHref={languageSwitchHref}>
-      <div className="grid gap-4 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-6">
-        <aside className="order-2 lg:order-1 lg:sticky lg:top-28 lg:self-start">
-          <div className="weekly-surface rounded-[26px] border border-[rgba(255,255,255,0.72)] p-4">
-            <div className="mb-4 flex items-center justify-between gap-3">
-              <div>
-                <p className="text-[12px] uppercase tracking-[0.16em] text-[rgba(85,85,85,0.72)]">
-                  {locale === "en-US" ? "Issue list" : "期刊列表"}
-                </p>
-                <h2
-                  className={cn(
-                    "mt-1 text-[18px] font-semibold tracking-[-0.03em] text-[rgba(36,41,47,0.95)]",
-                    locale === "zh-CN" && "font-reading-zh"
-                  )}
-                >
-                  {locale === "en-US" ? "Archive" : "归档"}
-                </h2>
-              </div>
-              <div className="rounded-full border border-[rgba(36,41,47,0.08)] bg-[rgba(255,255,255,0.7)] px-3 py-1 text-[12px] text-[rgba(85,85,85,0.8)]">
-                {issues.length}
-              </div>
-            </div>
-            <div className="max-h-[calc(100vh-8.5rem)] overflow-y-auto pr-1 weekly-scrollbar">
+    <WeeklyShell>
+      <main className="min-h-screen bg-white">
+        <div className="mx-auto grid min-h-screen w-full max-w-[1338px] grid-cols-1 px-2 md:px-0 lg:grid-cols-[288px_minmax(0,1fr)] xl:grid-cols-[320px_minmax(0,1fr)]">
+        <aside className="hidden lg:block lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:pl-8 lg:pr-8 lg:pt-8">
+          <div className="flex h-full flex-col">
+            <div className="weekly-scrollbar flex-1 overflow-y-auto pr-2">
               <WeeklyIssueList issues={issues} activeHref={issue.href} locale={locale} />
             </div>
           </div>
         </aside>
 
-        <section className="order-1 min-w-0 lg:order-2">
-          <article className="weekly-surface rounded-[28px] border border-[rgba(255,255,255,0.72)] px-4 py-5 md:px-6 md:py-6">
-            <div className="px-1">
-              <p className="text-[12px] uppercase tracking-[0.16em] text-[rgba(85,85,85,0.72)]">
-                {formatDateCompact(issue.date, locale)} · {getIssueLabel(issue, locale)} ·{" "}
-                {getCountLabel(issue.content, locale)}
-              </p>
+        <section className="min-w-0 px-2 pb-16 pt-5 md:px-4 md:pt-6 lg:px-8">
+          <article className="mx-auto w-full max-w-[998px]">
+            <div className="mb-6 flex items-start justify-between gap-4">
               <h1
                 className={cn(
-                  "mt-3 text-[30px] font-semibold leading-[1.14] tracking-[-0.04em] text-[rgba(36,41,47,0.96)] md:text-[42px]",
+                  "flex-1 text-[24px] font-extrabold leading-[1.12] tracking-[0.18px] text-[rgba(36,41,47,0.96)] md:text-[32px] md:leading-[1.14] xl:text-[36px]",
                   locale === "zh-CN" && "font-reading-zh"
                 )}
               >
-                {issue.title}
+                <span>{getSidebarTitle(issue.title)}</span>
               </h1>
-              {issue.summary ? (
-                <p
-                  className={cn(
-                    "mt-4 max-w-[50rem] text-[16px] leading-[1.85] text-[rgba(85,85,85,0.85)] md:text-[18px]",
-                    locale === "zh-CN" && "font-reading-zh"
-                  )}
+              <div className="flex shrink-0 items-center gap-2 pt-1">
+                <SearchTrigger className="bg-[rgba(245,245,245,0.95)] hover:bg-[rgba(235,235,235,0.95)]" />
+                <Link
+                  href={languageSwitchHref}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[rgba(245,245,245,0.95)] text-sm font-medium text-[rgba(85,85,85,0.86)] transition-colors hover:bg-[rgba(235,235,235,0.95)] hover:text-[rgba(36,41,47,1)]"
                 >
-                  {issue.summary}
-                </p>
-              ) : null}
+                  {locale === "en-US" ? "中" : "En"}
+                </Link>
+              </div>
             </div>
             <BlogCoverImage
               cover={issue.cover as BlogCover}
               priority
-              sizes="(min-width: 1024px) 900px, 100vw"
-              className="mt-5 aspect-[1.58] w-full rounded-[22px] bg-[rgba(246,241,232,0.92)]"
+              sizes="(min-width: 1152px) 998px, 100vw"
+              className="aspect-[1.58] w-full rounded-[14px] bg-[rgba(246,241,232,0.92)]"
               imageClassName="object-cover transition-none"
             />
-          </article>
-
-          <article className="mt-4 weekly-surface rounded-[28px] border border-[rgba(255,255,255,0.72)] px-4 py-5 md:px-8 md:py-8">
+            {issue.summary ? (
+              <p
+                className={cn(
+                  "mt-7 text-[16px] leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)]",
+                  locale === "zh-CN" && "font-reading-zh"
+                )}
+              >
+                {issue.summary}
+              </p>
+            ) : null}
             <div
               className={cn(
-                "mdx-content [&>h2:first-child]:mt-3 [&>h3:first-child]:mt-2",
+                "weekly-article mt-8",
                 locale === "zh-CN" && "font-reading-zh"
               )}
             >
               <MDXRemote
                 source={expandMultiBlankLines(issue.content)}
-                components={components}
+                components={weeklyComponents}
                 options={options}
               />
             </div>
           </article>
         </section>
-      </div>
+        </div>
+      </main>
     </WeeklyShell>
   );
 }
