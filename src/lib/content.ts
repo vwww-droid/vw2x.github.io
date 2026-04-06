@@ -1,5 +1,6 @@
 import { allAboutPages, allBlogs } from "content-collections";
 import type { Locale } from "@/lib/i18n";
+import { resolveBlogCover, type BlogCover } from "@/lib/covers";
 import {
   DEFAULT_LOCALE,
   EN_LOCALE,
@@ -9,6 +10,8 @@ import {
   stripLocalePrefix,
 } from "@/lib/i18n";
 
+type BlogRecord = (typeof allBlogs)[number];
+
 export type SearchDocument = {
   title: string;
   url: string;
@@ -17,13 +20,11 @@ export type SearchDocument = {
   content: string;
   lang: Locale;
   translationKey: string;
-  cover?: BlogCover;
+  cover: BlogCover;
 };
 
-export type BlogCover = {
-  src: string;
-  alt: string;
-  source: "explicit" | "generated";
+type BlogWithCover = Omit<BlogRecord, "cover" | "coverAlt"> & {
+  cover: BlogCover;
 };
 
 export type LanguageSwitchTarget = {
@@ -53,6 +54,26 @@ function getDocumentTranslationKey(document: {
   return document.translationKey ?? document.slug ?? "";
 }
 
+function getResolvedBlogCover(blog: BlogRecord) {
+  return resolveBlogCover({
+    title: blog.title,
+    translationKey: getDocumentTranslationKey(blog),
+    cover: blog.cover,
+    coverAlt: blog.coverAlt,
+  });
+}
+
+function addResolvedCover(blog: BlogRecord): BlogWithCover {
+  const { cover: ignoredCover, coverAlt: ignoredCoverAlt, ...rest } = blog;
+  void ignoredCover;
+  void ignoredCoverAlt;
+
+  return {
+    ...rest,
+    cover: getResolvedBlogCover(blog),
+  };
+}
+
 function toSearchableContent(content: string) {
   return content
     .replace(/```[\s\S]*?```/g, " ")
@@ -73,7 +94,7 @@ function getBlogIndexHref(locale: Locale) {
 
 export function getBlogsByLocale(locale: Locale) {
   return sortByDateDesc(
-    allBlogs.filter((blog) => getDocumentLocale(blog) === locale)
+    allBlogs.filter((blog) => getDocumentLocale(blog) === locale).map(addResolvedCover)
   );
 }
 
@@ -110,7 +131,9 @@ export function getTranslatedAboutPage(locale: Locale, translationKey: string) {
 }
 
 export function getSearchDocuments(locale?: Locale): SearchDocument[] {
-  const source = locale ? getBlogsByLocale(locale) : sortByDateDesc(allBlogs);
+  const source = locale
+    ? getBlogsByLocale(locale)
+    : sortByDateDesc(allBlogs).map(addResolvedCover);
 
   return source.map((blog) => {
     const blogLocale = getDocumentLocale(blog);
@@ -124,6 +147,7 @@ export function getSearchDocuments(locale?: Locale): SearchDocument[] {
       content: toSearchableContent(blog.content).slice(0, 1200),
       lang: blogLocale,
       translationKey,
+      cover: blog.cover,
     };
   });
 }
