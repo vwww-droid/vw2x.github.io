@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { formatDate } from "@/lib/utils";
 
 export type BlogListItemData = {
   slug: string;
@@ -37,6 +38,9 @@ function BlogListItem({ blog }: BlogListItemProps) {
           <h2 className="text-lg font-medium leading-snug tracking-tight text-foreground md:text-2xl md:leading-tight">
             {blog.title}
           </h2>
+          <p className="text-xs leading-5 text-muted-foreground/70 md:text-sm md:leading-6">
+            {formatDate(blog.date)}
+          </p>
           <p className="text-sm leading-6 text-muted-foreground md:text-[1.05rem] md:leading-7">
             {blog.summary ?? ""}
           </p>
