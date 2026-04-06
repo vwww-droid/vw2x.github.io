@@ -25,6 +25,10 @@ function getRssHref() {
   return config.site.rss.feedLinks.rss2;
 }
 
+function getWeeklyLabel(locale: Locale) {
+  return locale === "en-US" ? "Weekly" : "周记";
+}
+
 export function WeeklyShell({
   locale,
   languageSwitchHref,
@@ -50,11 +54,11 @@ export function WeeklyShell({
                     locale === "zh-CN" && "font-reading-zh"
                   )}
                 >
-                  <span className="rounded-full border border-[rgba(36,41,47,0.08)] bg-[rgba(255,255,255,0.76)] px-3 py-1 text-[14px] leading-none text-[rgba(36,41,47,0.76)]">
-                    vw2x
-                  </span>
-                  <span>周记</span>
-                </Link>
+                <span className="rounded-full border border-[rgba(36,41,47,0.08)] bg-[rgba(255,255,255,0.76)] px-3 py-1 text-[14px] leading-none text-[rgba(36,41,47,0.76)]">
+                  vw2x
+                </span>
+                <span>{getWeeklyLabel(locale)}</span>
+              </Link>
                 <span className="hidden h-5 w-px bg-[rgba(36,41,47,0.12)] lg:block" />
                 <p className="text-[13px] leading-relaxed text-[rgba(85,85,85,0.8)]">
                   {locale === "en-US"
