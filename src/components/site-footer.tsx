@@ -9,8 +9,8 @@ export function SiteFooter() {
   const github = config.social.github;
 
   return (
-    <footer className="shrink-0">
-      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-2 gap-y-1 px-4 py-6 text-sm text-muted-foreground">
+    <footer className="shrink-0 border-t border-black/5">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-x-3 gap-y-1 px-[clamp(0.75rem,3.5vw,1.25rem)] py-6 text-sm text-muted-foreground/80 md:py-7">
         <Link href="/about" className="transition-colors hover:text-foreground">
           关于我
         </Link>
