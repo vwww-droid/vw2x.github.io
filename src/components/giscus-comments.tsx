@@ -7,6 +7,7 @@ import {
   getDocumentModeFromClassName,
   getGiscusLang,
   getGiscusThemeMessage,
+  getGiscusThemeOrigin,
   getGiscusThemeUrl,
   type GiscusDocumentMode,
 } from "@/components/giscus-comments-theme";
@@ -26,8 +27,10 @@ export default function GiscusComments({
     return getDocumentModeFromClassName(document.documentElement.className);
   });
 
-  const origin =
-    typeof window === "undefined" ? config.site.url : window.location.origin;
+  const origin = getGiscusThemeOrigin(
+    typeof window === "undefined" ? undefined : window.location.origin,
+    config.site.url,
+  );
   const theme = getGiscusThemeUrl(origin, mode);
 
   useEffect(() => {
