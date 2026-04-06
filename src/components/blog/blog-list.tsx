@@ -36,7 +36,7 @@ function BlogListItem({ blog }: BlogListItemProps) {
       >
         <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-8">
           <div className="min-w-0 flex-1">
-            <h2 className="text-[22px] font-semibold leading-[1.35] tracking-[-0.02em] text-[rgba(36,41,47,0.9)] md:text-[30px]">
+            <h2 className="text-[20px] font-semibold leading-[1.35] tracking-[-0.02em] text-[rgba(36,41,47,0.9)] md:text-[26px]">
               {blog.title}
             </h2>
           </div>
@@ -44,7 +44,7 @@ function BlogListItem({ blog }: BlogListItemProps) {
             {formatDateCompact(blog.date)}
           </p>
         </div>
-        <p className="mt-3 text-[17px] leading-[1.72] text-[rgba(36,41,47,0.82)]">
+        <p className="mt-3 text-[17px] leading-[1.72] text-[rgba(85,85,85,0.8)]">
             {blog.summary ?? ""}
         </p>
       </Link>
