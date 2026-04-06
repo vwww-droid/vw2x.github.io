@@ -1,12 +1,14 @@
 import generatedCovers from "@/content/covers/generated-covers.json";
 
-export type BlogCoverSource = "explicit" | "generated" | "none";
-
-export type BlogCover = {
-  src: string;
-  alt: string;
-  source: BlogCoverSource;
-};
+export type BlogCover =
+  | {
+      source: "explicit" | "generated";
+      src: string;
+      alt: string;
+    }
+  | {
+      source: "none";
+    };
 
 export type BlogCoverInput = {
   title: string;
@@ -52,9 +54,5 @@ export function resolveBlogCover(input: BlogCoverInput): BlogCover {
     };
   }
 
-  return {
-    src: "",
-    alt: explicitAlt ?? input.title,
-    source: "none",
-  };
+  return { source: "none" };
 }

@@ -63,15 +63,15 @@ function getResolvedBlogCover(blog: BlogRecord) {
   });
 }
 
-function addResolvedCover(blog: BlogRecord): BlogWithCover {
-  const { cover: ignoredCover, coverAlt: ignoredCoverAlt, ...rest } = blog;
-  void ignoredCover;
-  void ignoredCoverAlt;
-
-  return {
-    ...rest,
+function normalizeBlog(blog: BlogRecord): BlogWithCover {
+  const normalizedBlog = {
+    ...blog,
     cover: getResolvedBlogCover(blog),
   };
+
+  delete normalizedBlog.coverAlt;
+
+  return normalizedBlog as BlogWithCover;
 }
 
 function toSearchableContent(content: string) {
@@ -94,7 +94,7 @@ function getBlogIndexHref(locale: Locale) {
 
 export function getBlogsByLocale(locale: Locale) {
   return sortByDateDesc(
-    allBlogs.filter((blog) => getDocumentLocale(blog) === locale).map(addResolvedCover)
+    allBlogs.filter((blog) => getDocumentLocale(blog) === locale).map(normalizeBlog)
   );
 }
 
@@ -133,7 +133,7 @@ export function getTranslatedAboutPage(locale: Locale, translationKey: string) {
 export function getSearchDocuments(locale?: Locale): SearchDocument[] {
   const source = locale
     ? getBlogsByLocale(locale)
-    : sortByDateDesc(allBlogs).map(addResolvedCover);
+    : sortByDateDesc(allBlogs).map(normalizeBlog);
 
   return source.map((blog) => {
     const blogLocale = getDocumentLocale(blog);
