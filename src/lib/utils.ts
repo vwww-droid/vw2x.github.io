@@ -36,3 +36,11 @@ export function formatDateCompact(
   const day = `${parsed.getDate()}`.padStart(2, "0");
   return `${year}${month}${day}`;
 }
+
+export function formatDateWeekly(date: string) {
+  const parsed = new Date(date);
+  const year = parsed.getFullYear();
+  const month = `${parsed.getMonth() + 1}`.padStart(2, "0");
+  const day = `${parsed.getDate()}`.padStart(2, "0");
+  return `${year}/${month}/${day}`;
+}

@@ -5,27 +5,15 @@ type BlogListProps = {
 };
 
 export function BlogList({ blogs }: BlogListProps) {
-  const [featuredBlog, ...restBlogs] = blogs;
-
   return (
-    <div className="space-y-10 md:space-y-12">
-      {featuredBlog ? (
+    <div className="grid gap-x-6 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {blogs.map((blog, index) => (
         <BlogWeeklyCard
-          blog={featuredBlog}
-          featured
-          priority
+          key={blog.href}
+          blog={blog}
+          priority={index < 4}
         />
-      ) : null}
-      {restBlogs.length > 0 ? (
-        <div className="grid gap-x-8 gap-y-10 md:grid-cols-2 md:gap-y-12">
-          {restBlogs.map((blog) => (
-            <BlogWeeklyCard
-              key={blog.href}
-              blog={blog}
-            />
-          ))}
-        </div>
-      ) : null}
+      ))}
     </div>
   );
 }

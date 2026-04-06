@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BlogCoverImage } from "@/components/blog/blog-cover-image";
 import type { BlogCover } from "@/lib/covers";
 import type { Locale } from "@/lib/i18n";
-import { formatDateCompact } from "@/lib/utils";
+import { formatDateWeekly } from "@/lib/utils";
 
 export type BlogTeaser = {
   href: string;
@@ -16,61 +16,37 @@ export type BlogTeaser = {
 
 type BlogWeeklyCardProps = {
   blog: BlogTeaser;
-  featured?: boolean;
   priority?: boolean;
 };
 
 export function BlogWeeklyCard({
   blog,
-  featured = false,
   priority = false,
 }: BlogWeeklyCardProps) {
   return (
-    <article className="group h-full">
+    <article className="h-full">
       <Link
         href={blog.href}
-        className="block h-full"
+        className="mx-auto flex h-full w-full flex-col overflow-hidden rounded-[12px] bg-white pb-3 shadow-[0_2px_12px_rgba(15,23,42,0.08)]"
       >
-        <div className="flex h-full flex-col gap-4 rounded-[24px] bg-[rgba(255,255,255,0.96)] p-3 md:gap-5 md:p-4 lg:p-5">
-          <BlogCoverImage
-            cover={blog.cover}
-            priority={priority}
-            sizes={
-              featured
-                ? "(min-width: 1024px) 960px, 100vw"
-                : "(min-width: 1024px) 460px, (min-width: 768px) 50vw, 100vw"
-            }
-            className={
-              featured
-                ? "aspect-[1.5] w-full rounded-[18px] bg-[rgba(246,241,232,0.9)] md:aspect-[1.9]"
-                : "aspect-[1.32] w-full rounded-[18px] bg-[rgba(246,241,232,0.9)]"
-            }
-            imageClassName="transition-none"
-          />
-          <div className="flex flex-1 flex-col gap-3 px-1 pb-1">
-            <p className="text-[13px] uppercase tracking-[0.12em] text-[rgba(85,85,85,0.72)]">
-              {formatDateCompact(blog.date, blog.lang)}
-            </p>
-            <h2
-              className={
-                featured
-                  ? "text-[25px] font-semibold leading-[1.22] tracking-[-0.03em] text-[rgba(36,41,47,0.94)] md:max-w-[18ch] md:text-[34px]"
-                  : "text-[22px] font-semibold leading-[1.28] tracking-[-0.025em] text-[rgba(36,41,47,0.94)] md:text-[24px]"
-              }
-            >
-              {blog.title}
-            </h2>
-            <p
-              className={
-                featured
-                  ? "max-w-[64ch] text-[16px] leading-[1.8] text-[rgba(85,85,85,0.82)] md:text-[17px]"
-                  : "text-[15px] leading-[1.75] text-[rgba(85,85,85,0.82)]"
-              }
-            >
-              {blog.summary ?? ""}
-            </p>
-          </div>
+        <BlogCoverImage
+          cover={blog.cover}
+          priority={priority}
+          sizes="(min-width: 1280px) 320px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="aspect-[5/3] w-full rounded-t-[12px] bg-[rgba(246,241,232,0.9)]"
+          imageClassName="transition-none"
+        />
+        <div className="flex w-full items-center justify-between gap-3 px-4 pt-3 leading-tight">
+          <h2 className="min-w-0 flex-1 truncate text-[18px] font-semibold text-[rgba(36,41,47,0.96)] md:text-[16px]">
+            {blog.title}
+          </h2>
+          <p className="shrink-0 text-[18px] text-[rgba(85,85,85,0.82)] md:text-[15px]">
+            {formatDateWeekly(blog.date)}
+          </p>
         </div>
+        <p className="line-clamp-2 px-4 pt-2 text-[18px] leading-[1.55] text-[rgba(85,85,85,0.86)] md:min-h-[3rem] md:text-[15px]">
+          {blog.summary ?? ""}
+        </p>
       </Link>
     </article>
   );

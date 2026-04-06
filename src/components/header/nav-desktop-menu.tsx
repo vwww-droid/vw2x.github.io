@@ -18,20 +18,20 @@ export function NavDesktopMenu() {
   return (
     <nav
       aria-label="Primary"
-      className="hidden items-start justify-between gap-8 py-3 md:flex md:py-4"
+      className="hidden items-start justify-between gap-9 py-5 md:flex"
     >
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 shrink-0">
         <Link
           href={homeHref}
-          className="block text-[24px] font-extrabold tracking-[-0.03em] text-[#24292f] transition-colors hover:opacity-80 md:text-[30px]"
+          className="block text-[32px] font-semibold leading-none tracking-[-0.03em] text-[#24292f] transition-colors hover:opacity-80"
         >
           vw2x
         </Link>
-        <p className="mt-0.5 text-[12px] leading-[1.25] text-[rgba(85,85,85,0.78)] md:text-[13px]">
+        <p className="mt-2 text-[12px] leading-[1.25] text-[rgba(85,85,85,0.78)]">
           {config.site.tagline}
         </p>
       </div>
-      <div className="flex shrink-0 items-center gap-8 pt-1 text-[16px] font-bold text-[rgba(36,41,47,0.82)]">
+      <div className="ml-auto flex shrink-0 items-center gap-8 pt-1 text-[16px] font-bold text-[rgba(36,41,47,0.82)]">
         {navItems.map((item) =>
           item.external ? (
             <a

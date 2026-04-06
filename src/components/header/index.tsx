@@ -80,7 +80,7 @@ export function Header() {
           isHidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
-        <div className="mx-auto max-w-4xl px-4 md:px-6">
+        <div className="mx-auto w-full max-w-[1338px] px-4 sm:px-3 md:px-0">
           <SearchProvider>
             <NavDesktopMenu />
             <NavMobileMenu />
