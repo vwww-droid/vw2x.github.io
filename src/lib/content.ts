@@ -17,6 +17,13 @@ export type SearchDocument = {
   content: string;
   lang: Locale;
   translationKey: string;
+  cover?: ContentCover | null;
+};
+
+export type ContentCover = {
+  src: string;
+  alt: string;
+  source: "explicit" | "generated" | "none";
 };
 
 export type LanguageSwitchTarget = {
@@ -117,6 +124,7 @@ export function getSearchDocuments(locale?: Locale): SearchDocument[] {
       content: toSearchableContent(blog.content).slice(0, 1200),
       lang: blogLocale,
       translationKey,
+      cover: null,
     };
   });
 }
