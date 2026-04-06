@@ -8,7 +8,6 @@ import {
   getBlogsByLocale,
   getTranslatedBlog,
 } from "@/lib/content";
-import { getTableOfContents } from "@/lib/toc";
 import { absoluteUrl } from "@/lib/utils";
 
 type BlogsPageProps = {
@@ -76,8 +75,17 @@ export default async function EnglishBlogPage(props: BlogsPageProps) {
   if (!blog) {
     notFound();
   }
-
-  const toc = await getTableOfContents(blog.content);
-
-  return <BlogPostPage blog={blog} locale="en-US" toc={toc} />;
+  return (
+    <BlogPostPage
+      blog={{
+        title: blog.title,
+        date: blog.date,
+        summary: blog.summary,
+        content: blog.content,
+        lang: blog.lang,
+        cover: blog.cover,
+      }}
+      locale="en-US"
+    />
+  );
 }
