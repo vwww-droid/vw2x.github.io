@@ -1,16 +1,17 @@
-import { type Metadata } from "next";
+import type { Metadata } from "next";
+
 import { BlogList } from "@/components/blog/blog-list";
 import { config } from "@/lib/config";
 import { getBlogsByLocale } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: `${config.localeLabels.blog["zh-CN"]} | ${config.site.title}`,
-  description: config.site.description["zh-CN"],
-  keywords: `${config.site.title}, 博客, 文章`,
+  title: `${config.localeLabels.blog["en-US"]} | ${config.site.title}`,
+  description: config.site.description["en-US"],
+  keywords: `${config.site.title}, blog, engineering notes`,
 };
 
-export default function BlogPage() {
-  const blogs = getBlogsByLocale("zh-CN");
+export default function EnglishBlogIndexPage() {
+  const blogs = getBlogsByLocale("en-US");
 
   return (
     <div className="mx-auto w-full max-w-[900px] px-4 py-[15px] md:px-5 md:py-[34px]">

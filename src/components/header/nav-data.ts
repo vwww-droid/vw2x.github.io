@@ -1,4 +1,5 @@
 import { config } from "@/lib/config";
+import type { Locale } from "@/lib/i18n";
 
 export type NavItem = {
   label: string;
@@ -6,8 +7,10 @@ export type NavItem = {
   external?: boolean;
 };
 
-export const navItems: NavItem[] = config.navigation.main.map(({ title, href }) => ({
-  label: title,
-  href,
-  external: /^https?:\/\//.test(href),
-}));
+export function getNavItems(locale: Locale): NavItem[] {
+  return config.navigation.main.map(({ title, href }) => ({
+    label: title,
+    href: href === "/about" && locale === "en-US" ? "/en/about" : href,
+    external: /^https?:\/\//.test(href),
+  }));
+}

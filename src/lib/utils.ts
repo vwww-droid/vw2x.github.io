@@ -1,12 +1,15 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { config } from "@/lib/config"
+import type { Locale } from "@/lib/i18n"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
 export function absoluteUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`
+  const base = process.env.NEXT_PUBLIC_APP_URL ?? config.site.url
+  return `${base}${path}`
 }
 
 export function formatDate(date: string) {
@@ -18,8 +21,16 @@ export function formatDate(date: string) {
   return `${year}年${month}月${day}日`;
 }
 
-export function formatDateCompact(date: string) {
+export function formatDateCompact(
+  date: string,
+  locale: Locale = "zh-CN"
+) {
   const parsed = new Date(date);
+
+  if (locale === "en-US") {
+    return parsed.toISOString().slice(0, 10);
+  }
+
   const year = parsed.getFullYear();
   const month = `${parsed.getMonth() + 1}`.padStart(2, "0");
   const day = `${parsed.getDate()}`.padStart(2, "0");

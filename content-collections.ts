@@ -1,5 +1,14 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 
+const localeSchema = (z: any) => ({
+  lang: z.enum(["zh-CN", "en-US"]).default("zh-CN"),
+  translationKey: z.string().optional(),
+});
+
+function stripLocaleSegment(path: string) {
+  return path.replace(/^(zh|en)\//, "");
+}
+
 const blogs = defineCollection({
   name: "blogs",
   directory: "src/content/blog",
@@ -11,11 +20,19 @@ const blogs = defineCollection({
     featured: z.boolean().optional().default(false),
     summary: z.string().optional(),
     keywords: z.array(z.string()).optional(),
+    ...localeSchema(z),
   }),
   transform: async (document) => {
+    const slug = stripLocaleSegment(document._meta.path);
+
     return {
       ...document,
-      slug: `${document._meta.path}`,
+      slug,
+      href:
+        document.lang === "en-US"
+          ? `/en/blog/${slug}`
+          : `/blog/${slug}`,
+      translationKey: document.translationKey ?? slug,
     };
   },
 });
@@ -26,7 +43,16 @@ const aboutPages = defineCollection({
   include: "**/*.md",
   schema: (z) => ({
     description: z.string().optional(),
+    ...localeSchema(z),
   }),
+  transform: async (document) => {
+    return {
+      ...document,
+      slug: stripLocaleSegment(document._meta.path),
+      href: document.lang === "en-US" ? "/en/about" : "/about",
+      translationKey: document.translationKey ?? stripLocaleSegment(document._meta.path),
+    };
+  },
 });
 
 export default defineConfig({

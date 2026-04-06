@@ -6,11 +6,11 @@ import { getBlogsByLocale } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: config.site.title,
-  description: config.site.description["zh-CN"],
+  description: config.site.description["en-US"],
 };
 
-export default function Home() {
-  const blogs = getBlogsByLocale("zh-CN");
+export default function EnglishHomePage() {
+  const blogs = getBlogsByLocale("en-US");
 
   return (
     <div className="mx-auto w-full max-w-[900px] px-4 py-[15px] md:px-5 md:py-[34px]">

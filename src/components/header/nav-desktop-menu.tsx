@@ -1,15 +1,26 @@
-import Link from "next/link";
+"use client";
 
-import { navItems } from "./nav-data";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { SearchTrigger } from "@/components/search/search-trigger";
+import { getLocaleFromPathname } from "@/lib/i18n";
+import { LanguageSwitch } from "./language-switch";
+import { getNavItems } from "./nav-data";
 
 export function NavDesktopMenu() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
+  const homeHref = locale === "en-US" ? "/en" : "/";
+  const navItems = getNavItems(locale);
+
   return (
     <nav
       aria-label="Primary"
       className="hidden h-14 items-center justify-between md:flex md:h-[84px]"
     >
       <Link
-        href="/"
+        href={homeHref}
         className="text-[24px] font-extrabold tracking-[-0.03em] text-[#24292f] transition-colors hover:opacity-80 md:text-[30px]"
       >
         vw2x
@@ -36,6 +47,8 @@ export function NavDesktopMenu() {
             </Link>
           )
         )}
+        <SearchTrigger />
+        <LanguageSwitch />
       </div>
     </nav>
   );

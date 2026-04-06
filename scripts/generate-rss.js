@@ -1,20 +1,15 @@
-import { readdir, readFile } from 'fs/promises';
-import { join, relative } from 'path';
-import { promises as fsPromises } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import matter from 'gray-matter';
-import { Feed } from 'feed';
-import { marked } from 'marked';
+import { readdir, readFile } from "fs/promises";
+import { join, relative } from "path";
+import { promises as fsPromises } from "fs";
+import matter from "gray-matter";
+import { Feed } from "feed";
+import { marked } from "marked";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const BASE_URL = 'https://xxx.com';
+const BASE_URL = "https://vw2x.vercel.app";
 const AUTHOR = {
-  name: "Your Name",
-  email: "your.email@example.com",
-  link: BASE_URL
+  name: "vw2x",
+  email: "vwvw2025@outlook.com",
+  link: BASE_URL,
 };
 
 async function scanMarkdownFiles(dir) {
@@ -25,20 +20,27 @@ async function scanMarkdownFiles(dir) {
     const fullPath = join(dir, entry.name);
     if (entry.isDirectory()) {
       files.push(...await scanMarkdownFiles(fullPath));
-    } else if (entry.name.endsWith('.md')) {
-      const content = await readFile(fullPath, 'utf-8');
+    } else if (entry.name.endsWith(".md")) {
+      const content = await readFile(fullPath, "utf-8");
       const { data, content: markdown } = matter(content);
-      
-      // Get relative path and convert to URL path
-      const relativePath = relative(join(process.cwd(), 'src/content'), dir);
-      const urlPath = join(relativePath, entry.name.replace('.md', '')).replace(/\\/g, '/');
-      
+      const relativePath = relative(join(process.cwd(), "src/content/blog"), fullPath)
+        .replace(/\\/g, "/");
+      const [localeSegment, ...slugParts] = relativePath.split("/");
+      const slug = slugParts.join("/").replace(/\.md$/, "");
+      const lang = data.lang === "en-US" || localeSegment === "en" ? "en-US" : "zh-CN";
+      const url =
+        lang === "en-US"
+          ? `${BASE_URL}/en/blog/${slug}`
+          : `${BASE_URL}/blog/${slug}`;
+
       files.push({
         ...data,
+        lang,
+        slug,
         content: markdown,
-        url: `${BASE_URL}/${urlPath}`,
+        url,
         date: new Date(data.date),
-        updated: new Date(data.updated)
+        updated: data.updated ? new Date(data.updated) : new Date(data.date),
       });
     }
   }
@@ -47,25 +49,21 @@ async function scanMarkdownFiles(dir) {
 }
 
 async function generateRSSFeed() {
-  const contentDir = join(process.cwd(), 'src/content/blog');
-  
-  try {
-    // Scan markdown files
-    const posts = await scanMarkdownFiles(contentDir);
+  const contentDir = join(process.cwd(), "src/content/blog");
 
-    // Sort posts by date
+  try {
+    const posts = await scanMarkdownFiles(contentDir);
     posts.sort((a, b) => b.date - a.date);
 
-    // Create feed
     const feed = new Feed({
-      title: "Your Blog",
-      description: "Your Blog Description",
+      title: "vw2x",
+      description: "Notes on learning, building, and thinking",
       id: BASE_URL,
       link: BASE_URL,
-      language: "en",
+      language: "zh-CN",
       image: `${BASE_URL}/favicon.png`,
       favicon: `${BASE_URL}/favicon.ico`,
-      copyright: `All rights reserved ${new Date().getFullYear()}, Your Name`,
+      copyright: `All rights reserved ${new Date().getFullYear()}, vw2x`,
       updated: new Date(),
       generator: "Feed for Node.js",
       feedLinks: {
@@ -73,13 +71,12 @@ async function generateRSSFeed() {
         json: `${BASE_URL}/feed.json`,
         atom: `${BASE_URL}/atom.xml`,
       },
-      author: AUTHOR
+      author: AUTHOR,
     });
 
-    // Add posts to feed
     for (const post of posts) {
       const htmlContent = marked(post.content);
-      
+
       feed.addItem({
         title: post.title,
         id: post.url,
@@ -92,15 +89,14 @@ async function generateRSSFeed() {
       });
     }
 
-    // Write feed files
-    await fsPromises.writeFile('./public/rss.xml', feed.rss2());
-    await fsPromises.writeFile('./public/index.xml', feed.rss2());
-    await fsPromises.writeFile('./public/atom.xml', feed.atom1());
-    await fsPromises.writeFile('./public/feed.json', feed.json1());
+    await fsPromises.writeFile("./public/rss.xml", feed.rss2());
+    await fsPromises.writeFile("./public/index.xml", feed.rss2());
+    await fsPromises.writeFile("./public/atom.xml", feed.atom1());
+    await fsPromises.writeFile("./public/feed.json", feed.json1());
 
-    console.log(`Generated RSS feeds with ${posts.length} items`);
+      console.log(`Generated RSS feeds with ${posts.length} items`);
   } catch (error) {
-    console.error('Error generating RSS feeds:', error);
+    console.error("Error generating RSS feeds:", error);
   }
 }
 

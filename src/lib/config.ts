@@ -18,7 +18,10 @@ export const config = {
     name: "vw2x",
     /** Short line under the site title on the home page */
     tagline: "As tiny as it is, there is a difference.",
-    description: "vw2x",
+    description: {
+      "zh-CN": "记录学习和思考的过程",
+      "en-US": "Notes on learning, building, and thinking",
+    },
     keywords: ["vw2x", "AI", "Full Stack Developer"],
     url: siteOrigin,
     baseUrl: siteOrigin,
@@ -44,6 +47,20 @@ export const config = {
     name: "vw2x",
     email: "vwvw2025@outlook.com",
     bio: "welcome!",
+  },
+  localeLabels: {
+    home: {
+      "zh-CN": "首页",
+      "en-US": "Home",
+    },
+    blog: {
+      "zh-CN": "文章",
+      "en-US": "Blog",
+    },
+    about: {
+      "zh-CN": "关于",
+      "en-US": "About",
+    },
   },
   social: {
     github: "https://github.com/vwww-droid",

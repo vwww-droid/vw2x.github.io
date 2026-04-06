@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
 import { Header } from "@/components/header";
 import { SiteFooter } from "@/components/site-footer";
 import { config } from "@/lib/config";
+import { LocaleDocumentSync } from "@/components/locale-document-sync";
 
 export const metadata: Metadata = {
   title: config.site.title,
-  description: config.site.description,
+  description: config.site.description["zh-CN"],
   keywords: config.site.keywords,
   metadataBase: config.seo.metadataBase,
   alternates: config.seo.alternates,
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
     url: config.site.url,
     type: config.seo.openGraph.type,
     title: config.site.title,
-    description: config.site.description,
+    description: config.site.description["zh-CN"],
     images: [
       { url: config.site.image }
     ]
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     site: config.site.url,
     card: config.seo.twitter.card,
     title: config.site.title,
-    description: config.site.description,
+    description: config.site.description["zh-CN"],
     images: [
       { url: config.site.image }
     ]
@@ -40,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-CN" suppressHydrationWarning>
       <head>
         <link rel="stylesheet" href="https://tw93.fun/css/jinkai.css?v=20260403152924" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
@@ -48,6 +50,7 @@ export default function RootLayout({
         <link rel="alternate" type="application/json" title="JSON" href="/feed.json" />
       </head>
       <body className="flex min-h-dvh flex-col overflow-x-hidden bg-background text-foreground antialiased">
+        <LocaleDocumentSync />
         <Header />
         <div className="flex-1 md:pt-[84px]">{children}</div>
         <SiteFooter />
