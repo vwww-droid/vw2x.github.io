@@ -27,3 +27,17 @@ Cursor also stays compatible with the skills and rules from all those other AI t
 I recommend paying month by month. The 10% you save on an annual plan is not worth losing the flexibility to try the newest features quickly. For example, Cursor can now use Claude Opus 4.6, which comes with fewer restrictions for reverse engineering. And while I was writing this, I noticed Cursor also shipped an agent mode, so by the time this Codex subscription expires I might switch back to Cursor again. (I am still warming up a Claude Code account by chatting with it every day and feeding it some emotional value, since negative wording gets filtered and reported. Several people around me have already had multiple Claude Code accounts banned, and the US version now also charges tax, which pushes it to 250 USD per month.)
 
 ![Cursor Agent Window](/weekly/2615/CursorAgentWindow.png)
+
+## Loose Notes
+
+I spent some time looking at the anxiety triggered by AI's impact and realized that whether someone is ordinary or exceptional, nobody really escapes anxiety.
+
+Seen from another angle, anxiety means you have at least some ability to anticipate risk and hold expectations. As long as a person is living with any kind of goal, anxiety is basically unavoidable.
+
+The first thing to let go of is the fantasy that I can somehow live without anxiety at all. Once that illusion is dropped, it actually becomes easier to stay composed.
+
+And beyond that, anxiety means there is at least some drive to find what can still be improved.
+
+Small anxiety can be treated as a small challenge. By adding a "come to think of it" callback, the attitude can shift from avoidance or even disgust to facing it, or even feeling excited by it. That can actually be healthy.
+
+Eat well. Sleep well. Let the results of your work pile up like a mountain.
