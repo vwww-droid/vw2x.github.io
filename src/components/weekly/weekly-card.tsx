@@ -21,6 +21,10 @@ type WeeklyCardProps = {
   priority?: boolean;
 };
 
+function getCardTitle(title: string) {
+  return title.replace(/^(\d+)\s*-\s*/, "$1 ");
+}
+
 export function WeeklyCard({ issue, priority = false }: WeeklyCardProps) {
   return (
     <article className="h-full min-w-0">
@@ -37,7 +41,7 @@ export function WeeklyCard({ issue, priority = false }: WeeklyCardProps) {
         />
         <div className="flex w-full min-w-0 items-center justify-between gap-3 px-3 pt-3 leading-tight">
           <h2 className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-[rgba(36,41,47,0.96)] md:text-[16px]">
-            {issue.title}
+            {getCardTitle(issue.title)}
           </h2>
           <p className="shrink-0 text-base text-[rgba(85,85,85,0.82)] md:text-[15px]">
             {formatDateWeekly(issue.date)}
