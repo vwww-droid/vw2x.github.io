@@ -24,27 +24,27 @@ export function BlogWeeklyCard({
   priority = false,
 }: BlogWeeklyCardProps) {
   return (
-    <article className="h-full">
+    <article className="h-full min-w-0">
       <Link
         href={blog.href}
-        className="mx-auto flex h-full w-full flex-col overflow-hidden rounded-[12px] bg-white pb-3 shadow-[0_2px_12px_rgba(15,23,42,0.08)]"
+        className="card-content mx-auto flex h-full w-full min-w-0 flex-col justify-center overflow-hidden rounded-lg bg-white pb-3 shadow-md"
       >
         <BlogCoverImage
           cover={blog.cover}
           priority={priority}
           sizes="(min-width: 1280px) 320px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="aspect-[5/3] w-full rounded-t-[12px] bg-[rgba(246,241,232,0.9)]"
+          className="h-56 w-full rounded-t-lg bg-[rgba(246,241,232,0.9)] sm:h-52 md:h-48"
           imageClassName="transition-none"
         />
-        <div className="flex w-full items-center justify-between gap-3 px-4 pt-3 leading-tight">
-          <h2 className="min-w-0 flex-1 truncate text-[18px] font-semibold text-[rgba(36,41,47,0.96)] md:text-[16px]">
+        <div className="flex w-full min-w-0 items-center justify-between gap-3 px-3 pt-3 leading-tight">
+          <h2 className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-[rgba(36,41,47,0.96)] md:text-[16px]">
             {blog.title}
           </h2>
-          <p className="shrink-0 text-[18px] text-[rgba(85,85,85,0.82)] md:text-[15px]">
+          <p className="shrink-0 text-base text-[rgba(85,85,85,0.82)] md:text-[15px]">
             {formatDateWeekly(blog.date)}
           </p>
         </div>
-        <p className="line-clamp-2 px-4 pt-2 text-[18px] leading-[1.55] text-[rgba(85,85,85,0.86)] md:min-h-[3rem] md:text-[15px]">
+        <p className="line-clamp-2 h-14 w-full overflow-hidden px-3 pt-2 text-base leading-[1.55] text-[rgba(85,85,85,0.86)] md:h-12 md:text-[15px]">
           {blog.summary ?? ""}
         </p>
       </Link>
