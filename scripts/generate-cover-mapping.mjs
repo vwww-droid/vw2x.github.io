@@ -62,7 +62,9 @@ async function walkMarkdownFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
 
-  for (const entry of entries) {
+  for (const entry of [...entries].sort((left, right) =>
+    left.name.localeCompare(right.name)
+  )) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       files.push(...(await walkMarkdownFiles(fullPath)));
@@ -102,6 +104,7 @@ async function scanArticles() {
       (frontmatter.translationKey && frontmatter.translationKey.trim()) ||
       path.basename(filePath, path.extname(filePath));
     const title = frontmatter.title || translationKey;
+    const lang = frontmatter.lang || "";
     const cover = frontmatter.cover;
     const coverAlt = frontmatter.coverAlt;
 
@@ -109,6 +112,7 @@ async function scanArticles() {
       filePath,
       title,
       translationKey,
+      lang,
       hasExplicitCover: hasNonEmptyValue(cover),
       coverAlt: hasNonEmptyValue(coverAlt) ? coverAlt.trim() : undefined,
     });
@@ -121,24 +125,48 @@ function buildQuery(article) {
   return article.title.replace(/\s+/g, " ").trim();
 }
 
+function compareQueryPriority(left, right) {
+  const priority = (article) => {
+    if (article.lang === "en-US") {
+      return 0;
+    }
+
+    if (article.lang === "zh-CN") {
+      return 1;
+    }
+
+    return 2;
+  };
+
+  const diff = priority(left) - priority(right);
+  if (diff !== 0) {
+    return diff;
+  }
+
+  return left.filePath.localeCompare(right.filePath);
+}
+
+function selectQueryArticle(articles) {
+  return [...articles].sort(compareQueryPriority)[0] ?? null;
+}
+
 function groupCandidates(articles, generatedCoverMap) {
   const groups = new Map();
 
   for (const article of articles) {
     const existing = groups.get(article.translationKey) ?? {
       translationKey: article.translationKey,
-      title: article.title,
+      queryArticle: null,
       files: [],
       missingExplicitCoverFiles: [],
       hasCachedMapping: Boolean(generatedCoverMap[article.translationKey]?.src),
+      articles: [],
     };
 
     existing.files.push(article.filePath);
+    existing.articles.push(article);
     if (!article.hasExplicitCover) {
       existing.missingExplicitCoverFiles.push(article.filePath);
-      if (!existing.title || existing.title === article.translationKey) {
-        existing.title = article.title;
-      }
     }
 
     groups.set(article.translationKey, existing);
@@ -146,6 +174,10 @@ function groupCandidates(articles, generatedCoverMap) {
 
   return [...groups.values()]
     .filter((group) => !group.hasCachedMapping && group.missingExplicitCoverFiles.length > 0)
+    .map((group) => ({
+      ...group,
+      queryArticle: selectQueryArticle(group.articles),
+    }))
     .sort((a, b) => a.translationKey.localeCompare(b.translationKey));
 }
 
@@ -200,9 +232,10 @@ async function main() {
 
   for (const candidate of candidates) {
     console.log(`- ${candidate.translationKey}`);
-    console.log(`  title: ${candidate.title}`);
+    console.log(`  title: ${candidate.queryArticle?.title ?? candidate.translationKey}`);
+    console.log(`  locale: ${candidate.queryArticle?.lang ?? "unknown"}`);
     console.log(`  files: ${candidate.missingExplicitCoverFiles.length}`);
-    console.log(`  query: ${buildQuery(candidate)}`);
+    console.log(`  query: ${buildQuery(candidate.queryArticle ?? candidate)}`);
     if (generatedCoverMap[candidate.translationKey]?.src) {
       console.log(`  cache: hit`);
     } else {
@@ -224,7 +257,8 @@ async function main() {
   let updatedCount = 0;
 
   for (const candidate of candidates) {
-    const generated = await fetchUnsplashCover(buildQuery(candidate), apiKey);
+    const queryArticle = candidate.queryArticle ?? candidate.articles[0];
+    const generated = await fetchUnsplashCover(buildQuery(queryArticle), apiKey);
     if (!generated?.src) {
       console.log(`- skipped ${candidate.translationKey}: no Unsplash result`);
       continue;
@@ -232,7 +266,7 @@ async function main() {
 
     nextMap[candidate.translationKey] = {
       src: generated.src,
-      alt: generated.alt || candidate.title,
+      alt: generated.alt || queryArticle.title,
     };
     updatedCount += 1;
     console.log(`- updated ${candidate.translationKey}`);
