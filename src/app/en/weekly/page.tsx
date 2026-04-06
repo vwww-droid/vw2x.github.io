@@ -20,24 +20,18 @@ export default function WeeklyPage() {
     <WeeklyShell
       locale={locale}
       languageSwitchHref={languageSwitchTarget.href}
+      showHeader={false}
     >
-      <section className="mb-5 weekly-surface rounded-[28px] border border-[rgba(255,255,255,0.72)] px-4 py-5 md:px-6 md:py-6">
-        <p className="text-[12px] uppercase tracking-[0.16em] text-[rgba(85,85,85,0.72)]">
-          Weekly archive
-        </p>
-        <div className="mt-3 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <h1 className="text-[30px] font-semibold leading-[1.14] tracking-[-0.04em] text-[rgba(36,41,47,0.96)] md:text-[42px]">
-              vw2x 周记
-            </h1>
-            <p className="mt-3 max-w-[48rem] text-[16px] leading-[1.8] text-[rgba(85,85,85,0.84)]">
-              A bilingual issue archive built around a cover-first scan, then a slower reading flow once you open an issue.
-            </p>
-          </div>
-          <div className="rounded-full border border-[rgba(36,41,47,0.08)] bg-[rgba(255,255,255,0.72)] px-4 py-2 text-[14px] text-[rgba(85,85,85,0.8)]">
-            {issues.length} issues
-          </div>
+      <section className="mb-4 flex flex-col gap-3 px-1 md:mb-5 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.18em] text-[rgba(85,85,85,0.62)]">
+            Weekly
+          </p>
+          <h1 className="mt-2 text-[28px] font-semibold leading-[1.08] tracking-[-0.05em] text-[rgba(36,41,47,0.96)] md:text-[38px]">
+            vw2x Weekly
+          </h1>
         </div>
+        <div className="text-[13px] text-[rgba(85,85,85,0.72)]">{issues.length} issues</div>
       </section>
 
       <WeeklyGrid issues={issues} />
