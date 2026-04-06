@@ -114,4 +114,30 @@
       "Noto Serif CJK SC",
       serif;
   }
+
+  .weekly-surface {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 243, 236, 0.98));
+    border: 1px solid rgba(36, 41, 47, 0.08);
+    box-shadow:
+      0 14px 32px rgba(36, 41, 47, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  }
+
+  .weekly-cover-frame {
+    background:
+      linear-gradient(180deg, rgba(252, 250, 246, 0.98), rgba(241, 236, 227, 0.98));
+    border: 1px solid rgba(36, 41, 47, 0.08);
+    box-shadow:
+      0 12px 30px rgba(36, 41, 47, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  }
+
+  .weekly-cover-placeholder {
+    background:
+      radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 36%),
+      radial-gradient(circle at 82% 22%, rgba(36, 41, 47, 0.06) 0%, rgba(36, 41, 47, 0) 34%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)),
+      linear-gradient(145deg, rgba(199, 186, 164, 0.16), rgba(199, 186, 164, 0.04));
+  }
 }
