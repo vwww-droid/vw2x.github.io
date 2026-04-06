@@ -86,14 +86,7 @@ export default async function BlogPage(props: BlogsPageProps) {
 
   return (
     <BlogPostPage
-      blog={{
-        title: blog.title,
-        date: blog.date,
-        summary: blog.summary,
-        content: blog.content,
-        lang: blog.lang,
-        cover: blog.cover,
-      }}
+      blog={blog}
       locale="zh-CN"
     />
   );

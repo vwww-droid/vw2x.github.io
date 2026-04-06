@@ -1,5 +1,3 @@
-import count from "word-count";
-
 import { BlogCoverImage } from "@/components/blog/blog-cover-image";
 import type { BlogCover } from "@/lib/covers";
 import { cn, formatDateCompact } from "@/lib/utils";
@@ -8,24 +6,23 @@ type BlogHeroProps = {
   title: string;
   date: string;
   summary?: string;
-  content: string;
+  metaLabel: string;
   cover: BlogCover;
   locale: "zh-CN" | "en-US";
+  className?: string;
 };
 
 export function BlogHero({
   title,
   date,
   summary,
-  content,
+  metaLabel,
   cover,
   locale,
+  className,
 }: BlogHeroProps) {
-  const countLabel =
-    locale === "en-US" ? `${count(content)} words` : `${count(content)} 字`;
-
   return (
-    <header className="mx-auto w-full max-w-[900px] px-4 md:px-5">
+    <header className={className}>
       <div className="rounded-[28px] bg-[rgba(255,255,255,0.92)] p-3 md:p-4">
         <BlogCoverImage
           cover={cover}
@@ -36,7 +33,7 @@ export function BlogHero({
         />
         <div className="px-1 pb-2 pt-5 md:px-2 md:pb-3 md:pt-6">
           <p className="text-[13px] uppercase tracking-[0.12em] text-[rgba(85,85,85,0.72)]">
-            {formatDateCompact(date, locale)} · {countLabel}
+            {formatDateCompact(date, locale)} · {metaLabel}
           </p>
           <h1
             className={cn(
