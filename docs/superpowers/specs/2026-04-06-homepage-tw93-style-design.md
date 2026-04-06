@@ -81,11 +81,11 @@ Presentation rules:
 
 ### Typography
 
-The redesign should prioritize the same font family currently used by `tw93.fun`, which is exposed as `TsangerJinKai02`.
+The redesign should prioritize the same font family currently used by `tw93.fun`, which is exposed in CSS as `TsangerJinKai02` and corresponds to `仓耳今楷`.
 
 Font strategy:
 
-1. Prefer loading `TsangerJinKai02` through its public font-face stylesheet source.
+1. Prefer loading `仓耳今楷` through the same public stylesheet source that exposes `TsangerJinKai02`.
 2. Keep a fallback stack centered on `STKaiti`, `KaiTi`, and common system sans-serif fonts.
 3. Use the same family across headings, body text, navigation, and list items for visual consistency.
 
