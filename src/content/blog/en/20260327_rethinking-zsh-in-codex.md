@@ -4,6 +4,8 @@ date: "2026-03-27"
 featured: false
 summary: "One software, one command, two outcomes. That made me start separating different zsh startup modes."
 keywords: ["Codex", "zsh", "Shell", "Debugging", "Android", "Build"]
+cover: "/blog/260327_codex-zsh-interactive-shell/image.png"
+coverAlt: "Terminal screenshot showing zsh environment differences in Codex"
 lang: "en-US"
 translationKey: "rethinking-zsh-in-codex"
 ---

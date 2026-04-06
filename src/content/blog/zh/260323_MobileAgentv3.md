@@ -4,6 +4,8 @@ date: "2026-03-23"
 featured: false
 summary: "黑灰产 App 自动化测试想稳定, 先放弃全自动幻觉."
 keywords: ["自动化", "AI"]
+cover: "/blog/260323_MobileAgentv3/image-2.png"
+coverAlt: "MobileAgent-v3 的流程截图"
 lang: "zh-CN"
 translationKey: "mobileagent-v3-testing"
 ---

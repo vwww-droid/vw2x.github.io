@@ -4,6 +4,8 @@ date: "2026-03-14"
 featured: false
 summary: "Exploring how to gradually peel a human-facing reverse-engineering GUI tool into agent-facing APIs and CLIs."
 keywords: ["Reverse Engineering", "MCP", "Frida", "CLI", "Android", "Agent"]
+cover: "/blog/260314_algorithm-mcp/architecture.png"
+coverAlt: "Architecture diagram for Algorithm Assistant MCP"
 lang: "en-US"
 translationKey: "algorithm-assistant-mcp-from-gui-to-api"
 ---

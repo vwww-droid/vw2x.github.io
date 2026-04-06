@@ -4,6 +4,7 @@ date: "2026-03-19"
 featured: false
 summary: "I do not try to control the whole system. I focus on the parts I can control and influence."
 keywords: ["Web Penetration Testing", "Next.js"]
+coverAlt: "Code-filled screen representing web authorization risk analysis"
 lang: "en-US"
 translationKey: "nextjs-auth-bypass-cases"
 ---

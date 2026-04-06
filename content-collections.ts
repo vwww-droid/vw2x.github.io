@@ -18,6 +18,8 @@ const blogs = defineCollection({
     date: z.string(),
     updated: z.string().optional(),
     featured: z.boolean().optional().default(false),
+    cover: z.string().optional(),
+    coverAlt: z.string().optional(),
     summary: z.string().optional(),
     keywords: z.array(z.string()).optional(),
     ...localeSchema(z),

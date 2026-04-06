@@ -4,16 +4,9 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SearchIcon, XIcon } from "lucide-react";
-
-type SearchDocument = {
-  title: string;
-  url: string;
-  date: string;
-  summary: string;
-  content: string;
-  lang: "zh-CN" | "en-US";
-  translationKey: string;
-};
+import { BlogCoverImage } from "@/components/blog/blog-cover-image";
+import type { SearchDocument } from "@/lib/content";
+import { formatDateCompact } from "@/lib/utils";
 
 type SearchModalProps = {
   open: boolean;
@@ -193,34 +186,42 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
           ) : filteredResults.length === 0 ? (
             <SearchState>{labels.noResults}</SearchState>
           ) : (
-            <div className="space-y-1" role="listbox" aria-label={labels.placeholder}>
+            <div className="space-y-1" aria-label={labels.placeholder}>
               {filteredResults.map((result, index) => (
                 <Link
                   key={`${result.lang}-${result.translationKey}`}
                   href={result.url}
-                  className={`block rounded-[8px] px-4 py-3 transition-colors ${
-                    selectedIndex === index ? "bg-[#f4f4f1]" : "hover:bg-[#f7f7f4]"
+                  className={`block rounded-[14px] px-3 py-2.5 transition-colors ${
+                    selectedIndex === index
+                      ? "bg-[rgba(244,241,234,0.92)]"
+                      : "hover:bg-[rgba(247,245,239,0.82)]"
                   }`}
                   onClick={() => onOpenChange(false)}
                 >
-                  <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
-                    <div className="min-w-0 flex-1">
+                  <div className="flex items-start gap-3">
+                    <BlogCoverImage
+                      cover={result.cover}
+                      sizes="112px"
+                      className="h-[72px] w-[72px] shrink-0 rounded-[12px] bg-[rgba(246,241,232,0.9)] sm:h-[80px] sm:w-[96px]"
+                      imageClassName="transition-none"
+                    />
+                    <div className="min-w-0 flex-1 pt-0.5">
+                      <p className="text-[11px] uppercase tracking-[0.12em] text-[rgba(85,85,85,0.72)]">
+                        {formatDateCompact(result.date, result.lang)}
+                      </p>
                       <p
-                        className="text-[17px] font-semibold leading-[1.45] text-[#24292f]"
+                        className="mt-1.5 text-[17px] font-semibold leading-[1.3] tracking-[-0.02em] text-[rgba(36,41,47,0.94)]"
                         dangerouslySetInnerHTML={{
                           __html: highlightText(result.title, query),
                         }}
                       />
                       <p
-                        className="mt-1 text-[15px] leading-[1.7] text-[rgba(85,85,85,0.82)]"
+                        className="mt-1.5 text-[13px] leading-[1.6] text-[rgba(85,85,85,0.82)]"
                         dangerouslySetInnerHTML={{
-                          __html: highlightText(result.summary || result.content, query),
+                          __html: highlightText(getPreviewText(result, query), query),
                         }}
                       />
                     </div>
-                    <p className="shrink-0 pt-0.5 text-[14px] leading-[1.4] text-[rgba(85,85,85,0.7)]">
-                      {result.date}
-                    </p>
                   </div>
                 </Link>
               ))}
@@ -242,6 +243,33 @@ function SearchState({ children }: { children: React.ReactNode }) {
       {children}
     </div>
   );
+}
+
+function getPreviewText(document: SearchDocument, query: string) {
+  const preview = document.summary || document.content;
+  const normalizedQuery = query.trim().toLowerCase();
+
+  if (!normalizedQuery || preview.length <= 140) {
+    return preview;
+  }
+
+  const normalizedPreview = preview.toLowerCase();
+  const matchIndex = normalizedPreview.indexOf(normalizedQuery);
+
+  if (matchIndex === -1) {
+    return `${preview.slice(0, 137).trimEnd()}...`;
+  }
+
+  const contextRadius = 56;
+  const start = Math.max(0, matchIndex - contextRadius);
+  const end = Math.min(
+    preview.length,
+    matchIndex + normalizedQuery.length + contextRadius
+  );
+  const prefix = start > 0 ? "..." : "";
+  const suffix = end < preview.length ? "..." : "";
+
+  return `${prefix}${preview.slice(start, end).trim()}${suffix}`;
 }
 
 function highlightText(text: string, query: string) {

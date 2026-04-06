@@ -4,6 +4,7 @@ date: "2026-01-25"
 featured: true
 summary: "两个命令搞定跨设备复制粘贴, 而且可选加密传输."
 keywords: ["Beam", "clipboard", "cross-device", "encryption", "CLI", "Python"]
+coverAlt: "用于跨设备命令行工作的笔记本电脑桌面"
 lang: "zh-CN"
 translationKey: "beam-cross-device-copy-cli"
 ---

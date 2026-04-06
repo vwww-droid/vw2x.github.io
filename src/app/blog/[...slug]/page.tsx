@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { absoluteUrl } from "@/lib/utils"
 import { notFound } from "next/navigation"
-import { getTableOfContents } from "@/lib/toc"
 import 'highlight.js/styles/github-dark.min.css'
 import 'katex/dist/katex.min.css';
 import { config } from "@/lib/config";
@@ -85,7 +84,10 @@ export default async function BlogPage(props: BlogsPageProps) {
     notFound()
   }
 
-  const toc = await getTableOfContents(blog.content)
-
-  return <BlogPostPage blog={blog} locale="zh-CN" toc={toc} />;
+  return (
+    <BlogPostPage
+      blog={blog}
+      locale="zh-CN"
+    />
+  );
 }
