@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -98,5 +100,17 @@
   }
   a:hover {
     color: color-mix(in oklab, var(--foreground) 76%, var(--primary) 24%);
+  }
+}
+
+@layer utilities {
+  .font-reading-zh {
+    font-family:
+      "TsangerJinKai02",
+      "STKaiti",
+      "KaiTi",
+      "Songti SC",
+      "Noto Serif CJK SC",
+      serif;
   }
 }

@@ -49,7 +49,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-dvh overflow-x-hidden bg-background text-foreground antialiased">
         <Header />
-        <div className="pt-[60px] md:pt-[84px]">{children}</div>
+        <div className="md:pt-[84px]">{children}</div>
         <SiteFooter />
       </body>
     </html>
