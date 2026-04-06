@@ -186,41 +186,39 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
           ) : filteredResults.length === 0 ? (
             <SearchState>{labels.noResults}</SearchState>
           ) : (
-            <div className="space-y-1" role="listbox" aria-label={labels.placeholder}>
+            <div className="space-y-1" aria-label={labels.placeholder}>
               {filteredResults.map((result, index) => (
                 <Link
                   key={`${result.lang}-${result.translationKey}`}
                   href={result.url}
-                  role="option"
-                  aria-selected={selectedIndex === index}
-                  className={`block rounded-[18px] p-2.5 transition-colors ${
+                  className={`block rounded-[14px] px-3 py-2.5 transition-colors ${
                     selectedIndex === index
-                      ? "bg-[rgba(244,241,234,0.96)]"
-                      : "hover:bg-[rgba(247,245,239,0.9)]"
+                      ? "bg-[rgba(244,241,234,0.92)]"
+                      : "hover:bg-[rgba(247,245,239,0.82)]"
                   }`}
                   onClick={() => onOpenChange(false)}
                 >
-                  <div className="flex items-start gap-3 rounded-[16px] bg-[rgba(255,255,255,0.88)] p-2.5">
+                  <div className="flex items-start gap-3">
                     <BlogCoverImage
                       cover={result.cover}
                       sizes="112px"
-                      className="h-[88px] w-[88px] shrink-0 rounded-[14px] bg-[rgba(246,241,232,0.9)] sm:h-[96px] sm:w-[112px]"
+                      className="h-[72px] w-[72px] shrink-0 rounded-[12px] bg-[rgba(246,241,232,0.9)] sm:h-[80px] sm:w-[96px]"
                       imageClassName="transition-none"
                     />
-                    <div className="min-w-0 flex-1 px-0.5 py-0.5">
+                    <div className="min-w-0 flex-1 pt-0.5">
                       <p className="text-[11px] uppercase tracking-[0.12em] text-[rgba(85,85,85,0.72)]">
                         {formatDateCompact(result.date, result.lang)}
                       </p>
                       <p
-                        className="mt-2 text-[18px] font-semibold leading-[1.3] tracking-[-0.02em] text-[rgba(36,41,47,0.94)]"
+                        className="mt-1.5 text-[17px] font-semibold leading-[1.3] tracking-[-0.02em] text-[rgba(36,41,47,0.94)]"
                         dangerouslySetInnerHTML={{
                           __html: highlightText(result.title, query),
                         }}
                       />
                       <p
-                        className="mt-2 text-[14px] leading-[1.65] text-[rgba(85,85,85,0.82)]"
+                        className="mt-1.5 text-[13px] leading-[1.6] text-[rgba(85,85,85,0.82)]"
                         dangerouslySetInnerHTML={{
-                          __html: highlightText(getPreviewText(result), query),
+                          __html: highlightText(getPreviewText(result, query), query),
                         }}
                       />
                     </div>
@@ -247,14 +245,31 @@ function SearchState({ children }: { children: React.ReactNode }) {
   );
 }
 
-function getPreviewText(document: SearchDocument) {
+function getPreviewText(document: SearchDocument, query: string) {
   const preview = document.summary || document.content;
+  const normalizedQuery = query.trim().toLowerCase();
 
-  if (preview.length <= 120) {
+  if (!normalizedQuery || preview.length <= 140) {
     return preview;
   }
 
-  return `${preview.slice(0, 117).trimEnd()}...`;
+  const normalizedPreview = preview.toLowerCase();
+  const matchIndex = normalizedPreview.indexOf(normalizedQuery);
+
+  if (matchIndex === -1) {
+    return `${preview.slice(0, 137).trimEnd()}...`;
+  }
+
+  const contextRadius = 56;
+  const start = Math.max(0, matchIndex - contextRadius);
+  const end = Math.min(
+    preview.length,
+    matchIndex + normalizedQuery.length + contextRadius
+  );
+  const prefix = start > 0 ? "..." : "";
+  const suffix = end < preview.length ? "..." : "";
+
+  return `${prefix}${preview.slice(start, end).trim()}${suffix}`;
 }
 
 function highlightText(text: string, query: string) {
