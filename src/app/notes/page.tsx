@@ -14,7 +14,7 @@ export default function NotesPage() {
   const notes = getNotesByLocale("zh-CN");
 
   return (
-    <div className="mx-auto w-full max-w-[1338px] px-4 py-4 sm:px-3 md:px-0 md:py-8">
+    <div className="mx-auto w-full max-w-[1680px] px-4 py-4 sm:px-4 md:px-6 md:py-8 2xl:px-8">
       <NotesGrid notes={notes} locale="zh-CN" />
     </div>
   );
