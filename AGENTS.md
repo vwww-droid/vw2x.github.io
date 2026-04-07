@@ -29,6 +29,15 @@
 - `Outline-only notes`: keep a title, bullets, or a short question when the idea is real but not ready for a full post.
 - `Social posts`: keep them lightweight. Share something genuinely interesting, useful, or funny instead of broadcasting a self-image.
 
+## Content Domain Boundary
+- `blog` is the display surface. Use it for longer-form public writing that is ready for homepage presentation and stronger external distribution.
+- `notes` is the notes surface. Use it for lighter public notes, quick captures, partial models, and frequent accumulation.
+- `weekly` is the weekly surface. Use it for issue-based weekly publishing only, not as a fallback for `blog` or `notes`.
+- Default flow: start with `notes` when an idea is still being clarified, promote it to `blog` only when the material is strong enough to stand as a finished public post.
+- Do not keep the same core body duplicated across `blog` and `notes`. When a note is promoted into a post, rewrite it for the new domain instead of publishing two parallel copies.
+- `blog` drafts may add explicit `cover` and `coverAlt` when needed for presentation. `notes` drafts should stay no-cover by default.
+- Route intent must match content intent: homepage and `/blog` are for `blog`, `/notes` is for notes accumulation, `/weekly` is for weekly issues.
+
 ## Draft Self-Check
 - Does this draft share a thing, or ask readers to watch me?
 - If nobody reacted, would I still believe the note was worth writing?

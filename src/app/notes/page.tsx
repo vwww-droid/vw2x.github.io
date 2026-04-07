@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-import { BlogList } from "@/components/blog/blog-list";
+import { NotesGrid } from "@/components/notes/notes-grid";
 import { config } from "@/lib/config";
-import { getBlogsByLocale } from "@/lib/content";
+import { getNotesByLocale } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: `vw2x 笔记 | ${config.site.title}`,
@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default function NotesPage() {
-  const blogs = getBlogsByLocale("zh-CN");
+  const notes = getNotesByLocale("zh-CN");
 
   return (
     <div className="mx-auto w-full max-w-[1338px] px-4 py-4 sm:px-3 md:px-0 md:py-8">
-      <BlogList blogs={blogs} />
+      <NotesGrid notes={notes} locale="zh-CN" />
     </div>
   );
 }
