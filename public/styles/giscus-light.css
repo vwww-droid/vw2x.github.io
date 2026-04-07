@@ -118,8 +118,14 @@ main .gsc-comment-box-textarea:focus,
   font-size: 16px;
 }
 
+main .gsc-reactions {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
 .gsc-reactions-count {
   visibility: hidden;
+  text-align: left;
 }
 
 .gsc-reactions-count:after {
@@ -128,7 +134,7 @@ main .gsc-comment-box-textarea:focus,
   font-size: 22px;
   display: inline-block;
   margin-bottom: 16px;
-  margin-left: -64px;
+  margin-left: 0;
 }
 
 html[lang="en"] .gsc-reactions-count:after {

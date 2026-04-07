@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { Header } from "@/components/header";
-import { SiteFooter } from "@/components/site-footer";
 import { config } from "@/lib/config";
 import { LocaleDocumentSync } from "@/components/locale-document-sync";
 
@@ -53,7 +52,6 @@ export default function RootLayout({
         <LocaleDocumentSync />
         <Header />
         <div className="flex-1">{children}</div>
-        <SiteFooter />
       </body>
     </html>
   );
