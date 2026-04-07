@@ -75,7 +75,7 @@ const zhNotes = [
 ];
 
 test("buildNotesTimelineGroups groups notes by day in reverse chronological order", () => {
-  const groups = buildNotesTimelineGroups(zhNotes, "zh-CN");
+  const groups = buildNotesTimelineGroups(zhNotes);
 
   assert.equal(groups.length, 2);
   assert.equal(groups[0]?.dateKey, "2026-04-07");
@@ -84,7 +84,7 @@ test("buildNotesTimelineGroups groups notes by day in reverse chronological orde
 });
 
 test("buildNotesTimelineGroups exposes archive-style timeline labels and summary fallback", () => {
-  const [group] = buildNotesTimelineGroups(zhNotes, "zh-CN");
+  const [group] = buildNotesTimelineGroups(zhNotes);
   const secondCard = group?.items[1];
 
   assert.deepEqual(group?.timelineLabel, {
@@ -129,7 +129,7 @@ export type NotesTimelineGroup = {
   }>;
 };
 
-function formatTimelineLabel(date: string, locale: Locale) {
+function formatTimelineLabel(date: string) {
   const parsed = new Date(`${date}T00:00:00`);
   const monthShort = new Intl.DateTimeFormat("en-US", { month: "short" }).format(parsed);
   const dayNumber = new Intl.DateTimeFormat("en-US", { day: "2-digit" }).format(parsed);
@@ -138,8 +138,7 @@ function formatTimelineLabel(date: string, locale: Locale) {
 }
 
 export function buildNotesTimelineGroups(
-  notes: NotesTimelineItem[],
-  locale: Locale
+  notes: NotesTimelineItem[]
 ): NotesTimelineGroup[] {
   const groups = new Map<string, NotesTimelineGroup>();
 
@@ -160,7 +159,7 @@ export function buildNotesTimelineGroups(
 
     groups.set(dateKey, {
       dateKey,
-      timelineLabel: formatTimelineLabel(dateKey, locale),
+      timelineLabel: formatTimelineLabel(dateKey),
       items: [
         {
           href: note.href,
@@ -262,7 +261,7 @@ export function NotesGrid({ notes, locale }: NotesGridProps) {
     );
   }
 
-  const groups = buildNotesTimelineGroups(notes, locale);
+  const groups = buildNotesTimelineGroups(notes);
 
   return (
     <div className="notes-timeline space-y-10 md:space-y-12">
