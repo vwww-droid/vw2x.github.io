@@ -40,7 +40,7 @@ test("buildNotesTimelineGroups groups notes by day in reverse chronological orde
   assert.equal(groups[1]?.dateKey, "2026-04-06");
 });
 
-test("buildNotesTimelineGroups exposes locale-aware timeline labels and summary fallback", () => {
+test("buildNotesTimelineGroups exposes archive-style timeline labels and summary fallback", () => {
   const [group] = buildNotesTimelineGroups(zhNotes);
   const secondCard = group?.items[1];
 

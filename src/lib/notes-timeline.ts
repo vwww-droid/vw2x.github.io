@@ -23,6 +23,7 @@ export type NotesTimelineGroup = {
   }>;
 };
 
+// Expects a zero-padded yyyy-MM-dd date string.
 function formatTimelineLabel(date: string) {
   const parsed = new Date(`${date}T00:00:00`);
   const monthShort = new Intl.DateTimeFormat("en-US", { month: "short" }).format(parsed);
