@@ -19,11 +19,19 @@ test("notes grid uses the timeline helper and timeline-specific layout classes",
   assert.doesNotMatch(cardSource, /date:\s*string/);
   assert.match(cardSource, /export type NoteCardTeaser =/);
   assert.match(cardSource, /note:\s*NoteCardTeaser/);
+  assert.match(cardSource, /href=\{note\.href\}/);
+  assert.match(cardSource, /note\.title/);
+  assert.match(cardSource, /note\.summary \?\? ""/);
 
   assert.match(globalsSource, /\.notes-timeline-marker\s*\{/);
   assert.match(globalsSource, /\.notes-timeline-spine\s*\{/);
+  assert.match(globalsSource, /\.notes-timeline-node\s*\{/);
   assert.match(globalsSource, /\.notes-timeline-month\s*\{/);
   assert.match(globalsSource, /\.notes-timeline-day\s*\{/);
+  assert.match(
+    globalsSource,
+    /\.notes-timeline\s*>\s*:last-child\s+\.notes-timeline-spine\s*\{/
+  );
   assert.match(globalsSource, /\.notes-timeline-cards\s*\{/);
   assert.match(globalsSource, /repeat\(auto-fit,\s*minmax\(/);
   assert.match(globalsSource, /--notes-timeline-spine-offset/);
