@@ -41,7 +41,7 @@ test("buildNotesTimelineGroups exposes locale-aware timeline labels and summary 
   const secondCard = group?.items[1];
 
   assert.deepEqual(group?.timelineLabel, {
-    monthShort: "Apr",
+    monthShort: "4月",
     dayNumber: "07",
   });
   assert.equal(secondCard?.summary, "");

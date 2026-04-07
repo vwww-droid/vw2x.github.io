@@ -25,7 +25,7 @@ export type NotesTimelineGroup = {
 
 function formatTimelineLabel(date: string, locale: Locale) {
   const parsed = new Date(`${date}T00:00:00`);
-  const monthShort = new Intl.DateTimeFormat("en-US", { month: "short" }).format(parsed);
+  const monthShort = new Intl.DateTimeFormat(locale, { month: "short" }).format(parsed);
   const dayNumber = new Intl.DateTimeFormat("en-US", { day: "2-digit" }).format(parsed);
 
   return { monthShort, dayNumber };
