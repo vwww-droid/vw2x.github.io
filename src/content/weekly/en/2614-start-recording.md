@@ -1,12 +1,12 @@
 ---
-title: "2615 Milk Beer"
-date: "2026-04-06"
+title: "2614 Milk Beer"
+date: "2026-03-30"
 summary: "Lately I've been hooked on milk beer. My nightly RMB 18 dinner stipend basically all goes into it now, and Xiyuchun's white peach flavor is not as good as the original."
 keywords: ["Weekly", "Journal", "Recording"]
 lang: "en-US"
-translationKey: "2615-start-recording"
-issue: 2615
-cover: "/weekly/2615/奶啤.png"
+translationKey: "2614-start-recording"
+issue: 2614
+cover: "/weekly/2614/奶啤.png"
 coverAlt: "Milk beer"
 ---
 
@@ -26,7 +26,7 @@ Cursor also stays compatible with the skills and rules from all those other AI t
 
 I recommend paying month by month. The 10% you save on an annual plan is not worth losing the flexibility to try the newest features quickly. For example, Cursor can now use Claude Opus 4.6, which comes with fewer restrictions for reverse engineering. And while I was writing this, I noticed Cursor also shipped an agent mode, so by the time this Codex subscription expires I might switch back to Cursor again. (I am still warming up a Claude Code account by chatting with it every day and feeding it some emotional value, since negative wording gets filtered and reported. Several people around me have already had multiple Claude Code accounts banned, and the US version now also charges tax, which pushes it to 250 USD per month.)
 
-![Cursor Agent Window](/weekly/2615/CursorAgentWindow.png)
+![Cursor Agent Window](/weekly/2614/CursorAgentWindow.png)
 
 ## Loose Notes
 
