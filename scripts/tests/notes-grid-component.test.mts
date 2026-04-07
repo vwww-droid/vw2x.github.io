@@ -33,6 +33,7 @@ test("notes grid uses the timeline helper and timeline-specific layout classes",
     /\.notes-timeline\s*>\s*:last-child\s+\.notes-timeline-spine\s*\{/
   );
   assert.match(globalsSource, /\.notes-timeline-cards\s*\{/);
-  assert.match(globalsSource, /repeat\(auto-fit,\s*minmax\(/);
+  assert.match(globalsSource, /repeat\(\s*auto-fill,\s*minmax\(/);
+  assert.match(globalsSource, /justify-content:\s*start/);
   assert.match(globalsSource, /--notes-timeline-spine-offset/);
 });
