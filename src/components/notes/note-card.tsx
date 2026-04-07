@@ -3,16 +3,15 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-export type NoteTeaser = {
+export type NoteCardTeaser = {
   href: string;
   title: string;
-  date: string;
   summary?: string | null;
   lang?: Locale;
 };
 
 type NoteCardProps = {
-  note: NoteTeaser;
+  note: NoteCardTeaser;
 };
 
 export function NoteCard({ note }: NoteCardProps) {

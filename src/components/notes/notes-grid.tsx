@@ -1,10 +1,10 @@
-import { NoteCard, type NoteTeaser } from "@/components/notes/note-card";
+import { NoteCard } from "@/components/notes/note-card";
 import type { Locale } from "@/lib/i18n";
-import { buildNotesTimelineGroups } from "@/lib/notes-timeline";
+import { buildNotesTimelineGroups, type NotesTimelineItem } from "@/lib/notes-timeline";
 import { cn } from "@/lib/utils";
 
 type NotesGridProps = {
-  notes: NoteTeaser[];
+  notes: NotesTimelineItem[];
   locale: Locale;
 };
 
@@ -43,7 +43,7 @@ export function NotesGrid({ notes, locale }: NotesGridProps) {
 
           <div
             className={cn(
-              "grid grid-cols-1 gap-3 [&>*]:min-w-0 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8",
+              "notes-timeline-cards [&>*]:min-w-0",
               locale === "zh-CN" && "font-reading-zh"
             )}
           >
