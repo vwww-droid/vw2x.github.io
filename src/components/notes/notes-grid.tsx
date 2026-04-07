@@ -1,5 +1,6 @@
 import { NoteCard, type NoteTeaser } from "@/components/notes/note-card";
 import type { Locale } from "@/lib/i18n";
+import { buildNotesTimelineGroups } from "@/lib/notes-timeline";
 import { cn } from "@/lib/utils";
 
 type NotesGridProps = {
@@ -23,10 +24,34 @@ export function NotesGrid({ notes, locale }: NotesGridProps) {
     );
   }
 
+  const timelineGroups = buildNotesTimelineGroups(notes);
+
   return (
-    <div className="grid grid-cols-1 gap-x-4 gap-y-4 [&>*]:min-w-0 md:grid-cols-2 md:gap-x-6 md:gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
-      {notes.map((note) => (
-        <NoteCard key={note.href} note={note} />
+    <div className="notes-timeline space-y-8 md:space-y-10">
+      {timelineGroups.map((group) => (
+        <section
+          key={group.dateKey}
+          className="grid grid-cols-1 gap-4 md:grid-cols-[88px_minmax(0,1fr)] md:gap-6"
+        >
+          <div className="notes-timeline-marker">
+            <div className="notes-timeline-spine" aria-hidden="true" />
+            <div className="notes-timeline-node">
+              <span className="notes-timeline-month">{group.timelineLabel.monthShort}</span>
+              <span className="notes-timeline-day">{group.timelineLabel.dayNumber}</span>
+            </div>
+          </div>
+
+          <div
+            className={cn(
+              "grid grid-cols-1 gap-3 [&>*]:min-w-0 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8",
+              locale === "zh-CN" && "font-reading-zh"
+            )}
+          >
+            {group.items.map((note) => (
+              <NoteCard key={note.href} note={note} />
+            ))}
+          </div>
+        </section>
       ))}
     </div>
   );
