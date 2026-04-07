@@ -15,7 +15,7 @@
 ### Data shaping and tests
 
 - Create: `src/lib/notes-timeline.ts`
-  Derive locale-aware day labels and day-grouped note sections from the existing notes list.
+  Derive archive-style day labels and day-grouped note sections from the existing notes list.
 - Create: `scripts/tests/notes-timeline.test.mts`
   Lock the grouping shape, reverse chronological ordering, and summary fallback behavior.
 - Create: `scripts/tests/notes-grid-component.test.mts`
@@ -83,7 +83,7 @@ test("buildNotesTimelineGroups groups notes by day in reverse chronological orde
   assert.equal(groups[1]?.dateKey, "2026-04-06");
 });
 
-test("buildNotesTimelineGroups exposes locale-aware timeline labels and summary fallback", () => {
+test("buildNotesTimelineGroups exposes archive-style timeline labels and summary fallback", () => {
   const [group] = buildNotesTimelineGroups(zhNotes, "zh-CN");
   const secondCard = group?.items[1];
 
@@ -131,7 +131,7 @@ export type NotesTimelineGroup = {
 
 function formatTimelineLabel(date: string, locale: Locale) {
   const parsed = new Date(`${date}T00:00:00`);
-  const monthShort = new Intl.DateTimeFormat(locale, { month: "short" }).format(parsed);
+  const monthShort = new Intl.DateTimeFormat("en-US", { month: "short" }).format(parsed);
   const dayNumber = new Intl.DateTimeFormat("en-US", { day: "2-digit" }).format(parsed);
 
   return { monthShort, dayNumber };
@@ -191,7 +191,7 @@ git commit -F- <<'EOF'
 feat(notes): add timeline grouping helper
 
 1. 新增 notes 首页按天分组工具, 输出时间轴标签和卡片所需的最小数据结构.
-2. 用独立测试锁定倒序分组, 日期标签和摘要兜底行为.
+2. 用独立测试锁定倒序分组, 档案式日期标签和摘要兜底行为.
 3. 为后续首页时间轴布局改造准备稳定的数据边界.
 EOF
 ```
