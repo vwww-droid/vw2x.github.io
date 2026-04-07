@@ -28,16 +28,20 @@ const zhNotes = [
 ];
 
 test("buildNotesTimelineGroups groups notes by day in reverse chronological order", () => {
-  const groups = buildNotesTimelineGroups(zhNotes, "zh-CN");
+  const groups = buildNotesTimelineGroups(zhNotes);
 
   assert.equal(groups.length, 2);
   assert.equal(groups[0]?.dateKey, "2026-04-07");
   assert.equal(groups[0]?.items.length, 2);
+  assert.deepEqual(
+    groups[0]?.items.map((item) => item.title),
+    ["time base", "blocking"]
+  );
   assert.equal(groups[1]?.dateKey, "2026-04-06");
 });
 
 test("buildNotesTimelineGroups exposes locale-aware timeline labels and summary fallback", () => {
-  const [group] = buildNotesTimelineGroups(zhNotes, "zh-CN");
+  const [group] = buildNotesTimelineGroups(zhNotes);
   const secondCard = group?.items[1];
 
   assert.deepEqual(group?.timelineLabel, {

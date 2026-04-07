@@ -23,7 +23,7 @@ export type NotesTimelineGroup = {
   }>;
 };
 
-function formatTimelineLabel(date: string, locale: Locale) {
+function formatTimelineLabel(date: string) {
   const parsed = new Date(`${date}T00:00:00`);
   const monthShort = new Intl.DateTimeFormat("en-US", { month: "short" }).format(parsed);
   const dayNumber = new Intl.DateTimeFormat("en-US", { day: "2-digit" }).format(parsed);
@@ -32,8 +32,7 @@ function formatTimelineLabel(date: string, locale: Locale) {
 }
 
 export function buildNotesTimelineGroups(
-  notes: NotesTimelineItem[],
-  locale: Locale
+  notes: NotesTimelineItem[]
 ): NotesTimelineGroup[] {
   const groups = new Map<string, NotesTimelineGroup>();
 
@@ -55,7 +54,7 @@ export function buildNotesTimelineGroups(
 
     groups.set(dateKey, {
       dateKey,
-      timelineLabel: formatTimelineLabel(dateKey, locale),
+      timelineLabel: formatTimelineLabel(dateKey),
       items: [item],
     });
   }
