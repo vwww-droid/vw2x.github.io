@@ -72,6 +72,44 @@ function getResolvedBlogCover(blog: BlogRecord) {
   });
 }
 
+function extractFirstImageSource(content: string) {
+  const htmlImageMatch = content.match(/<img\s+[^>]*src=["']([^"']+)["'][^>]*>/i);
+  if (htmlImageMatch?.[1]) {
+    return htmlImageMatch[1];
+  }
+
+  const markdownImageMatch = content.match(/!\[[^\]]*]\(([^)\s]+)(?:\s+["'][^"']*["'])?\)/);
+  if (markdownImageMatch?.[1]) {
+    return markdownImageMatch[1];
+  }
+
+  return undefined;
+}
+
+function getResolvedWeeklyCover(issue: WeeklyRecord): BlogCover {
+  const explicitOrGenerated = resolveBlogCover({
+    title: issue.title,
+    translationKey: getDocumentTranslationKey(issue),
+    cover: issue.cover,
+    coverAlt: issue.coverAlt,
+  });
+
+  if (explicitOrGenerated.source !== "none") {
+    return explicitOrGenerated;
+  }
+
+  const extractedSource = extractFirstImageSource(issue.content);
+  if (!extractedSource) {
+    return { source: "none" };
+  }
+
+  return {
+    source: "generated",
+    src: extractedSource,
+    alt: issue.coverAlt?.trim() || issue.title,
+  };
+}
+
 function normalizeBlog(blog: BlogRecord): BlogWithCover {
   const normalizedBlog = {
     ...blog,
@@ -86,7 +124,7 @@ function normalizeBlog(blog: BlogRecord): BlogWithCover {
 function normalizeWeekly(issue: WeeklyRecord): WeeklyWithCover {
   const normalizedIssue = {
     ...issue,
-    cover: getResolvedBlogCover(issue),
+    cover: getResolvedWeeklyCover(issue),
   };
 
   delete normalizedIssue.coverAlt;

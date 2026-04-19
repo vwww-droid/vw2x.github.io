@@ -18,7 +18,7 @@ const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
-        "mt-6 mb-4 scroll-m-20 text-[22px] leading-[1.35] font-semibold tracking-[-0.01em] text-[rgba(36,41,47,0.9)] md:text-[30px]",
+        "mt-6 mb-4 scroll-m-20 text-[22px] leading-[1.3] font-semibold tracking-[-0.01em] text-[rgba(36,41,47,0.94)] md:text-[30px]",
         className
       )}
       {...props}
@@ -27,7 +27,7 @@ const components = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "mt-9 mb-3 scroll-m-20 text-[22px] leading-[1.45] font-semibold tracking-[-0.01em] text-[rgba(36,41,47,0.9)]",
+        "mt-9 mb-3 scroll-m-20 text-[22px] leading-[1.38] font-semibold tracking-[-0.01em] text-[rgba(36,41,47,0.94)]",
         className
       )}
       {...props}
@@ -36,7 +36,7 @@ const components = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "mt-7 mb-2 scroll-m-20 text-[19px] leading-[1.55] font-semibold text-[rgba(36,41,47,0.88)]",
+        "mt-7 mb-2 scroll-m-20 text-[19px] leading-[1.48] font-semibold text-[rgba(36,41,47,0.92)]",
         className
       )}
       {...props}
@@ -45,7 +45,7 @@ const components = {
   h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
       className={cn(
-        "mt-6 mb-2 scroll-m-20 text-[0.96rem] leading-[1.65] font-medium text-foreground/88",
+        "mt-6 mb-2 scroll-m-20 text-[0.96rem] leading-[1.56] font-medium text-foreground/92",
         className
       )}
       {...props}
@@ -54,7 +54,7 @@ const components = {
   h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h5
       className={cn(
-        "mt-5 mb-2 scroll-m-20 text-[0.92rem] leading-[1.65] font-medium text-foreground/84",
+        "mt-5 mb-2 scroll-m-20 text-[0.92rem] leading-[1.56] font-medium text-foreground/88",
         className
       )}
       {...props}
@@ -63,7 +63,7 @@ const components = {
   h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h6
       className={cn(
-        "mt-4 mb-2 scroll-m-20 text-[0.88rem] leading-[1.65] font-medium text-foreground/72",
+        "mt-4 mb-2 scroll-m-20 text-[0.88rem] leading-[1.56] font-medium text-foreground/78",
         className
       )}
       {...props}
@@ -81,7 +81,7 @@ const components = {
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
       className={cn(
-        "my-[0.8em] text-[16px] leading-[1.7] font-normal text-[rgba(36,41,47,0.9)]",
+        "my-[0.8em] text-[16px] leading-[1.62] font-normal text-[rgba(36,41,47,0.94)]",
         className
       )}
       {...props}
@@ -93,7 +93,7 @@ const components = {
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
       className={cn(
-        "my-4 ml-5 list-disc space-y-1.5 text-[16px] leading-[1.72] text-[rgba(36,41,47,0.9)]",
+        "my-4 ml-5 list-disc space-y-1.5 text-[16px] leading-[1.64] text-[rgba(36,41,47,0.94)]",
         className
       )}
       {...props}
@@ -102,7 +102,7 @@ const components = {
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
       className={cn(
-        "my-4 ml-5 list-decimal space-y-1.5 text-[16px] leading-[1.72] text-[rgba(36,41,47,0.9)]",
+        "my-4 ml-5 list-decimal space-y-1.5 text-[16px] leading-[1.64] text-[rgba(36,41,47,0.94)]",
         className
       )}
       {...props}
@@ -114,7 +114,7 @@ const components = {
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <blockquote
       className={cn(
-        "my-4 border-l-[4px] border-[#c9ced4] pl-3 text-[16px] leading-[1.72] text-[rgba(36,41,47,0.82)]",
+        "my-4 border-l-[4px] border-[#c9ced4] pl-3 text-[16px] leading-[1.64] text-[rgba(36,41,47,0.86)]",
         className
       )}
       {...props}

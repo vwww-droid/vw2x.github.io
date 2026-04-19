@@ -7,11 +7,9 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 
-import { BlogCoverImage } from "@/components/blog/blog-cover-image";
 import GiscusComments from "@/components/giscus-comments";
 import { components } from "@/components/mdx-components";
 import { SearchTrigger } from "@/components/search/search-trigger";
-import type { BlogCover } from "@/lib/covers";
 import type { Locale } from "@/lib/i18n";
 import { expandMultiBlankLines } from "@/lib/mdx-expand-blank-lines";
 import { WeeklyShell } from "@/components/weekly/weekly-shell";
@@ -40,7 +38,7 @@ const weeklyComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
-        "!mb-[13px] !mt-[28px] !text-[32px] !leading-[1.7] font-bold tracking-[0.8px] text-[rgba(36,41,47,0.96)]",
+        "!mb-[13px] !mt-[28px] !text-[32px] !leading-[1.62] font-bold tracking-[0.8px] text-[rgba(36,41,47,1)]",
         className
       )}
       {...props}
@@ -49,7 +47,7 @@ const weeklyComponents = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "!mb-[13px] !mt-[28px] !text-[24px] !leading-[1.7] font-bold tracking-[0.8px] text-[rgba(36,41,47,0.96)]",
+        "!mb-[13px] !mt-[28px] !text-[24px] !leading-[1.62] font-bold tracking-[0.8px] text-[rgba(36,41,47,1)]",
         className
       )}
       {...props}
@@ -58,7 +56,7 @@ const weeklyComponents = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "!mb-[13px] !mt-[10px] !text-[20px] !leading-[1.7] font-bold tracking-[0.8px] text-[rgba(36,41,47,0.96)]",
+        "!mb-[13px] !mt-[10px] !text-[20px] !leading-[1.58] font-bold tracking-[0.8px] text-[rgba(36,41,47,1)]",
         className
       )}
       {...props}
@@ -67,7 +65,7 @@ const weeklyComponents = {
   h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
       className={cn(
-        "!mb-[13px] !mt-[10px] !text-[16px] !leading-[1.7] font-bold tracking-[0.5px] text-[rgba(36,41,47,0.96)]",
+        "!mb-[13px] !mt-[10px] !text-[16px] !leading-[1.56] font-bold tracking-[0.5px] text-[rgba(36,41,47,1)]",
         className
       )}
       {...props}
@@ -76,7 +74,7 @@ const weeklyComponents = {
   h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h5
       className={cn(
-        "!mb-[13px] !mt-[10px] !text-[16px] !leading-[1.7] font-bold tracking-[0.5px] text-[rgba(36,41,47,0.96)]",
+        "!mb-[13px] !mt-[10px] !text-[16px] !leading-[1.56] font-bold tracking-[0.5px] text-[rgba(36,41,47,1)]",
         className
       )}
       {...props}
@@ -85,7 +83,16 @@ const weeklyComponents = {
   h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h6
       className={cn(
-        "!mb-[13px] !mt-[10px] !text-[16px] !leading-[1.7] font-bold tracking-[0.5px] text-[rgba(36,41,47,0.96)]",
+        "!mb-[13px] !mt-[10px] !text-[16px] !leading-[1.56] font-bold tracking-[0.5px] text-[rgba(36,41,47,1)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+  a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
+    <a
+      className={cn(
+        "rounded-[2px] border-b border-dotted border-[silver] font-normal text-[rgba(36,41,47,0.92)] no-underline transition-colors hover:text-[#24292f] hover:border-solid",
         className
       )}
       {...props}
@@ -94,7 +101,7 @@ const weeklyComponents = {
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
       className={cn(
-        "!my-[28px] !text-[15px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)]",
+        "!my-[28px] !text-[15px] !leading-[1.62] tracking-[0.5px] text-[rgba(36,41,47,0.98)]",
         className
       )}
       {...props}
@@ -103,7 +110,7 @@ const weeklyComponents = {
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
       className={cn(
-        "!my-[28px] list-disc pl-5 !text-[15px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)] [&>li+li]:mt-3",
+        "!my-[28px] list-disc pl-5 !text-[15px] !leading-[1.62] tracking-[0.5px] text-[rgba(36,41,47,0.98)] [&>li+li]:mt-3",
         className
       )}
       {...props}
@@ -112,7 +119,7 @@ const weeklyComponents = {
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
       className={cn(
-        "!my-[28px] list-decimal pl-7 !text-[15px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)] [&>li+li]:mt-3",
+        "!my-[28px] list-decimal pl-7 !text-[15px] !leading-[1.62] tracking-[0.5px] text-[rgba(36,41,47,0.98)] [&>li+li]:mt-3",
         className
       )}
       {...props}
@@ -124,7 +131,31 @@ const weeklyComponents = {
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <blockquote
       className={cn(
-        "!my-[28px] border-l-4 border-[#c9ced4] pl-3 !text-[15px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.82)]",
+        "!my-[28px] border-l-4 border-[#c9ced4] pl-3 !text-[15px] !leading-[1.62] tracking-[0.5px] text-[rgba(36,41,47,0.9)]",
+        className
+      )}
+      {...props}
+    />
+  ),
+  img: ({
+    className,
+    alt,
+    ...props
+  }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      className={cn(
+        "my-2 mx-auto block h-auto w-full max-w-full rounded-[14px] bg-[rgba(243,244,246,1)]",
+        className
+      )}
+      alt={alt}
+      {...props}
+    />
+  ),
+  small: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <small
+      className={cn(
+        "mx-auto mb-[28px] mt-[-10px] block max-w-[72ch] text-center text-[13px] leading-[1.7] text-[rgba(85,85,85,0.76)]",
         className
       )}
       {...props}
@@ -178,8 +209,8 @@ export function WeeklyIssuePage({
   return (
     <WeeklyShell>
       <main className="min-h-screen bg-white">
-        <div className="mx-auto grid min-h-screen w-full max-w-[1338px] grid-cols-1 px-2 md:px-0 lg:grid-cols-[288px_minmax(0,1fr)] xl:grid-cols-[320px_minmax(0,1fr)]">
-          <aside className="hidden lg:block lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:pl-8 lg:pr-8 lg:pt-8">
+        <div className="mx-auto grid min-h-screen w-full max-w-[1338px] grid-cols-1 px-2 md:px-0 lg:grid-cols-[232px_minmax(0,1fr)] xl:grid-cols-[248px_minmax(0,1fr)]">
+          <aside className="hidden lg:block lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:pl-6 lg:pr-4 lg:pt-8">
             <div className="flex h-full flex-col">
               <div className="weekly-scrollbar flex-1 overflow-y-auto pr-2">
                 <WeeklyIssueList issues={issues} activeHref={issue.href} locale={locale} />
@@ -187,8 +218,8 @@ export function WeeklyIssuePage({
             </div>
           </aside>
 
-          <section className="min-w-0 px-2 pb-16 pt-5 md:px-4 md:pt-6 lg:px-8">
-            <article className="mx-auto w-full max-w-[998px]">
+          <section className="min-w-0 px-2 pb-16 pt-5 md:px-4 md:pt-6 lg:px-4">
+            <article className="mx-auto w-full lg:ml-0 lg:mr-auto lg:w-[80%] lg:max-w-[1100px]">
               <div className="mb-6 flex items-start justify-between gap-4">
                 <h1
                   className={cn(
@@ -208,26 +239,9 @@ export function WeeklyIssuePage({
                   </Link>
                 </div>
               </div>
-              <BlogCoverImage
-                cover={issue.cover as BlogCover}
-                priority
-                sizes="(min-width: 1152px) 998px, 100vw"
-                className="aspect-[1.58] w-full rounded-[14px] bg-[rgba(246,241,232,0.92)]"
-                imageClassName="object-cover transition-none"
-              />
-              {issue.summary ? (
-                <p
-                  className={cn(
-                    "mt-7 text-[16px] leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)]",
-                    locale === "zh-CN" && "font-reading-zh"
-                  )}
-                >
-                  {issue.summary}
-                </p>
-              ) : null}
               <div
                 className={cn(
-                  "weekly-article mt-8",
+                  "weekly-article",
                   locale === "zh-CN" && "font-reading-zh"
                 )}
               >

@@ -26,6 +26,12 @@ export async function generateMetadata({ params }: WeeklyPageProps): Promise<Met
   }
 
   const translated = getTranslatedWeeklyIssue("zh-CN", issue.translationKey);
+  const imageUrl =
+    issue.cover.source === "none"
+      ? config.site.image
+      : issue.cover.src.startsWith("http")
+        ? issue.cover.src
+        : absoluteUrl(issue.cover.src);
 
   return {
     title: issue.title,
@@ -47,7 +53,7 @@ export async function generateMetadata({ params }: WeeklyPageProps): Promise<Met
       url: absoluteUrl(`/weekly/${issue.slug}`),
       images: [
         {
-          url: config.site.image,
+          url: imageUrl,
         },
       ],
     },
@@ -57,7 +63,7 @@ export async function generateMetadata({ params }: WeeklyPageProps): Promise<Met
       description: issue.summary,
       images: [
         {
-          url: config.site.image,
+          url: imageUrl,
         },
       ],
       creator: config.seo.twitter.creator,

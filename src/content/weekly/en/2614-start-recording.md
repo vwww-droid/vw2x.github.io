@@ -6,9 +6,11 @@ keywords: ["Weekly", "Journal", "Recording"]
 lang: "en-US"
 translationKey: "2614-start-recording"
 issue: 2614
-cover: "/weekly/2614/奶啤.png"
-coverAlt: "Milk beer"
 ---
+
+<img src="/weekly/2614/奶啤.png" width="800" />
+
+<small>The cover shows the milk beer I have been drinking a lot lately. Since this was the first weekly issue, it felt like a light way to begin.</small>
 
 This is the first issue of the weekly journal. I hope to use my blog to record the good articles, good ideas, and good solutions I came across each week, actually solve some problems, and leave behind something useful.
 

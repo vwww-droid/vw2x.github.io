@@ -46,7 +46,7 @@ export function BlogHero({
           {summary ? (
             <p
               className={cn(
-                "mt-4 max-w-[42rem] text-[16px] leading-[1.85] text-[rgba(85,85,85,0.84)] md:text-[18px]",
+                "mt-4 max-w-[42rem] text-[16px] leading-[1.72] text-[rgba(36,41,47,0.88)] md:text-[18px]",
                 locale === "zh-CN" && "font-reading-zh"
               )}
             >

@@ -6,9 +6,11 @@ keywords: ["Weekly", "周记", "记录"]
 lang: "zh-CN"
 translationKey: "2614-start-recording"
 issue: 2614
-cover: "/weekly/2614/奶啤.png"
-coverAlt: "奶啤"
 ---
+
+<img src="/weekly/2614/奶啤.png" width="800" />
+
+<small>封面图是最近很常喝的奶啤. 这也是第一期周记, 就拿它当一个轻松点的开头.</small>
 
 这是第一期周记, 希望可以在自己博客里记录当周见过的好文章好想法好解决方案, 切实解决一些问题, 带来一些价值.
 

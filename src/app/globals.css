@@ -248,6 +248,45 @@
     hyphens: auto;
   }
 
+  .weekly-article img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-inline: auto;
+    border-radius: 14px;
+    background: rgba(243, 244, 246, 1);
+  }
+
+  .weekly-article small {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 0.9rem auto 2rem;
+    padding: 0 0.75rem 1rem;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(85, 85, 85, 0.76);
+    border-bottom: 1px solid rgba(36, 41, 47, 0.08);
+  }
+
+  .weekly-article > p,
+  .weekly-article > ul,
+  .weekly-article > ol,
+  .weekly-article > blockquote,
+  .weekly-article > h1,
+  .weekly-article > h2,
+  .weekly-article > h3,
+  .weekly-article > h4,
+  .weekly-article > h5,
+  .weekly-article > h6 {
+    width: 100%;
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .weekly-article > *:first-child {
     margin-block-start: 0 !important;
   }

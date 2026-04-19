@@ -55,7 +55,7 @@ export function NotePage({ locale, languageSwitchHref, note }: NotePageProps) {
             {note.title}
           </h1>
           {note.summary ? (
-            <p className="mt-4 text-[16px] leading-[1.85] text-[rgba(85,85,85,0.86)] md:text-[18px]">
+            <p className="mt-4 text-[16px] leading-[1.72] text-[rgba(36,41,47,0.88)] md:text-[18px]">
               {note.summary}
             </p>
           ) : null}
