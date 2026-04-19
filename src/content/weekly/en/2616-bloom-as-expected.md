@@ -10,11 +10,11 @@ issue: 2616
 
 <img src="/weekly/2616/image.png" width="800" />
 
-<small>The cover shows this bouquet of tulips from the day it arrived to the moment it fully opened. The three frames also match the way this week slowly unfolded.</small>
+<small>The tulips from the day they arrived to the moment they fully opened.</small>
 
 I recently joined a Yunnan flower group because I got curious about what flower keeping actually feels like.
 
-This time I bought tulips. Changing the water every day, watching the buds loosen little by little, and then seeing the whole bouquet open at its own pace made me settle down with it.
+Watching the whole bouquet open at its own pace made me settle down with it.
 
 Nothing especially big happened this week. Instead, it was this kind of small and certain action that stayed with me the most.
 
@@ -26,31 +26,47 @@ Compared with immediately trying to do more, what I care about now is getting my
 
 ## Things I Saw This Week
 
-- [ngiokweng's blog](https://ngiokweng.github.io)
+[ngiokweng's blog](https://ngiokweng.github.io)
 
-  His blog is written with a lot of care. The Appdome analysis piece in particular taught me a few reverse engineering moves worth paying attention to. More than the specific content, I think I like the feeling he gives off as a whole, especially this line from his signature: if you are dissatisfied with what you have now, having more later may not make you happy either.
+![](/weekly/2616/Appdome.png)
 
-  That sentence fits my state this week very well. A lot of the time, the problem is not simply that something is missing. It is that the rhythm has already become messy.
+His blog is written with a lot of care. The Appdome analysis piece in particular taught me a few reverse engineering moves worth paying attention to. More than the specific content, I think I like the feeling he gives off as a whole, especially this line from his signature: if you are dissatisfied with what you have now, having more later may not make you happy either.
 
-- [rebased](https://github.com/DetachHead/rebased)
+That sentence fits my state this week very well. A lot of the time, the problem is not simply that something is missing. It is that the rhythm has already become messy.
 
-  This is JetBrains' independent Git client idea in open-source recreated form. JetBrains talked about making it for a long time, then it quietly went nowhere, and someone else ended up building it in the open.
+[rebased](https://github.com/DetachHead/rebased)
 
-- [kaku](https://github.com/tw93/kaku)
+![](/weekly/2616/rebased.png)
 
-  Recently I felt again what a tool with real craftsmanship feels like. Warp also felt amazing when I first started using it, but after using kaku, going back makes Warp feel a little overdesigned.
+This is JetBrains' independent Git client idea in open-source recreated form. JetBrains talked about making it for a long time, then it quietly went nowhere, and someone else ended up building it in the open.
 
-  On X, I saw someone say that the way tw93 writes tools sounds like a true craftsman. I agree. A lot of information online makes me anxious, but when I look at the things he builds and the way he talks about products, it gives me the feeling of moving one step every day and enjoying the process itself. It can even be a little calming before sleep.
+Once unpacked into Applications, it takes around 1.4 GB, which feels a bit too large for a Git tool. Still, for tasks with many submodules, it is much more comfortable than pure command line work.
 
-  Another comment that stayed with me said, roughly, that this was the first terminal in ten years that felt right without needing any configuration first. I feel something similar.
+[kaku](https://github.com/tw93/kaku)
 
-- [android-cli](https://android-developers.googleblog.com/2026/04/build-android-apps-3x-faster-using-any-agent.html)
+![](/weekly/2616/kaku.png)
 
-  In mobile security development, many fixed detection scenarios used to require hand-building a small app every time. Now that Google has shipped Android CLI, it feels like writing the plan and letting it handle the build-and-test loop may be enough. Traditional large-front-end Android development may really be nearing a turning point.
+**Kaku is a deeply customized fork of WezTerm, designed for an out-of-the-box experience.**
 
-- [jsxposed](https://jsxposed.org)
+On X, I saw someone say that the way tw93 writes tools sounds like a true craftsman. I agree. A lot of information online makes me anxious, but when I look at the things he builds and the way he talks about products, it gives me the feeling of moving one step every day and enjoying the process itself. It can even be a little calming before sleep.
 
-  What I learned from this project is the value of turning common needs into an interface that ordinary people can call directly. Saying one sentence to disable a popup in an app is a strong idea.
+What really struck me: **`vim` keybindings**, **`sudo` with fingerprint verification**, and **using AI through a custom model configuration**. Warp still does not open this up.
+
+Another comment that stayed with me said, roughly, that this was the first terminal in ten years that felt right without needing any configuration first.
+
+I did run into a few issues on commands I use a lot though, which I may write about later.
+
+[android-cli](https://android-developers.googleblog.com/2026/04/build-android-apps-3x-faster-using-any-agent.html)
+
+![](/weekly/2616/android-cli.png)
+
+In mobile security development, many fixed detection scenarios used to require hand-building a small app every time. Now that Google has shipped Android CLI, it feels like writing the plan and letting it handle the build-and-test loop may be enough. Traditional large-front-end Android development may really be nearing a turning point.
+
+[JsxposedX](https://github.com/dugongzi/JsxposedX)
+
+![](/weekly/2616/Jsxposed.png)
+
+What I learned from this project is the value of turning common needs into an interface that ordinary people can call directly. Saying one sentence to disable a popup in an app is a strong idea.
 
 ## Loose Notes
 
