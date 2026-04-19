@@ -94,7 +94,7 @@ const weeklyComponents = {
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
       className={cn(
-        "!my-[28px] !text-[16px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)]",
+        "!my-[28px] !text-[15px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)]",
         className
       )}
       {...props}
@@ -103,7 +103,7 @@ const weeklyComponents = {
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
       className={cn(
-        "!my-[28px] list-disc pl-5 !text-[16px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)] [&>li+li]:mt-3",
+        "!my-[28px] list-disc pl-5 !text-[15px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)] [&>li+li]:mt-3",
         className
       )}
       {...props}
@@ -112,7 +112,7 @@ const weeklyComponents = {
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
       className={cn(
-        "!my-[28px] list-decimal pl-7 !text-[16px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)] [&>li+li]:mt-3",
+        "!my-[28px] list-decimal pl-7 !text-[15px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.92)] [&>li+li]:mt-3",
         className
       )}
       {...props}
@@ -124,7 +124,7 @@ const weeklyComponents = {
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <blockquote
       className={cn(
-        "!my-[28px] border-l-4 border-[#c9ced4] pl-3 !text-[16px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.82)]",
+        "!my-[28px] border-l-4 border-[#c9ced4] pl-3 !text-[15px] !leading-[1.7] tracking-[0.5px] text-[rgba(36,41,47,0.82)]",
         className
       )}
       {...props}

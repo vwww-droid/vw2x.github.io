@@ -81,7 +81,7 @@ const components = {
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
       className={cn(
-        "my-[0.8em] text-[17px] leading-[1.7] font-normal text-[rgba(36,41,47,0.9)]",
+        "my-[0.8em] text-[16px] leading-[1.7] font-normal text-[rgba(36,41,47,0.9)]",
         className
       )}
       {...props}
@@ -93,7 +93,7 @@ const components = {
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
       className={cn(
-        "my-4 ml-5 list-disc space-y-1.5 text-[17px] leading-[1.72] text-[rgba(36,41,47,0.9)]",
+        "my-4 ml-5 list-disc space-y-1.5 text-[16px] leading-[1.72] text-[rgba(36,41,47,0.9)]",
         className
       )}
       {...props}
@@ -102,7 +102,7 @@ const components = {
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
       className={cn(
-        "my-4 ml-5 list-decimal space-y-1.5 text-[17px] leading-[1.72] text-[rgba(36,41,47,0.9)]",
+        "my-4 ml-5 list-decimal space-y-1.5 text-[16px] leading-[1.72] text-[rgba(36,41,47,0.9)]",
         className
       )}
       {...props}
@@ -114,7 +114,7 @@ const components = {
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <blockquote
       className={cn(
-        "my-4 border-l-[4px] border-[#c9ced4] pl-3 text-[17px] leading-[1.72] text-[rgba(36,41,47,0.82)]",
+        "my-4 border-l-[4px] border-[#c9ced4] pl-3 text-[16px] leading-[1.72] text-[rgba(36,41,47,0.82)]",
         className
       )}
       {...props}

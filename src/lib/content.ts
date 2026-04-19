@@ -213,7 +213,6 @@ export function getSearchDocuments(locale?: Locale): SearchDocument[] {
     ...(locale
       ? getWeeklyIssuesByLocale(locale)
       : sortByDateDesc(allWeeklies).map(normalizeWeekly)),
-    ...(locale ? getNotesByLocale(locale) : sortByDateDesc(allNotes).map(normalizeNote)),
   ]);
 
   return source.map((blog) => {

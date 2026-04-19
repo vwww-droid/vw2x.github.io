@@ -57,10 +57,6 @@ export const config = {
       "zh-CN": "文章",
       "en-US": "Blog",
     },
-    about: {
-      "zh-CN": "关于",
-      "en-US": "About",
-    },
   },
   social: {
     github: "https://github.com/vwww-droid",
@@ -80,9 +76,8 @@ export const config = {
   },
   navigation: {
     main: [
-      { title: "Weekly", href: "https://weekly.vw2x.com" },
+      { title: "Weekly", href: "/weekly" },
       { title: "GitHub", href: "https://github.com/vwww-droid" },
-      { title: "About", href: "/about" },
     ],
   },
   seo: {
